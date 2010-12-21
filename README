@@ -1,3 +1,5 @@
 ArcterusEmu Core is a free MMORPG (Massive Multiplayer Online Role Play Game) World of Warcraft Emulator. It's Code based on the TrinityCore Project.
 
 License: OpenSource GPL v3
+
+Database (with installer & patcher) can be found here: http://github.com/ArcterusEmu/database
