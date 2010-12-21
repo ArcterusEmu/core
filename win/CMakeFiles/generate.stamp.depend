@@ -1,0 +1,32 @@
+# CMake generation dependency list for this directory.
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/CMakeLists.txt
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/CMakeFiles/CMakeSystem.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/CMakeFiles/CMakeCCompiler.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/CMakeFiles/CMakeCXXCompiler.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/CMakeSystemSpecificInformation.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/CMakeGenericSystem.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/Platform/gcc.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/Platform/Windows.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/Platform/WindowsPaths.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/CMakeCInformation.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/Platform/Windows-cl.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/CMakeFiles/CMakeCPlatform.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/CMakeFiles/CMakeCXXPlatform.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/Platform/cl.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/CMakeFiles/CMakeRCCompiler.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/CMakeRCInformation.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/CMakeCommonLanguageInclude.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/CMakeCXXInformation.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/CMakeCommonLanguageInclude.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/CheckCXXSourceRuns.cmake
+C:/Programme/CMake 2.6/share/cmake-2.6/Modules/CheckIncludeFiles.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/cmake/options.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/cmake/macros/CheckPlatform.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/cmake/platform/settings.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/cmake/platform/win/settings.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/cmake/compiler/msvc/settings.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/cmake/macros/FindPCHSupport.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/cmake/macros/FindACE.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/cmake/macros/FindOpenSSL.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/cmake/genrev.cmake
+C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/cmake/showoptions.cmake

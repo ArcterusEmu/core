@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="INSTALL"
+	ProjectGUID="{84976309-6D25-40FD-BDAF-CE12EB538072}"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="Debug"
+			IntermediateDirectory="INSTALL.dir\Debug"
+			ConfigurationType="10"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="..\..;..\..\..\dep\zlib;..\..\..\dep\mysqllite\include;..\..\..\dep\mysqllite\libmysql;..\..\..\dep\mysqllite\sql;..\..\..\dep\mysqllite\strings;..\..\..\dep\mysqllite\dbug;..\..\..\dep\mysqllite\extra\yassl\taocrypt\mySTL;..\..\..\dep\mysqllite\extra\yassl\taocrypt\include;..\..\..\dep\mysqllite\extra\yassl\include;"
+				ExceptionHandling="0"
+				SuppressStartupBanner="FALSE"
+				WarningLevel="0"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;Debug\&quot;"
+				AssemblerListingLocation="Debug"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\..;..\..\..\dep\zlib;..\..\..\dep\mysqllite\include;..\..\..\dep\mysqllite\libmysql;..\..\..\dep\mysqllite\sql;..\..\..\dep\mysqllite\strings;..\..\..\dep\mysqllite\dbug;..\..\..\dep\mysqllite\extra\yassl\taocrypt\mySTL;..\..\..\dep\mysqllite\extra\yassl\taocrypt\include;..\..\..\dep\mysqllite\extra\yassl\include;"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;Debug\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;Debug\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -DBUILD_TYPE=$(OutDir) -P cmake_install.cmake"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="Release"
+			IntermediateDirectory="INSTALL.dir\Release"
+			ConfigurationType="10"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="..\..;..\..\..\dep\zlib;..\..\..\dep\mysqllite\include;..\..\..\dep\mysqllite\libmysql;..\..\..\dep\mysqllite\sql;..\..\..\dep\mysqllite\strings;..\..\..\dep\mysqllite\dbug;..\..\..\dep\mysqllite\extra\yassl\taocrypt\mySTL;..\..\..\dep\mysqllite\extra\yassl\taocrypt\include;..\..\..\dep\mysqllite\extra\yassl\include;"
+				ExceptionHandling="0"
+				SuppressStartupBanner="FALSE"
+				WarningLevel="0"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;Release\&quot;"
+				AssemblerListingLocation="Release"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\..;..\..\..\dep\zlib;..\..\..\dep\mysqllite\include;..\..\..\dep\mysqllite\libmysql;..\..\..\dep\mysqllite\sql;..\..\..\dep\mysqllite\strings;..\..\..\dep\mysqllite\dbug;..\..\..\dep\mysqllite\extra\yassl\taocrypt\mySTL;..\..\..\dep\mysqllite\extra\yassl\taocrypt\include;..\..\..\dep\mysqllite\extra\yassl\include;"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;Release\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;Release\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -DBUILD_TYPE=$(OutDir) -P cmake_install.cmake"/>
+		</Configuration>
+		<Configuration
+			Name="MinSizeRel|Win32"
+			OutputDirectory="MinSizeRel"
+			IntermediateDirectory="INSTALL.dir\MinSizeRel"
+			ConfigurationType="10"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="..\..;..\..\..\dep\zlib;..\..\..\dep\mysqllite\include;..\..\..\dep\mysqllite\libmysql;..\..\..\dep\mysqllite\sql;..\..\..\dep\mysqllite\strings;..\..\..\dep\mysqllite\dbug;..\..\..\dep\mysqllite\extra\yassl\taocrypt\mySTL;..\..\..\dep\mysqllite\extra\yassl\taocrypt\include;..\..\..\dep\mysqllite\extra\yassl\include;"
+				ExceptionHandling="0"
+				SuppressStartupBanner="FALSE"
+				WarningLevel="0"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"
+				AssemblerListingLocation="MinSizeRel"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\..;..\..\..\dep\zlib;..\..\..\dep\mysqllite\include;..\..\..\dep\mysqllite\libmysql;..\..\..\dep\mysqllite\sql;..\..\..\dep\mysqllite\strings;..\..\..\dep\mysqllite\dbug;..\..\..\dep\mysqllite\extra\yassl\taocrypt\mySTL;..\..\..\dep\mysqllite\extra\yassl\taocrypt\include;..\..\..\dep\mysqllite\extra\yassl\include;"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -DBUILD_TYPE=$(OutDir) -P cmake_install.cmake"/>
+		</Configuration>
+		<Configuration
+			Name="RelWithDebInfo|Win32"
+			OutputDirectory="RelWithDebInfo"
+			IntermediateDirectory="INSTALL.dir\RelWithDebInfo"
+			ConfigurationType="10"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="..\..;..\..\..\dep\zlib;..\..\..\dep\mysqllite\include;..\..\..\dep\mysqllite\libmysql;..\..\..\dep\mysqllite\sql;..\..\..\dep\mysqllite\strings;..\..\..\dep\mysqllite\dbug;..\..\..\dep\mysqllite\extra\yassl\taocrypt\mySTL;..\..\..\dep\mysqllite\extra\yassl\taocrypt\include;..\..\..\dep\mysqllite\extra\yassl\include;"
+				ExceptionHandling="0"
+				SuppressStartupBanner="FALSE"
+				WarningLevel="0"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"
+				AssemblerListingLocation="RelWithDebInfo"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\..;..\..\..\dep\zlib;..\..\..\dep\mysqllite\include;..\..\..\dep\mysqllite\libmysql;..\..\..\dep\mysqllite\sql;..\..\..\dep\mysqllite\strings;..\..\..\dep\mysqllite\dbug;..\..\..\dep\mysqllite\extra\yassl\taocrypt\mySTL;..\..\..\dep\mysqllite\extra\yassl\taocrypt\include;..\..\..\dep\mysqllite\extra\yassl\include;"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -DBUILD_TYPE=$(OutDir) -P cmake_install.cmake"/>
+		</Configuration>
+	</Configurations>
+	<Files>
+			<File
+				RelativePath="..\..\..\dep\mysqllite\CMakeLists.txt">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/dep/mysqllite/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -H../../.. -B../.. --check-stamp-file CMakeFiles/generate.stamp"
+					AdditionalDependencies="..\..\..\dep\mysqllite\CMakeLists.txt;..\..\..\dep\mysqllite\include\mysql_version.h.in;..\..\..\dep\mysqllite\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/dep/mysqllite/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -H../../.. -B../.. --check-stamp-file CMakeFiles/generate.stamp"
+					AdditionalDependencies="..\..\..\dep\mysqllite\CMakeLists.txt;..\..\..\dep\mysqllite\include\mysql_version.h.in;..\..\..\dep\mysqllite\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MinSizeRel|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/dep/mysqllite/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -H../../.. -B../.. --check-stamp-file CMakeFiles/generate.stamp"
+					AdditionalDependencies="..\..\..\dep\mysqllite\CMakeLists.txt;..\..\..\dep\mysqllite\include\mysql_version.h.in;..\..\..\dep\mysqllite\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="RelWithDebInfo|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/dep/mysqllite/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -H../../.. -B../.. --check-stamp-file CMakeFiles/generate.stamp"
+					AdditionalDependencies="..\..\..\dep\mysqllite\CMakeLists.txt;..\..\..\dep\mysqllite\include\mysql_version.h.in;..\..\..\dep\mysqllite\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+			</File>
+		<Filter
+			Name="CMake Rules"
+			Filter="">
+			<File
+				RelativePath="CMakeFiles\INSTALL_force.rule">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description=" "
+					CommandLine="cd ."
+					AdditionalDependencies="CMakeFiles\INSTALL_force.rule"
+					Outputs="CMakeFiles\INSTALL_force"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description=" "
+					CommandLine="cd ."
+					AdditionalDependencies="CMakeFiles\INSTALL_force.rule"
+					Outputs="CMakeFiles\INSTALL_force"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MinSizeRel|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description=" "
+					CommandLine="cd ."
+					AdditionalDependencies="CMakeFiles\INSTALL_force.rule"
+					Outputs="CMakeFiles\INSTALL_force"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="RelWithDebInfo|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description=" "
+					CommandLine="cd ."
+					AdditionalDependencies="CMakeFiles\INSTALL_force.rule"
+					Outputs="CMakeFiles\INSTALL_force"/>
+				</FileConfiguration>
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

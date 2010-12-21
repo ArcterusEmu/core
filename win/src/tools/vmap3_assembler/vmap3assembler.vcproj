@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="vmap3assembler"
+	ProjectGUID="{2CAA544F-0748-4E58-8FF3-17290B442FD6}"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="Debug"
+			IntermediateDirectory="vmap3assembler.dir\Debug"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="..\..\..\..\dep\g3dlite\include;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\collision\Maps;..\..\..\..\src\server\collision\Models;..\..\..\..\dep\acelite;"
+				BasicRuntimeChecks="3"
+				CompileAs="2"
+				DebugInformationFormat="3"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="0"
+				Optimization="0"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="TRUE"
+				SuppressStartupBanner="FALSE"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32,_WINDOWS,_DEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,NO_CORE_FUNCS,CMAKE_INTDIR=\&quot;Debug\&quot;"
+				AssemblerListingLocation="Debug"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/Debug/vmap3assembler.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\..\..\..\dep\g3dlite\include;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\collision\Maps;..\..\..\..\src\server\collision\Models;..\..\..\..\dep\acelite;"
+				PreprocessorDefinitions="WIN32,_WINDOWS,_DEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,NO_CORE_FUNCS,CMAKE_INTDIR=\&quot;Debug\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32,_WINDOWS,_DEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,NO_CORE_FUNCS,CMAKE_INTDIR=\&quot;Debug\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions=" /STACK:10000000 /machine:I386 /LARGEADDRESSAWARE /debug"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  ..\..\server\collision\Debug\collision.lib ..\..\..\dep\g3dlite\Debug\g3dlib.lib ..\..\..\dep\zlib\Debug\zlib.lib "
+				OutputFile="..\..\..\bin\Debug\vmap3assembler.exe"
+				Version="0.0"
+				GenerateManifest="TRUE"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
+				ProgramDataBaseFile="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/Debug/vmap3assembler.pdb"
+				GenerateDebugInformation="TRUE"
+				SubSystem="1"
+				ImportLibrary="Debug\vmap3assembler.lib"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="Release"
+			IntermediateDirectory="vmap3assembler.dir\Release"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="..\..\..\..\dep\g3dlite\include;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\collision\Maps;..\..\..\..\src\server\collision\Models;..\..\..\..\dep\acelite;"
+				CompileAs="2"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="2"
+				Optimization="2"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
+				SuppressStartupBanner="FALSE"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,NO_CORE_FUNCS,CMAKE_INTDIR=\&quot;Release\&quot;"
+				AssemblerListingLocation="Release"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/Release/vmap3assembler.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\..\..\..\dep\g3dlite\include;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\collision\Maps;..\..\..\..\src\server\collision\Models;..\..\..\..\dep\acelite;"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,NO_CORE_FUNCS,CMAKE_INTDIR=\&quot;Release\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,NO_CORE_FUNCS,CMAKE_INTDIR=\&quot;Release\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions=" /STACK:10000000 /machine:I386 /LARGEADDRESSAWARE"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  ..\..\server\collision\Release\collision.lib ..\..\..\dep\g3dlite\Release\g3dlib.lib ..\..\..\dep\zlib\Release\zlib.lib "
+				OutputFile="..\..\..\bin\Release\vmap3assembler.exe"
+				Version="0.0"
+				GenerateManifest="TRUE"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories=""
+				ProgramDataBaseFile="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/Release/vmap3assembler.pdb"
+				SubSystem="1"
+				ImportLibrary="Release\vmap3assembler.lib"/>
+		</Configuration>
+		<Configuration
+			Name="MinSizeRel|Win32"
+			OutputDirectory="MinSizeRel"
+			IntermediateDirectory="vmap3assembler.dir\MinSizeRel"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="..\..\..\..\dep\g3dlite\include;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\collision\Maps;..\..\..\..\src\server\collision\Models;..\..\..\..\dep\acelite;"
+				CompileAs="2"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="1"
+				Optimization="1"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
+				SuppressStartupBanner="FALSE"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,NO_CORE_FUNCS,CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"
+				AssemblerListingLocation="MinSizeRel"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/MinSizeRel/vmap3assembler.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\..\..\..\dep\g3dlite\include;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\collision\Maps;..\..\..\..\src\server\collision\Models;..\..\..\..\dep\acelite;"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,NO_CORE_FUNCS,CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,NO_CORE_FUNCS,CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions=" /STACK:10000000 /machine:I386 /LARGEADDRESSAWARE"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  ..\..\server\collision\MinSizeRel\collision.lib ..\..\..\dep\g3dlite\MinSizeRel\g3dlib.lib ..\..\..\dep\zlib\MinSizeRel\zlib.lib "
+				OutputFile="..\..\..\bin\MinSizeRel\vmap3assembler.exe"
+				Version="0.0"
+				GenerateManifest="TRUE"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories=""
+				ProgramDataBaseFile="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/MinSizeRel/vmap3assembler.pdb"
+				SubSystem="1"
+				ImportLibrary="MinSizeRel\vmap3assembler.lib"/>
+		</Configuration>
+		<Configuration
+			Name="RelWithDebInfo|Win32"
+			OutputDirectory="RelWithDebInfo"
+			IntermediateDirectory="vmap3assembler.dir\RelWithDebInfo"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="..\..\..\..\dep\g3dlite\include;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\collision\Maps;..\..\..\..\src\server\collision\Models;..\..\..\..\dep\acelite;"
+				CompileAs="2"
+				DebugInformationFormat="3"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="1"
+				Optimization="2"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
+				SuppressStartupBanner="FALSE"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,NO_CORE_FUNCS,CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"
+				AssemblerListingLocation="RelWithDebInfo"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/RelWithDebInfo/vmap3assembler.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\..\..\..\dep\g3dlite\include;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\collision\Maps;..\..\..\..\src\server\collision\Models;..\..\..\..\dep\acelite;"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,NO_CORE_FUNCS,CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,NO_CORE_FUNCS,CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions=" /STACK:10000000 /machine:I386 /LARGEADDRESSAWARE /debug"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  ..\..\server\collision\RelWithDebInfo\collision.lib ..\..\..\dep\g3dlite\RelWithDebInfo\g3dlib.lib ..\..\..\dep\zlib\RelWithDebInfo\zlib.lib "
+				OutputFile="..\..\..\bin\RelWithDebInfo\vmap3assembler.exe"
+				Version="0.0"
+				GenerateManifest="TRUE"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
+				ProgramDataBaseFile="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/RelWithDebInfo/vmap3assembler.pdb"
+				GenerateDebugInformation="TRUE"
+				SubSystem="1"
+				ImportLibrary="RelWithDebInfo\vmap3assembler.lib"/>
+		</Configuration>
+	</Configurations>
+	<Files>
+			<File
+				RelativePath="..\..\..\..\src\tools\vmap3_assembler\CMakeLists.txt">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/tools/vmap3_assembler/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -H../../../.. -B../../.. --check-stamp-file CMakeFiles/generate.stamp"
+					AdditionalDependencies="..\..\..\..\src\tools\vmap3_assembler\CMakeLists.txt;..\..\..\..\src\tools\vmap3_assembler\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/tools/vmap3_assembler/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -H../../../.. -B../../.. --check-stamp-file CMakeFiles/generate.stamp"
+					AdditionalDependencies="..\..\..\..\src\tools\vmap3_assembler\CMakeLists.txt;..\..\..\..\src\tools\vmap3_assembler\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MinSizeRel|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/tools/vmap3_assembler/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -H../../../.. -B../../.. --check-stamp-file CMakeFiles/generate.stamp"
+					AdditionalDependencies="..\..\..\..\src\tools\vmap3_assembler\CMakeLists.txt;..\..\..\..\src\tools\vmap3_assembler\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="RelWithDebInfo|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/tools/vmap3_assembler/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -H../../../.. -B../../.. --check-stamp-file CMakeFiles/generate.stamp"
+					AdditionalDependencies="..\..\..\..\src\tools\vmap3_assembler\CMakeLists.txt;..\..\..\..\src\tools\vmap3_assembler\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+			</File>
+		<Filter
+			Name="Source Files"
+			Filter="">
+			<File
+				RelativePath="..\..\..\..\src\tools\vmap3_assembler\VMapAssembler.cpp">
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

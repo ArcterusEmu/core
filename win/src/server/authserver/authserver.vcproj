@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="authserver"
+	ProjectGUID="{6F93D9AE-274A-43B3-A9F6-81573194EF77}"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="Debug"
+			IntermediateDirectory="authserver.dir\Debug"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories=".;..\..\..;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Database;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\shared\Packets;..\..\..\..\src\server\shared\Cryptography;..\..\..\..\src\server\shared\Cryptography\Authentication;..\..\..\..\src\server\shared\Logging;..\..\..\..\src\server\shared\Threading;..\..\..\..\src\server\shared\Utilities;..\..\..\..\src\server\authserver;..\..\..\..\src\server\authserver\Authentication;..\..\..\..\src\server\authserver\Realms;..\..\..\..\src\server\authserver\Server;..\..\..\..\dep\acelite;..\..\..\..\dep\mysqllite\include;..\..\..\..\dep\openssl\include;"
+				BasicRuntimeChecks="3"
+				CompileAs="2"
+				DebugInformationFormat="3"
+				ExceptionHandling="1"
+				ForcedIncludeFiles="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/PrecompiledHeaders/authPCH.h"
+				InlineFunctionExpansion="0"
+				Optimization="0"
+				PrecompiledHeaderThrough="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/PrecompiledHeaders/authPCH.h"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="TRUE"
+				SuppressStartupBanner="FALSE"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32,_WINDOWS,_DEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;Debug\&quot;"
+				AssemblerListingLocation="Debug"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/Debug/authserver.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories=".;..\..\..;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Database;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\shared\Packets;..\..\..\..\src\server\shared\Cryptography;..\..\..\..\src\server\shared\Cryptography\Authentication;..\..\..\..\src\server\shared\Logging;..\..\..\..\src\server\shared\Threading;..\..\..\..\src\server\shared\Utilities;..\..\..\..\src\server\authserver;..\..\..\..\src\server\authserver\Authentication;..\..\..\..\src\server\authserver\Realms;..\..\..\..\src\server\authserver\Server;..\..\..\..\dep\acelite;..\..\..\..\dep\mysqllite\include;..\..\..\..\dep\openssl\include;"
+				PreprocessorDefinitions="WIN32,_WINDOWS,_DEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;Debug\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32,_WINDOWS,_DEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;Debug\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -E copy &quot;C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/authserver.conf.dist&quot; &quot;C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/$(ConfigurationName)/&quot;"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions=" /STACK:10000000 /machine:I386 /LARGEADDRESSAWARE /debug"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  ..\shared\Debug\shared.lib ..\..\..\dep\mysqllite\Debug\libmysql.lib ..\..\..\..\dep\openssl\lib\ssleay32.lib ..\..\..\..\dep\openssl\lib\libeay32.lib ..\..\..\dep\acelite\ace\Debug\ace.lib ..\..\..\dep\zlib\Debug\zlib.lib wsock32.lib "
+				OutputFile="..\..\..\bin\Debug\authserver.exe"
+				Version="0.0"
+				GenerateManifest="TRUE"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
+				ProgramDataBaseFile="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/Debug/authserver.pdb"
+				GenerateDebugInformation="TRUE"
+				SubSystem="1"
+				ImportLibrary="Debug\authserver.lib"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="Release"
+			IntermediateDirectory="authserver.dir\Release"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories=".;..\..\..;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Database;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\shared\Packets;..\..\..\..\src\server\shared\Cryptography;..\..\..\..\src\server\shared\Cryptography\Authentication;..\..\..\..\src\server\shared\Logging;..\..\..\..\src\server\shared\Threading;..\..\..\..\src\server\shared\Utilities;..\..\..\..\src\server\authserver;..\..\..\..\src\server\authserver\Authentication;..\..\..\..\src\server\authserver\Realms;..\..\..\..\src\server\authserver\Server;..\..\..\..\dep\acelite;..\..\..\..\dep\mysqllite\include;..\..\..\..\dep\openssl\include;"
+				CompileAs="2"
+				ExceptionHandling="1"
+				ForcedIncludeFiles="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/PrecompiledHeaders/authPCH.h"
+				InlineFunctionExpansion="2"
+				Optimization="2"
+				PrecompiledHeaderThrough="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/PrecompiledHeaders/authPCH.h"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
+				SuppressStartupBanner="FALSE"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;Release\&quot;"
+				AssemblerListingLocation="Release"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/Release/authserver.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories=".;..\..\..;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Database;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\shared\Packets;..\..\..\..\src\server\shared\Cryptography;..\..\..\..\src\server\shared\Cryptography\Authentication;..\..\..\..\src\server\shared\Logging;..\..\..\..\src\server\shared\Threading;..\..\..\..\src\server\shared\Utilities;..\..\..\..\src\server\authserver;..\..\..\..\src\server\authserver\Authentication;..\..\..\..\src\server\authserver\Realms;..\..\..\..\src\server\authserver\Server;..\..\..\..\dep\acelite;..\..\..\..\dep\mysqllite\include;..\..\..\..\dep\openssl\include;"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;Release\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;Release\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -E copy &quot;C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/authserver.conf.dist&quot; &quot;C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/$(ConfigurationName)/&quot;"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions=" /STACK:10000000 /machine:I386 /LARGEADDRESSAWARE"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  ..\shared\Release\shared.lib ..\..\..\dep\mysqllite\Release\libmysql.lib ..\..\..\..\dep\openssl\lib\ssleay32.lib ..\..\..\..\dep\openssl\lib\libeay32.lib ..\..\..\dep\acelite\ace\Release\ace.lib ..\..\..\dep\zlib\Release\zlib.lib wsock32.lib "
+				OutputFile="..\..\..\bin\Release\authserver.exe"
+				Version="0.0"
+				GenerateManifest="TRUE"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories=""
+				ProgramDataBaseFile="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/Release/authserver.pdb"
+				SubSystem="1"
+				ImportLibrary="Release\authserver.lib"/>
+		</Configuration>
+		<Configuration
+			Name="MinSizeRel|Win32"
+			OutputDirectory="MinSizeRel"
+			IntermediateDirectory="authserver.dir\MinSizeRel"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories=".;..\..\..;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Database;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\shared\Packets;..\..\..\..\src\server\shared\Cryptography;..\..\..\..\src\server\shared\Cryptography\Authentication;..\..\..\..\src\server\shared\Logging;..\..\..\..\src\server\shared\Threading;..\..\..\..\src\server\shared\Utilities;..\..\..\..\src\server\authserver;..\..\..\..\src\server\authserver\Authentication;..\..\..\..\src\server\authserver\Realms;..\..\..\..\src\server\authserver\Server;..\..\..\..\dep\acelite;..\..\..\..\dep\mysqllite\include;..\..\..\..\dep\openssl\include;"
+				CompileAs="2"
+				ExceptionHandling="1"
+				ForcedIncludeFiles="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/PrecompiledHeaders/authPCH.h"
+				InlineFunctionExpansion="1"
+				Optimization="1"
+				PrecompiledHeaderThrough="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/PrecompiledHeaders/authPCH.h"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
+				SuppressStartupBanner="FALSE"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"
+				AssemblerListingLocation="MinSizeRel"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/MinSizeRel/authserver.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories=".;..\..\..;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Database;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\shared\Packets;..\..\..\..\src\server\shared\Cryptography;..\..\..\..\src\server\shared\Cryptography\Authentication;..\..\..\..\src\server\shared\Logging;..\..\..\..\src\server\shared\Threading;..\..\..\..\src\server\shared\Utilities;..\..\..\..\src\server\authserver;..\..\..\..\src\server\authserver\Authentication;..\..\..\..\src\server\authserver\Realms;..\..\..\..\src\server\authserver\Server;..\..\..\..\dep\acelite;..\..\..\..\dep\mysqllite\include;..\..\..\..\dep\openssl\include;"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;MinSizeRel\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -E copy &quot;C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/authserver.conf.dist&quot; &quot;C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/$(ConfigurationName)/&quot;"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions=" /STACK:10000000 /machine:I386 /LARGEADDRESSAWARE"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  ..\shared\MinSizeRel\shared.lib ..\..\..\dep\mysqllite\MinSizeRel\libmysql.lib ..\..\..\..\dep\openssl\lib\ssleay32.lib ..\..\..\..\dep\openssl\lib\libeay32.lib ..\..\..\dep\acelite\ace\MinSizeRel\ace.lib ..\..\..\dep\zlib\MinSizeRel\zlib.lib wsock32.lib "
+				OutputFile="..\..\..\bin\MinSizeRel\authserver.exe"
+				Version="0.0"
+				GenerateManifest="TRUE"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories=""
+				ProgramDataBaseFile="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/MinSizeRel/authserver.pdb"
+				SubSystem="1"
+				ImportLibrary="MinSizeRel\authserver.lib"/>
+		</Configuration>
+		<Configuration
+			Name="RelWithDebInfo|Win32"
+			OutputDirectory="RelWithDebInfo"
+			IntermediateDirectory="authserver.dir\RelWithDebInfo"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories=".;..\..\..;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Database;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\shared\Packets;..\..\..\..\src\server\shared\Cryptography;..\..\..\..\src\server\shared\Cryptography\Authentication;..\..\..\..\src\server\shared\Logging;..\..\..\..\src\server\shared\Threading;..\..\..\..\src\server\shared\Utilities;..\..\..\..\src\server\authserver;..\..\..\..\src\server\authserver\Authentication;..\..\..\..\src\server\authserver\Realms;..\..\..\..\src\server\authserver\Server;..\..\..\..\dep\acelite;..\..\..\..\dep\mysqllite\include;..\..\..\..\dep\openssl\include;"
+				CompileAs="2"
+				DebugInformationFormat="3"
+				ExceptionHandling="1"
+				ForcedIncludeFiles="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/PrecompiledHeaders/authPCH.h"
+				InlineFunctionExpansion="1"
+				Optimization="2"
+				PrecompiledHeaderThrough="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/PrecompiledHeaders/authPCH.h"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
+				SuppressStartupBanner="FALSE"
+				UsePrecompiledHeader="2"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"
+				AssemblerListingLocation="RelWithDebInfo"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/RelWithDebInfo/authserver.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories=".;..\..\..;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Database;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\shared\Packets;..\..\..\..\src\server\shared\Cryptography;..\..\..\..\src\server\shared\Cryptography\Authentication;..\..\..\..\src\server\shared\Logging;..\..\..\..\src\server\shared\Threading;..\..\..\..\src\server\shared\Utilities;..\..\..\..\src\server\authserver;..\..\..\..\src\server\authserver\Authentication;..\..\..\..\src\server\authserver\Realms;..\..\..\..\src\server\authserver\Server;..\..\..\..\dep\acelite;..\..\..\..\dep\mysqllite\include;..\..\..\..\dep\openssl\include;"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32,_WINDOWS,NDEBUG,_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;,_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES,_CRT_SECURE_NO_WARNINGS,_CRT_NONSTDC_NO_WARNINGS,SCRIPTS,CMAKE_INTDIR=\&quot;RelWithDebInfo\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -E copy &quot;C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/authserver.conf.dist&quot; &quot;C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/$(ConfigurationName)/&quot;"/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalOptions=" /STACK:10000000 /machine:I386 /LARGEADDRESSAWARE /debug"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  ..\shared\RelWithDebInfo\shared.lib ..\..\..\dep\mysqllite\RelWithDebInfo\libmysql.lib ..\..\..\..\dep\openssl\lib\ssleay32.lib ..\..\..\..\dep\openssl\lib\libeay32.lib ..\..\..\dep\acelite\ace\RelWithDebInfo\ace.lib ..\..\..\dep\zlib\RelWithDebInfo\zlib.lib wsock32.lib "
+				OutputFile="..\..\..\bin\RelWithDebInfo\authserver.exe"
+				Version="0.0"
+				GenerateManifest="TRUE"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
+				ProgramDataBaseFile="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/bin/RelWithDebInfo/authserver.pdb"
+				GenerateDebugInformation="TRUE"
+				SubSystem="1"
+				ImportLibrary="RelWithDebInfo\authserver.lib"/>
+		</Configuration>
+	</Configurations>
+	<Files>
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\CMakeLists.txt">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -H../../../.. -B../../.. --check-stamp-file CMakeFiles/generate.stamp"
+					AdditionalDependencies="..\..\..\..\src\server\authserver\CMakeLists.txt;..\..\..\..\src\server\authserver\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -H../../../.. -B../../.. --check-stamp-file CMakeFiles/generate.stamp"
+					AdditionalDependencies="..\..\..\..\src\server\authserver\CMakeLists.txt;..\..\..\..\src\server\authserver\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MinSizeRel|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -H../../../.. -B../../.. --check-stamp-file CMakeFiles/generate.stamp"
+					AdditionalDependencies="..\..\..\..\src\server\authserver\CMakeLists.txt;..\..\..\..\src\server\authserver\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="RelWithDebInfo|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.6\bin\cmake.exe&quot; -H../../../.. -B../../.. --check-stamp-file CMakeFiles/generate.stamp"
+					AdditionalDependencies="..\..\..\..\src\server\authserver\CMakeLists.txt;..\..\..\..\src\server\authserver\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+			</File>
+		<Filter
+			Name="Source Files"
+			Filter="">
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\PrecompiledHeaders\authPCH.cpp">
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+					Name="VCCLCompilerTool"
+					PrecompiledHeaderThrough="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/PrecompiledHeaders/authPCH.h"
+					UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="MinSizeRel|Win32">
+					<Tool
+					Name="VCCLCompilerTool"
+					PrecompiledHeaderThrough="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/PrecompiledHeaders/authPCH.h"
+					UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="RelWithDebInfo|Win32">
+					<Tool
+					Name="VCCLCompilerTool"
+					PrecompiledHeaderThrough="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/PrecompiledHeaders/authPCH.h"
+					UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+					Name="VCCLCompilerTool"
+					PrecompiledHeaderThrough="C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/authserver/PrecompiledHeaders/authPCH.h"
+					UsePrecompiledHeader="1"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\Authentication\AuthCodes.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\Realms\RealmList.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\Server\AuthSocket.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\Server\RealmSocket.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\Main.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\shared\Debugging\WheatyExceptionReport.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\authserver.rc">
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="">
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\PrecompiledHeaders\authPCH.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\Authentication\AuthCodes.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\Realms\RealmList.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\Server\AuthSocket.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\Server\RealmAcceptor.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\Server\RealmSocket.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\authserver\resource.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\server\shared\Debugging\WheatyExceptionReport.h">
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>
