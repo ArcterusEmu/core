@@ -1,5 +1,5 @@
 ################################################
-# Trinity Core World Server configuration file #
+# ArcterusEmu World Server configuration file #
 ################################################
 [worldserver]
 
@@ -14,7 +14,7 @@
 #        Data directory setting.
 #        Important: DataDir needs to be quoted, as it is a string which may
 #         contain space characters.
-#        Example: "@prefix@/share/trinitycore"
+#        Example: "@prefix@/share/arcterusemu"
 #
 #    LogsDir
 #        Logs directory setting.
@@ -64,11 +64,11 @@
 ###############################################################################
 
 RealmID = 1
-DataDir = "."
-LogsDir = ""
-LoginDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;auth"
-WorldDatabaseInfo     = "127.0.0.1;3306;trinity;trinity;world"
-CharacterDatabaseInfo = "127.0.0.1;3306;trinity;trinity;characters"
+DataDir = "data"
+LogsDir = "log/world"
+LoginDatabaseInfo     = "127.0.0.1;3306;root;;auth"
+WorldDatabaseInfo     = "127.0.0.1;3306;root;;world"
+CharacterDatabaseInfo = "127.0.0.1;3306;root;;characters"
 LoginDatabase.WorkerThreads = 1
 WorldDatabase.WorkerThreads = 1
 CharacterDatabase.WorkerThreads = 1

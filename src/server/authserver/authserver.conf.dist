@@ -1,5 +1,5 @@
 ###############################################
-# Trinity Core Auth Server configuration file #
+# ArcterusEmu Auth Server configuration file #
 ###############################################
 [authserver]
 
@@ -121,14 +121,14 @@
 #
 ###############################################################################
 
-LogsDir = ""
+LogsDir = "log/auth"
 MaxPingTime = 30
 RealmServerPort = 3724
 BindIP = "0.0.0.0"
 PidFile = ""
 LogLevel = 0
 LogFile = "auth.log"
-SQLDriverLogFile = ""
+SQLDriverLogFile = "database.log"
 LogTimestamp = 0
 LogFileLevel = 0
 LogColors = ""
