@@ -68,6 +68,7 @@ ChatCommand * ChatHandler::getCommandTable()
         { "addon",          SEC_ADMINISTRATOR,  true,  &ChatHandler::HandleAccountSetAddonCommand,     "", NULL },
         { "gmlevel",        SEC_CONSOLE,        true,  &ChatHandler::HandleAccountSetGmLevelCommand,   "", NULL },
         { "password",       SEC_CONSOLE,        true,  &ChatHandler::HandleAccountSetPasswordCommand,  "", NULL },
+        { "closed",         SEC_ADMINISTRATOR,  true,  &ChatHandler::HandleBanAccountCommand,
         { NULL,             0,                  false, NULL,                                           "", NULL }
     };
 
