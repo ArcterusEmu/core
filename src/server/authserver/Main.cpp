@@ -45,8 +45,8 @@
 
 #ifdef _WIN32
 #include "ServiceWin32.h"
-char serviceName[] = "TrinityRealm";
-char serviceLongName[] = "Trinity realm service";
+char serviceName[] = "ArcterusEmu Authenticate-Server";
+char serviceLongName[] = "ArcterusEmu Authenticate-Server";
 char serviceDescription[] = "Massive Network Game Object Server";
 /*
  * -1 - not in service mode
