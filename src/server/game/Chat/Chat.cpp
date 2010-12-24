@@ -87,9 +87,6 @@ ChatCommand * ChatHandler::getCommandTable()
 
     static ChatCommand banCommandTable[] =
     {
-        { "account",        SEC_ADMINISTRATOR,  true,  &ChatHandler::HandleBanAccountCommand,          "", NULL },
-        { "character",      SEC_ADMINISTRATOR,  true,  &ChatHandler::HandleBanCharacterCommand,        "", NULL },
-        { "playeraccount",  SEC_ADMINISTRATOR,  true,  &ChatHandler::HandleBanAccountByCharCommand,    "", NULL },
         { "ip",             SEC_ADMINISTRATOR,  true,  &ChatHandler::HandleBanIPCommand,               "", NULL },
         { NULL,             0,                  false, NULL,                                           "", NULL }
     };
@@ -140,6 +137,8 @@ ChatCommand * ChatHandler::getCommandTable()
         { "rename",         SEC_GAMEMASTER,     true,  &ChatHandler::HandleCharacterRenameCommand,        "", NULL },
         { "reputation",     SEC_GAMEMASTER,     true,  &ChatHandler::HandleCharacterReputationCommand,    "", NULL },
         { "titles",         SEC_GAMEMASTER,     true,  &ChatHandler::HandleCharacterTitlesCommand,        "", NULL },
+        { "close",          SEC_ADMINISTRATOR,  true,  &ChatHandler::HandleBanCharacterCommand,           "", NULL },
+        { "closeacc",       SEC_ADMINISTRATOR,  true,  &ChatHandler::HandleBanAccountByCharCommand,       "", NULL },
         { NULL,             0,                  false, NULL,                                              "", NULL }
     };
 
