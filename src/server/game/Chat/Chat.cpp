@@ -68,7 +68,6 @@ ChatCommand * ChatHandler::getCommandTable()
         { "addon",          SEC_ADMINISTRATOR,  true,  &ChatHandler::HandleAccountSetAddonCommand,     "", NULL },
         { "gmlevel",        SEC_CONSOLE,        true,  &ChatHandler::HandleAccountSetGmLevelCommand,   "", NULL },
         { "password",       SEC_CONSOLE,        true,  &ChatHandler::HandleAccountSetPasswordCommand,  "", NULL },
-        { "closed",         SEC_ADMINISTRATOR,  true,  &ChatHandler::HandleBanAccountCommand,          "", NULL },
         { NULL,             0,                  false, NULL,                                           "", NULL }
     };
 
@@ -82,6 +81,7 @@ ChatCommand * ChatHandler::getCommandTable()
         { "set",            SEC_ADMINISTRATOR,  true,  NULL,                                           "", accountSetCommandTable },
         { "password",       SEC_PLAYER,         false, &ChatHandler::HandleAccountPasswordCommand,     "", NULL },
         { "",               SEC_PLAYER,         false, &ChatHandler::HandleAccountCommand,             "", NULL },
+        { "close",          SEC_ADMINISTRATOR,  true,  &ChatHandler::HandleBanAccountCommand,          "", NULL },
         { NULL,             0,                  false, NULL,                                           "", NULL }
     };
 
@@ -218,11 +218,11 @@ ChatCommand * ChatHandler::getCommandTable()
 
     static ChatCommand gmCommandTable[] =
     {
-        { "chat",           SEC_MODERATOR,      false, &ChatHandler::HandleGMChatCommand,              "", NULL },
+        { "blizz",          SEC_MODERATOR,      false, &ChatHandler::HandleGMChatCommand,              "", NULL },
         { "fly",            SEC_ADMINISTRATOR,  false, &ChatHandler::HandleGMFlyCommand,               "", NULL },
-        { "ingame",         SEC_PLAYER,         true,  &ChatHandler::HandleGMListIngameCommand,        "", NULL },
+        { "online",         SEC_PLAYER,         true,  &ChatHandler::HandleGMListIngameCommand,        "", NULL },
         { "list",           SEC_ADMINISTRATOR,  true,  &ChatHandler::HandleGMListFullCommand,          "", NULL },
-        { "visible",        SEC_MODERATOR,      false, &ChatHandler::HandleGMVisibleCommand,           "", NULL },
+        { "show",           SEC_MODERATOR,      false, &ChatHandler::HandleGMVisibleCommand,           "", NULL },
         { "",               SEC_MODERATOR,      false, &ChatHandler::HandleGMCommand,                  "", NULL },
         { NULL,             0,                  false, NULL,                                           "", NULL }
     };
