@@ -99,7 +99,7 @@ void RealmList::UpdateRealms(bool init)
             UpdateRealm(realmId, name, address, port, icon, color, timezone, (allowedSecurityLevel <= SEC_ADMINISTRATOR ? AccountTypes(allowedSecurityLevel) : SEC_ADMINISTRATOR), pop, build);
 
             if (init)
-                sLog.outString("Added realm \"%s\".", fields[1].GetCString());
+                sLog.outString("World \"%s\"added.", fields[1].GetCString());
         }
         while (result->NextRow());
     }

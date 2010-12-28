@@ -218,7 +218,7 @@ AuthSocket::~AuthSocket(void)
 /// Accept the connection and set the s random value for SRP6
 void AuthSocket::OnAccept(void)
 {
-    sLog.outBasic("Accepting connection from '%s'", socket().get_remote_address().c_str());
+    sLog.outBasic("Incomming connection accepted from '%s'", socket().get_remote_address().c_str());
 }
 
 void AuthSocket::OnClose(void)
@@ -369,7 +369,7 @@ bool AuthSocket::_HandleLogonChallenge()
     if (result)
     {
         pkt << (uint8)WOW_FAIL_BANNED;
-        sLog.outBasic("[AuthChallenge] Banned ip %s tries to login!", ip_address.c_str());
+        sLog.outBasic("[AuthChallenge] %s tried to login! Status: Banned IP", ip_address.c_str());
     }
     else
     {
@@ -421,12 +421,12 @@ bool AuthSocket::_HandleLogonChallenge()
                     if ((*banresult)[0].GetUInt64() == (*banresult)[1].GetUInt64())
                     {
                         pkt << (uint8) WOW_FAIL_BANNED;
-                        sLog.outBasic("[AuthChallenge] Banned account %s tries to login!", _login.c_str());
+                        sLog.outBasic("[AuthChallenge] %s tried to login! Status: Banned Account", _login.c_str());
                     }
                     else
                     {
                         pkt << (uint8) WOW_FAIL_SUSPENDED;
-                        sLog.outBasic("[AuthChallenge] Temporarily banned account %s tries to login!", _login.c_str());
+                        sLog.outBasic("[AuthChallenge] %s tried to login! Status: Temporary Banned Account", _login.c_str());
                     }
                 }
                 else
@@ -612,7 +612,7 @@ bool AuthSocket::_HandleLogonProof()
     ///- Check if SRP6 results match (password is correct), else send an error
     if (!memcmp(M.AsByteArray(), lp.M1, 20))
     {
-        sLog.outBasic("User '%s' successfully authenticated", _login.c_str());
+        sLog.outBasic("User '%s' logged in successfully", _login.c_str());
 
         ///- Update the sessionkey, last_ip, last login time and reset number of failed logins in the account table for this account
         // No SQL injection (escaped user name) and IP address as received by socket
@@ -663,7 +663,7 @@ bool AuthSocket::_HandleLogonProof()
         char data[4]= { AUTH_LOGON_PROOF, WOW_FAIL_UNKNOWN_ACCOUNT, 3, 0};
         socket().send(data, sizeof(data));
 
-        sLog.outBasic("[AuthChallenge] account %s tried to login with wrong password!",_login.c_str ());
+        sLog.outBasic("[AuthChallenge] %s tried to login! Status: Wrong Password",_login.c_str ());
 
         uint32 MaxWrongPassCount = sConfig.GetIntDefault("WrongPass.MaxCount", 0);
         if (MaxWrongPassCount > 0)

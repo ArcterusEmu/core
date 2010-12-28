@@ -24,13 +24,13 @@
 #include "Define.h"
 #include "revision.h"
 
-#define _PACKAGENAME "TrinityCore "
+#define _PACKAGENAME "ArcterusEmu "
 #define _CODENAME "LONG_COLD_WINTER"
 
 #if TRINITY_ENDIAN == TRINITY_BIGENDIAN
-# define _ENDIAN_STRING "big-endian"
+# define _ENDIAN_STRING "x64 / big-endian"
 #else
-# define _ENDIAN_STRING "little-endian"
+# define _ENDIAN_STRING "x86 / little-endian"
 #endif
 
 #if PLATFORM == PLATFORM_WINDOWS

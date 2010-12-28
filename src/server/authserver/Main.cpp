@@ -223,7 +223,7 @@ extern int main(int argc, char **argv)
 
     if (acceptor.open(bind_addr, ACE_Reactor::instance(), ACE_NONBLOCK) == -1)
     {
-        sLog.outError("Trinity realm can not bind to %s:%d", bind_ip.c_str(), rmport);
+        sLog.outError("ArcterusEmu Authserver can not bind to %s:%d", bind_ip.c_str(), rmport);
         return 1;
     }
 
@@ -276,9 +276,9 @@ extern int main(int argc, char **argv)
         if (Prio)
         {
             if (SetPriorityClass(hProcess,HIGH_PRIORITY_CLASS))
-                sLog.outString("TrinityRealm process priority class set to HIGH");
+                sLog.outString("ArcterusEmu Auth process priority class set to HIGH");
             else
-                sLog.outError("Can't set realmd process priority class.");
+                sLog.outError("Can't set Auth process priority class.");
             sLog.outString();
         }
     }
