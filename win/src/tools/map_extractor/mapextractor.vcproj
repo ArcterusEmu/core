@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="mapextractor"
+	ProjectGUID="{F513BCCD-7C9D-493E-A0D5-172FB3B91102}"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="Release"
+			IntermediateDirectory="mapextractor.dir\Release"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="..\..\..\..\src\server\shared;..\..\..\..\dep\libmpq;..\..\..\..\dep\libmpq\win;..\..\..\..\src\tools\map_extractor;..\..\..\..\src\tools\map_extractor\loadlib;"
+				CompileAs="2"
+				DisableSpecificWarnings="4996;4355;4244;4985;4267;4619"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="2"
+				Optimization="2"
+				RuntimeLibrary="2"
+				RuntimeTypeInfo="TRUE"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;SCRIPTS;CMAKE_INTDIR=\&quot;Release\&quot;"
+				AssemblerListingLocation="Release"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="..\..\..\bin\Release/mapextractor.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\..\..\..\src\server\shared;..\..\..\..\dep\libmpq;..\..\..\..\dep\libmpq\win;..\..\..\..\src\tools\map_extractor;..\..\..\..\src\tools\map_extractor\loadlib;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;SCRIPTS;CMAKE_INTDIR=\&quot;Release\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;SCRIPTS;CMAKE_INTDIR=\&quot;Release\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"
+CommandLine="&quot;C:\Programme\CMake 2.8\bin\cmake.exe&quot; -E make_directory &quot;C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/src/tools/map_extractor/Release&quot;&#x0D;&#x0A;if errorlevel 1 goto VCReportError"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkLibraryDependencies="false"
+				AdditionalOptions=" /STACK:10000000 /machine:X86 /LARGEADDRESSAWARE"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  ..\..\..\dep\bzip2\Release\bzip2.lib ..\..\..\dep\zlib\Release\zlib.lib ..\..\..\dep\libmpq\Release\mpq.lib "
+				OutputFile="..\..\..\bin\Release\mapextractor.exe"
+				Version="0.0"
+				LinkIncremental="1"
+				AdditionalLibraryDirectories=""
+				ProgramDatabaseFile="..\..\..\bin\Release/mapextractor.pdb"
+				SubSystem="1"
+				ImportLibrary="Release\mapextractor.lib"/>
+		</Configuration>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="Debug"
+			IntermediateDirectory="mapextractor.dir\Debug"
+			ConfigurationType="1"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalOptions=" /Zm1000"
+				AdditionalIncludeDirectories="..\..\..\..\src\server\shared;..\..\..\..\dep\libmpq;..\..\..\..\dep\libmpq\win;..\..\..\..\src\tools\map_extractor;..\..\..\..\src\tools\map_extractor\loadlib;"
+				BasicRuntimeChecks="3"
+				CompileAs="2"
+				DebugInformationFormat="3"
+				DisableSpecificWarnings="4996;4355;4244;4985;4267;4619"
+				ExceptionHandling="1"
+				InlineFunctionExpansion="0"
+				Optimization="0"
+				RuntimeLibrary="3"
+				RuntimeTypeInfo="TRUE"
+				WarningLevel="3"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;SCRIPTS;CMAKE_INTDIR=\&quot;Debug\&quot;"
+				AssemblerListingLocation="Debug"
+				ObjectFile="$(IntDir)\"
+				ProgramDataBaseFileName="..\..\..\bin\Debug/mapextractor.pdb"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories="..\..\..\..\src\server\shared;..\..\..\..\dep\libmpq;..\..\..\..\dep\libmpq\win;..\..\..\..\src\tools\map_extractor;..\..\..\..\src\tools\map_extractor\loadlib;"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;SCRIPTS;CMAKE_INTDIR=\&quot;Debug\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;SCRIPTS;CMAKE_INTDIR=\&quot;Debug\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"
+CommandLine="&quot;C:\Programme\CMake 2.8\bin\cmake.exe&quot; -E make_directory &quot;C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/win/src/tools/map_extractor/Debug&quot;&#x0D;&#x0A;if errorlevel 1 goto VCReportError"/>
+			<Tool
+				Name="VCPostBuildEventTool"/>
+			<Tool
+				Name="VCLinkerTool"
+				LinkLibraryDependencies="false"
+				AdditionalOptions=" /STACK:10000000 /machine:X86 /LARGEADDRESSAWARE /debug"
+				AdditionalDependencies="$(NOINHERIT) kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib  ..\..\..\dep\bzip2\Debug\bzip2.lib ..\..\..\dep\zlib\Debug\zlib.lib ..\..\..\dep\libmpq\Debug\mpq.lib "
+				OutputFile="..\..\..\bin\Debug\mapextractor.exe"
+				Version="0.0"
+				LinkIncremental="2"
+				AdditionalLibraryDirectories=""
+				ProgramDatabaseFile="..\..\..\bin\Debug/mapextractor.pdb"
+				GenerateDebugInformation="TRUE"
+				SubSystem="1"
+				ImportLibrary="Debug\mapextractor.lib"/>
+		</Configuration>
+	</Configurations>
+	<Files>
+			<File
+				RelativePath="..\..\..\..\src\tools\map_extractor\CMakeLists.txt">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/tools/map_extractor/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.8\bin\cmake.exe&quot; -H../../../.. -B../../.. --check-stamp-file &quot;C:\Dokumente und Einstellungen\Pascal\Eigene Dateien\Git\arcterusemu\core\win\src\tools\map_extractor\CMakeFiles\generate.stamp&quot;&#x0D;&#x0A;if errorlevel 1 goto VCReportError"
+					AdditionalDependencies="..\..\..\..\src\tools\map_extractor\CMakeLists.txt;..\..\..\..\src\tools\map_extractor\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/tools/map_extractor/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.8\bin\cmake.exe&quot; -H../../../.. -B../../.. --check-stamp-file &quot;C:\Dokumente und Einstellungen\Pascal\Eigene Dateien\Git\arcterusemu\core\win\src\tools\map_extractor\CMakeFiles\generate.stamp&quot;&#x0D;&#x0A;if errorlevel 1 goto VCReportError"
+					AdditionalDependencies="..\..\..\..\src\tools\map_extractor\CMakeLists.txt;..\..\..\..\src\tools\map_extractor\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+			</File>
+		<Filter
+			Name="Source Files"
+			Filter="">
+			<File
+				RelativePath="..\..\..\..\src\tools\map_extractor\adt.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\tools\map_extractor\dbcfile.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\tools\map_extractor\loadlib.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\tools\map_extractor\mpq_libmpq.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\tools\map_extractor\System.cpp">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\tools\map_extractor\wdt.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="">
+			<File
+				RelativePath="..\..\..\..\src\tools\map_extractor\adt.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\tools\map_extractor\dbcfile.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\tools\map_extractor\loadlib\loadlib.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\tools\map_extractor\mpq_libmpq04.h">
+			</File>
+			<File
+				RelativePath="..\..\..\..\src\tools\map_extractor\wdt.h">
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="9.00"
+	Name="INSTALL"
+	ProjectGUID="{8A32C1C7-241F-4EC1-84EA-78236CA007F3}"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="Release"
+			IntermediateDirectory="INSTALL.dir\Release"
+			ConfigurationType="10"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories=".;..\..\..;..\..\..\..\dep\gsoap;..\..\..\..\dep\sockets\include;..\..\..\..\dep\SFMT;..\..\..\..\dep\mersennetwister;..\..\..\..\src\server\collision;..\..\..\..\src\server\collision\Management;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Configuration;..\..\..\..\src\server\shared\Cryptography;..\..\..\..\src\server\shared\Cryptography\Authentication;..\..\..\..\src\server\shared\Database;..\..\..\..\src\server\shared\DataStores;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\shared\Dynamic\CountedReference;..\..\..\..\src\server\shared\Dynamic\LinkedReference;..\..\..\..\src\server\shared\Dynamic;..\..\..\..\src\server\shared\Logging;..\..\..\..\src\server\shared\Packets;..\..\..\..\src\server\shared\Policies;..\..\..\..\src\server\shared\Threading;..\..\..\..\src\server\shared\Utilities;..\..\..\..\src\server\game;..\..\..\..\src\server\game\Accounts;..\..\..\..\src\server\game\Achievements;..\..\..\..\src\server\game\Addons;..\..\..\..\src\server\game\AI;..\..\..\..\src\server\game\AI\CoreAI;..\..\..\..\src\server\game\AI\EventAI;..\..\..\..\src\server\game\AI\ScriptedAI;..\..\..\..\src\server\game\AI\SmartScripts;..\..\..\..\src\server\game\AuctionHouse;..\..\..\..\src\server\game\AuctionHouse\AuctionHouseBot;..\..\..\..\src\server\game\Battlegrounds;..\..\..\..\src\server\game\Battlegrounds\Zones;..\..\..\..\src\server\game\Calendar;..\..\..\..\src\server\game\Chat;..\..\..\..\src\server\game\Chat\Channels;..\..\..\..\src\server\game\Chat\Commands;..\..\..\..\src\server\game\Combat;..\..\..\..\src\server\game\Conditions;..\..\..\..\src\server\game\DataStores;..\..\..\..\src\server\game\DungeonFinding;..\..\..\..\src\server\game\Entities;..\..\..\..\src\server\game\Entities\Creature;..\..\..\..\src\server\game\Entities\Corpse;..\..\..\..\src\server\game\Entities\DynamicObject;..\..\..\..\src\server\game\Entities\GameObject;..\..\..\..\src\server\game\Entities\Item;..\..\..\..\src\server\game\Entities\Item\Container;..\..\..\..\src\server\game\Entities\Object;..\..\..\..\src\server\game\Entities\Object\Updates;..\..\..\..\src\server\game\Entities\Pet;..\..\..\..\src\server\game\Entities\Player;..\..\..\..\src\server\game\Entities\Totem;..\..\..\..\src\server\game\Entities\Unit;..\..\..\..\src\server\game\Entities\Vehicle;..\..\..\..\src\server\game\Entities\Transport;..\..\..\..\src\server\game\Events;..\..\..\..\src\server\game\Globals;..\..\..\..\src\server\game\Grids\Cells;..\..\..\..\src\server\game\Grids\Notifiers;..\..\..\..\src\server\game\Grids;..\..\..\..\src\server\game\Groups;..\..\..\..\src\server\game\Guilds;..\..\..\..\src\server\game\Instances;..\..\..\..\src\server\game\Loot;..\..\..\..\src\server\game\Mails;..\..\..\..\src\server\game\Maps;..\..\..\..\src\server\game\Miscellaneous;..\..\..\..\src\server\game\Movement;..\..\..\..\src\server\game\Movement\MovementGenerators;..\..\..\..\src\server\game\Movement\Waypoints;..\..\..\..\src\server\game\OutdoorPvP;..\..\..\..\src\server\game\Pools;..\..\..\..\src\server\game\PrecompiledHeaders;..\..\..\..\src\server\game\Quests;..\..\..\..\src\server\game\Reputation;..\..\..\..\src\server\game\Scripting;..\..\..\..\src\server\game\Server\Protocol;..\..\..\..\src\server\game\Server\Protocol\Handlers;..\..\..\..\src\server\game\Server;..\..\..\..\src\server\game\Skills;..\..\..\..\src\server\game\Spells;..\..\..\..\src\server\game\Spells\Auras;..\..\..\..\src\server\game\Tools;..\..\..\..\src\server\game\Weather;..\..\..\..\src\server\game\World;..\..\..\..\src\server\worldserver;..\..\..\..\src\server\worldserver\CommandLine;..\..\..\..\src\server\worldserver\RemoteAccess;..\..\..\..\src\server\worldserver\TCSoap;..\..\..\..\src\server\worldserver\WorldThread;..\..\..\..\dep\acelite;..\..\..\..\dep\mysqllite\include;..\..\..\..\src\server\worldserver\..\dep\openssl\include;"
+				ExceptionHandling="0"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;SCRIPTS;CMAKE_INTDIR=\&quot;Release\&quot;"
+				AssemblerListingLocation="Release"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories=".;..\..\..;..\..\..\..\dep\gsoap;..\..\..\..\dep\sockets\include;..\..\..\..\dep\SFMT;..\..\..\..\dep\mersennetwister;..\..\..\..\src\server\collision;..\..\..\..\src\server\collision\Management;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Configuration;..\..\..\..\src\server\shared\Cryptography;..\..\..\..\src\server\shared\Cryptography\Authentication;..\..\..\..\src\server\shared\Database;..\..\..\..\src\server\shared\DataStores;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\shared\Dynamic\CountedReference;..\..\..\..\src\server\shared\Dynamic\LinkedReference;..\..\..\..\src\server\shared\Dynamic;..\..\..\..\src\server\shared\Logging;..\..\..\..\src\server\shared\Packets;..\..\..\..\src\server\shared\Policies;..\..\..\..\src\server\shared\Threading;..\..\..\..\src\server\shared\Utilities;..\..\..\..\src\server\game;..\..\..\..\src\server\game\Accounts;..\..\..\..\src\server\game\Achievements;..\..\..\..\src\server\game\Addons;..\..\..\..\src\server\game\AI;..\..\..\..\src\server\game\AI\CoreAI;..\..\..\..\src\server\game\AI\EventAI;..\..\..\..\src\server\game\AI\ScriptedAI;..\..\..\..\src\server\game\AI\SmartScripts;..\..\..\..\src\server\game\AuctionHouse;..\..\..\..\src\server\game\AuctionHouse\AuctionHouseBot;..\..\..\..\src\server\game\Battlegrounds;..\..\..\..\src\server\game\Battlegrounds\Zones;..\..\..\..\src\server\game\Calendar;..\..\..\..\src\server\game\Chat;..\..\..\..\src\server\game\Chat\Channels;..\..\..\..\src\server\game\Chat\Commands;..\..\..\..\src\server\game\Combat;..\..\..\..\src\server\game\Conditions;..\..\..\..\src\server\game\DataStores;..\..\..\..\src\server\game\DungeonFinding;..\..\..\..\src\server\game\Entities;..\..\..\..\src\server\game\Entities\Creature;..\..\..\..\src\server\game\Entities\Corpse;..\..\..\..\src\server\game\Entities\DynamicObject;..\..\..\..\src\server\game\Entities\GameObject;..\..\..\..\src\server\game\Entities\Item;..\..\..\..\src\server\game\Entities\Item\Container;..\..\..\..\src\server\game\Entities\Object;..\..\..\..\src\server\game\Entities\Object\Updates;..\..\..\..\src\server\game\Entities\Pet;..\..\..\..\src\server\game\Entities\Player;..\..\..\..\src\server\game\Entities\Totem;..\..\..\..\src\server\game\Entities\Unit;..\..\..\..\src\server\game\Entities\Vehicle;..\..\..\..\src\server\game\Entities\Transport;..\..\..\..\src\server\game\Events;..\..\..\..\src\server\game\Globals;..\..\..\..\src\server\game\Grids\Cells;..\..\..\..\src\server\game\Grids\Notifiers;..\..\..\..\src\server\game\Grids;..\..\..\..\src\server\game\Groups;..\..\..\..\src\server\game\Guilds;..\..\..\..\src\server\game\Instances;..\..\..\..\src\server\game\Loot;..\..\..\..\src\server\game\Mails;..\..\..\..\src\server\game\Maps;..\..\..\..\src\server\game\Miscellaneous;..\..\..\..\src\server\game\Movement;..\..\..\..\src\server\game\Movement\MovementGenerators;..\..\..\..\src\server\game\Movement\Waypoints;..\..\..\..\src\server\game\OutdoorPvP;..\..\..\..\src\server\game\Pools;..\..\..\..\src\server\game\PrecompiledHeaders;..\..\..\..\src\server\game\Quests;..\..\..\..\src\server\game\Reputation;..\..\..\..\src\server\game\Scripting;..\..\..\..\src\server\game\Server\Protocol;..\..\..\..\src\server\game\Server\Protocol\Handlers;..\..\..\..\src\server\game\Server;..\..\..\..\src\server\game\Skills;..\..\..\..\src\server\game\Spells;..\..\..\..\src\server\game\Spells\Auras;..\..\..\..\src\server\game\Tools;..\..\..\..\src\server\game\Weather;..\..\..\..\src\server\game\World;..\..\..\..\src\server\worldserver;..\..\..\..\src\server\worldserver\CommandLine;..\..\..\..\src\server\worldserver\RemoteAccess;..\..\..\..\src\server\worldserver\TCSoap;..\..\..\..\src\server\worldserver\WorldThread;..\..\..\..\dep\acelite;..\..\..\..\dep\mysqllite\include;..\..\..\..\src\server\worldserver\..\dep\openssl\include;"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;SCRIPTS;CMAKE_INTDIR=\&quot;Release\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;SCRIPTS;CMAKE_INTDIR=\&quot;Release\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="&quot;C:\Programme\CMake 2.8\bin\cmake.exe&quot; -DBUILD_TYPE=$(OutDir) -P cmake_install.cmake&#x0D;&#x0A;if errorlevel 1 goto VCReportError"/>
+		</Configuration>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="Debug"
+			IntermediateDirectory="INSTALL.dir\Debug"
+			ConfigurationType="10"
+			UseOfMFC="0"
+			ATLMinimizesCRunTimeLibraryUsage="FALSE"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories=".;..\..\..;..\..\..\..\dep\gsoap;..\..\..\..\dep\sockets\include;..\..\..\..\dep\SFMT;..\..\..\..\dep\mersennetwister;..\..\..\..\src\server\collision;..\..\..\..\src\server\collision\Management;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Configuration;..\..\..\..\src\server\shared\Cryptography;..\..\..\..\src\server\shared\Cryptography\Authentication;..\..\..\..\src\server\shared\Database;..\..\..\..\src\server\shared\DataStores;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\shared\Dynamic\CountedReference;..\..\..\..\src\server\shared\Dynamic\LinkedReference;..\..\..\..\src\server\shared\Dynamic;..\..\..\..\src\server\shared\Logging;..\..\..\..\src\server\shared\Packets;..\..\..\..\src\server\shared\Policies;..\..\..\..\src\server\shared\Threading;..\..\..\..\src\server\shared\Utilities;..\..\..\..\src\server\game;..\..\..\..\src\server\game\Accounts;..\..\..\..\src\server\game\Achievements;..\..\..\..\src\server\game\Addons;..\..\..\..\src\server\game\AI;..\..\..\..\src\server\game\AI\CoreAI;..\..\..\..\src\server\game\AI\EventAI;..\..\..\..\src\server\game\AI\ScriptedAI;..\..\..\..\src\server\game\AI\SmartScripts;..\..\..\..\src\server\game\AuctionHouse;..\..\..\..\src\server\game\AuctionHouse\AuctionHouseBot;..\..\..\..\src\server\game\Battlegrounds;..\..\..\..\src\server\game\Battlegrounds\Zones;..\..\..\..\src\server\game\Calendar;..\..\..\..\src\server\game\Chat;..\..\..\..\src\server\game\Chat\Channels;..\..\..\..\src\server\game\Chat\Commands;..\..\..\..\src\server\game\Combat;..\..\..\..\src\server\game\Conditions;..\..\..\..\src\server\game\DataStores;..\..\..\..\src\server\game\DungeonFinding;..\..\..\..\src\server\game\Entities;..\..\..\..\src\server\game\Entities\Creature;..\..\..\..\src\server\game\Entities\Corpse;..\..\..\..\src\server\game\Entities\DynamicObject;..\..\..\..\src\server\game\Entities\GameObject;..\..\..\..\src\server\game\Entities\Item;..\..\..\..\src\server\game\Entities\Item\Container;..\..\..\..\src\server\game\Entities\Object;..\..\..\..\src\server\game\Entities\Object\Updates;..\..\..\..\src\server\game\Entities\Pet;..\..\..\..\src\server\game\Entities\Player;..\..\..\..\src\server\game\Entities\Totem;..\..\..\..\src\server\game\Entities\Unit;..\..\..\..\src\server\game\Entities\Vehicle;..\..\..\..\src\server\game\Entities\Transport;..\..\..\..\src\server\game\Events;..\..\..\..\src\server\game\Globals;..\..\..\..\src\server\game\Grids\Cells;..\..\..\..\src\server\game\Grids\Notifiers;..\..\..\..\src\server\game\Grids;..\..\..\..\src\server\game\Groups;..\..\..\..\src\server\game\Guilds;..\..\..\..\src\server\game\Instances;..\..\..\..\src\server\game\Loot;..\..\..\..\src\server\game\Mails;..\..\..\..\src\server\game\Maps;..\..\..\..\src\server\game\Miscellaneous;..\..\..\..\src\server\game\Movement;..\..\..\..\src\server\game\Movement\MovementGenerators;..\..\..\..\src\server\game\Movement\Waypoints;..\..\..\..\src\server\game\OutdoorPvP;..\..\..\..\src\server\game\Pools;..\..\..\..\src\server\game\PrecompiledHeaders;..\..\..\..\src\server\game\Quests;..\..\..\..\src\server\game\Reputation;..\..\..\..\src\server\game\Scripting;..\..\..\..\src\server\game\Server\Protocol;..\..\..\..\src\server\game\Server\Protocol\Handlers;..\..\..\..\src\server\game\Server;..\..\..\..\src\server\game\Skills;..\..\..\..\src\server\game\Spells;..\..\..\..\src\server\game\Spells\Auras;..\..\..\..\src\server\game\Tools;..\..\..\..\src\server\game\Weather;..\..\..\..\src\server\game\World;..\..\..\..\src\server\worldserver;..\..\..\..\src\server\worldserver\CommandLine;..\..\..\..\src\server\worldserver\RemoteAccess;..\..\..\..\src\server\worldserver\TCSoap;..\..\..\..\src\server\worldserver\WorldThread;..\..\..\..\dep\acelite;..\..\..\..\dep\mysqllite\include;..\..\..\..\src\server\worldserver\..\dep\openssl\include;"
+				ExceptionHandling="0"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;SCRIPTS;CMAKE_INTDIR=\&quot;Debug\&quot;"
+				AssemblerListingLocation="Debug"
+				ObjectFile="$(IntDir)\"
+/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"
+				AdditionalIncludeDirectories=".;..\..\..;..\..\..\..\dep\gsoap;..\..\..\..\dep\sockets\include;..\..\..\..\dep\SFMT;..\..\..\..\dep\mersennetwister;..\..\..\..\src\server\collision;..\..\..\..\src\server\collision\Management;..\..\..\..\src\server\shared;..\..\..\..\src\server\shared\Configuration;..\..\..\..\src\server\shared\Cryptography;..\..\..\..\src\server\shared\Cryptography\Authentication;..\..\..\..\src\server\shared\Database;..\..\..\..\src\server\shared\DataStores;..\..\..\..\src\server\shared\Debugging;..\..\..\..\src\server\shared\Dynamic\CountedReference;..\..\..\..\src\server\shared\Dynamic\LinkedReference;..\..\..\..\src\server\shared\Dynamic;..\..\..\..\src\server\shared\Logging;..\..\..\..\src\server\shared\Packets;..\..\..\..\src\server\shared\Policies;..\..\..\..\src\server\shared\Threading;..\..\..\..\src\server\shared\Utilities;..\..\..\..\src\server\game;..\..\..\..\src\server\game\Accounts;..\..\..\..\src\server\game\Achievements;..\..\..\..\src\server\game\Addons;..\..\..\..\src\server\game\AI;..\..\..\..\src\server\game\AI\CoreAI;..\..\..\..\src\server\game\AI\EventAI;..\..\..\..\src\server\game\AI\ScriptedAI;..\..\..\..\src\server\game\AI\SmartScripts;..\..\..\..\src\server\game\AuctionHouse;..\..\..\..\src\server\game\AuctionHouse\AuctionHouseBot;..\..\..\..\src\server\game\Battlegrounds;..\..\..\..\src\server\game\Battlegrounds\Zones;..\..\..\..\src\server\game\Calendar;..\..\..\..\src\server\game\Chat;..\..\..\..\src\server\game\Chat\Channels;..\..\..\..\src\server\game\Chat\Commands;..\..\..\..\src\server\game\Combat;..\..\..\..\src\server\game\Conditions;..\..\..\..\src\server\game\DataStores;..\..\..\..\src\server\game\DungeonFinding;..\..\..\..\src\server\game\Entities;..\..\..\..\src\server\game\Entities\Creature;..\..\..\..\src\server\game\Entities\Corpse;..\..\..\..\src\server\game\Entities\DynamicObject;..\..\..\..\src\server\game\Entities\GameObject;..\..\..\..\src\server\game\Entities\Item;..\..\..\..\src\server\game\Entities\Item\Container;..\..\..\..\src\server\game\Entities\Object;..\..\..\..\src\server\game\Entities\Object\Updates;..\..\..\..\src\server\game\Entities\Pet;..\..\..\..\src\server\game\Entities\Player;..\..\..\..\src\server\game\Entities\Totem;..\..\..\..\src\server\game\Entities\Unit;..\..\..\..\src\server\game\Entities\Vehicle;..\..\..\..\src\server\game\Entities\Transport;..\..\..\..\src\server\game\Events;..\..\..\..\src\server\game\Globals;..\..\..\..\src\server\game\Grids\Cells;..\..\..\..\src\server\game\Grids\Notifiers;..\..\..\..\src\server\game\Grids;..\..\..\..\src\server\game\Groups;..\..\..\..\src\server\game\Guilds;..\..\..\..\src\server\game\Instances;..\..\..\..\src\server\game\Loot;..\..\..\..\src\server\game\Mails;..\..\..\..\src\server\game\Maps;..\..\..\..\src\server\game\Miscellaneous;..\..\..\..\src\server\game\Movement;..\..\..\..\src\server\game\Movement\MovementGenerators;..\..\..\..\src\server\game\Movement\Waypoints;..\..\..\..\src\server\game\OutdoorPvP;..\..\..\..\src\server\game\Pools;..\..\..\..\src\server\game\PrecompiledHeaders;..\..\..\..\src\server\game\Quests;..\..\..\..\src\server\game\Reputation;..\..\..\..\src\server\game\Scripting;..\..\..\..\src\server\game\Server\Protocol;..\..\..\..\src\server\game\Server\Protocol\Handlers;..\..\..\..\src\server\game\Server;..\..\..\..\src\server\game\Skills;..\..\..\..\src\server\game\Spells;..\..\..\..\src\server\game\Spells\Auras;..\..\..\..\src\server\game\Tools;..\..\..\..\src\server\game\Weather;..\..\..\..\src\server\game\World;..\..\..\..\src\server\worldserver;..\..\..\..\src\server\worldserver\CommandLine;..\..\..\..\src\server\worldserver\RemoteAccess;..\..\..\..\src\server\worldserver\TCSoap;..\..\..\..\src\server\worldserver\WorldThread;..\..\..\..\dep\acelite;..\..\..\..\dep\mysqllite\include;..\..\..\..\src\server\worldserver\..\dep\openssl\include;"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;SCRIPTS;CMAKE_INTDIR=\&quot;Debug\&quot;"/>
+			<Tool
+				Name="VCMIDLTool"
+				PreprocessorDefinitions="_BUILD_DIRECTIVE=\&quot;$(ConfigurationName)\&quot;;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;SCRIPTS;CMAKE_INTDIR=\&quot;Debug\&quot;"
+				MkTypLibCompatible="FALSE"
+				TargetEnvironment="1"
+				GenerateStublessProxies="TRUE"
+				TypeLibraryName="$(InputName).tlb"
+				OutputDirectory="$(IntDir)"
+				HeaderFileName="$(InputName).h"
+				DLLDataFileName=""
+				InterfaceIdentifierFileName="$(InputName)_i.c"
+				ProxyFileName="$(InputName)_p.c"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+CommandLine="&quot;C:\Programme\CMake 2.8\bin\cmake.exe&quot; -DBUILD_TYPE=$(OutDir) -P cmake_install.cmake&#x0D;&#x0A;if errorlevel 1 goto VCReportError"/>
+		</Configuration>
+	</Configurations>
+	<Files>
+			<File
+				RelativePath="..\..\..\..\src\server\worldserver\CMakeLists.txt">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/worldserver/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.8\bin\cmake.exe&quot; -H../../../.. -B../../.. --check-stamp-file &quot;C:\Dokumente und Einstellungen\Pascal\Eigene Dateien\Git\arcterusemu\core\win\src\server\worldserver\CMakeFiles\generate.stamp&quot;&#x0D;&#x0A;if errorlevel 1 goto VCReportError"
+					AdditionalDependencies="..\..\..\..\src\server\worldserver\CMakeLists.txt;..\..\..\..\src\server\worldserver\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description="Building Custom Rule C:/Dokumente und Einstellungen/Pascal/Eigene Dateien/Git/arcterusemu/core/src/server/worldserver/CMakeLists.txt"
+					CommandLine="&quot;C:\Programme\CMake 2.8\bin\cmake.exe&quot; -H../../../.. -B../../.. --check-stamp-file &quot;C:\Dokumente und Einstellungen\Pascal\Eigene Dateien\Git\arcterusemu\core\win\src\server\worldserver\CMakeFiles\generate.stamp&quot;&#x0D;&#x0A;if errorlevel 1 goto VCReportError"
+					AdditionalDependencies="..\..\..\..\src\server\worldserver\CMakeLists.txt;..\..\..\..\src\server\worldserver\CMakeLists.txt;"
+					Outputs="CMakeFiles\generate.stamp"/>
+				</FileConfiguration>
+			</File>
+		<Filter
+			Name="CMake Rules"
+			Filter="">
+			<File
+				RelativePath="CMakeFiles\INSTALL_force.rule">
+				<FileConfiguration
+					Name="Release|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description=" "
+					CommandLine="cd .&#x0D;&#x0A;if errorlevel 1 goto VCReportError"
+					AdditionalDependencies="CMakeFiles\INSTALL_force.rule"
+					Outputs="CMakeFiles\INSTALL_force"/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+					Name="VCCustomBuildTool"
+					Description=" "
+					CommandLine="cd .&#x0D;&#x0A;if errorlevel 1 goto VCReportError"
+					AdditionalDependencies="CMakeFiles\INSTALL_force.rule"
+					Outputs="CMakeFiles\INSTALL_force"/>
+				</FileConfiguration>
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>
