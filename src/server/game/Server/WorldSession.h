@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -48,12 +48,13 @@ class CharacterHandler;
 class SpellCastTargets;
 struct AreaTableEntry;
 struct GM_Ticket;
+struct LfgJoinResultData;
 struct LfgLockStatus;
 struct LfgPlayerBoot;
 struct LfgProposal;
 struct LfgReward;
 struct LfgRoleCheck;
-
+struct LfgUpdateData;
 
 enum AccountDataType
 {
@@ -137,12 +138,49 @@ enum CharterTypes
     ARENA_TEAM_CHARTER_5v5_TYPE                   = 5
 };
 
+//class to deal with packet processing
+//allows to determine if next packet is safe to be processed
+class PacketFilter
+{
+public:
+    explicit PacketFilter(WorldSession * pSession) : m_pSession(pSession) {}
+    virtual ~PacketFilter() {}
+
+    virtual bool Process(WorldPacket * /*packet*/) { return true; }
+    virtual bool ProcessLogout() const { return true; }
+
+protected:
+    WorldSession * const m_pSession;
+};
+//process only thread-safe packets in Map::Update()
+class MapSessionFilter : public PacketFilter
+{
+public:
+    explicit MapSessionFilter(WorldSession * pSession) : PacketFilter(pSession) {}
+    ~MapSessionFilter() {}
+
+    virtual bool Process(WorldPacket * packet);
+    //in Map::Update() we do not process player logout!
+    virtual bool ProcessLogout() const { return false; }
+};
+
+//class used to filer only thread-unsafe packets from queue
+//in order to update only be used in World::UpdateSessions()
+class WorldSessionFilter : public PacketFilter
+{
+public:
+    explicit WorldSessionFilter(WorldSession * pSession) : PacketFilter(pSession) {}
+    ~WorldSessionFilter() {}
+
+    virtual bool Process(WorldPacket* packet);
+};
+
 /// Player session in the World
 class WorldSession
 {
     friend class CharacterHandler;
     public:
-        WorldSession(uint32 id, WorldSocket *sock, AccountTypes sec, bool ispremium, uint8 expansion, time_t mute_time, LocaleConstant locale, uint32 recruiter);
+        WorldSession(uint32 id, WorldSocket *sock, AccountTypes sec, uint8 expansion, time_t mute_time, LocaleConstant locale, uint32 recruiter);
         ~WorldSession();
 
         bool PlayerLoading() const { return m_playerLoading; }
@@ -159,7 +197,7 @@ class WorldSession
 
         void SendPacket(WorldPacket const* packet);
         void SendNotification(const char *format,...) ATTR_PRINTF(2,3);
-        void SendNotification(int32 string_id,...);
+        void SendNotification(uint32 string_id,...);
         void SendPetNameInvalid(uint32 error, const std::string& name, DeclinedName *declinedName);
         void SendPartyResult(PartyOperation operation, const std::string& member, PartyResult res, uint32 val = 0);
         void SendAreaTriggerMessage(const char* Text, ...) ATTR_PRINTF(2,3);
@@ -170,7 +208,6 @@ class WorldSession
         void SendClientCacheVersion(uint32 version);
 
         AccountTypes GetSecurity() const { return _security; }
-		bool IsPremium() const { return _ispremium; }
         uint32 GetAccountId() const { return _accountId; }
         Player* GetPlayer() const { return _player; }
         char const* GetPlayerName() const;
@@ -201,7 +238,7 @@ class WorldSession
         void KickPlayer();
 
         void QueuePacket(WorldPacket* new_packet);
-        bool Update(uint32 diff);
+        bool Update(uint32 diff, PacketFilter& updater);
 
         /// Handle the authentication waiting queue (to be completed)
         void SendAuthWaitQue(uint32 position);
@@ -311,7 +348,7 @@ class WorldSession
         }
         void ResetTimeOutTime()
         {
-            m_timeOutTime = sWorld.getIntConfig(CONFIG_SOCKET_TIMEOUTTIME);
+            m_timeOutTime = sWorld->getIntConfig(CONFIG_SOCKET_TIMEOUTTIME);
         }
         bool IsConnectionIdle() const
         {
@@ -719,7 +756,7 @@ class WorldSession
         void HandleHearthAndResurrect(WorldPacket& recv_data);
 
         // Looking for Dungeon/Raid
-        void HandleSetLfgCommentOpcode(WorldPacket & recv_data);
+        void HandleLfgSetCommentOpcode(WorldPacket & recv_data);
         void HandleLfgPlayerLockInfoRequestOpcode(WorldPacket& recv_data);
         void HandleLfgPartyLockInfoRequestOpcode(WorldPacket& recv_data);
         void HandleLfgJoinOpcode(WorldPacket &recv_data);
@@ -731,16 +768,16 @@ class WorldSession
         void HandleLfrSearchOpcode(WorldPacket &recv_data);
         void HandleLfrLeaveOpcode(WorldPacket &recv_data);
 
-        void SendLfgUpdatePlayer(uint8 updateType);
-        void SendLfgUpdateParty(uint8 updateType);
+        void SendLfgUpdatePlayer(const LfgUpdateData& updateData);
+        void SendLfgUpdateParty(const LfgUpdateData& updateData);
         void SendLfgRoleChosen(uint64 guid, uint8 roles);
-        void SendLfgRoleCheckUpdate(LfgRoleCheck *pRoleCheck);
+        void SendLfgRoleCheckUpdate(const LfgRoleCheck *pRoleCheck);
         void SendLfgUpdateSearch(bool update);
-        void SendLfgJoinResult(uint8 checkResult, uint8 checkValue = 0, std::map<uint32, std::set<LfgLockStatus*>*> *playersLockMap = NULL /* LfgLockStatusMap *playersLockMap = NULL */);
+        void SendLfgJoinResult(const LfgJoinResultData& joinData);
         void SendLfgQueueStatus(uint32 dungeon, int32 waitTime, int32 avgWaitTime, int32 waitTimeTanks, int32 waitTimeHealer, int32 waitTimeDps, uint32 queuedTime, uint8 tanks, uint8 healers, uint8 dps);
         void SendLfgPlayerReward(uint32 rdungeonEntry, uint32 sdungeonEntry, uint8 done, const LfgReward *reward, const Quest *qRew);
-        void SendLfgBootPlayer(LfgPlayerBoot *pBoot);
-        void SendUpdateProposal(uint32 proposalId, LfgProposal *pProp);
+        void SendLfgBootPlayer(const LfgPlayerBoot *pBoot);
+        void SendLfgUpdateProposal(uint32 proposalId, const LfgProposal *pProp);
         void SendLfgDisabled();
         void SendLfgOfferContinue(uint32 dungeonEntry);
         void SendLfgTeleportError(uint8 err);
@@ -776,9 +813,6 @@ class WorldSession
         void HandleVoiceSessionEnableOpcode(WorldPacket& recv_data);
         void HandleSetActiveVoiceChannel(WorldPacket& recv_data);
         void HandleSetTaxiBenchmarkOpcode(WorldPacket& recv_data);
-		
-		// External Mail System
-		static void SendExternalMails();
 
         // Guild Bank
         void HandleGuildPermissions(WorldPacket& recv_data);
@@ -825,7 +859,7 @@ class WorldSession
         void HandleReadyForAccountDataTimes(WorldPacket& recv_data);
         void HandleQueryQuestsCompleted(WorldPacket& recv_data);
         void HandleQuestPOIQuery(WorldPacket& recv_data);
-        void HandleEjectPasenger(WorldPacket &data);
+        void HandleEjectPassenger(WorldPacket &data);
         void HandleEnterPlayerVehicle(WorldPacket &data);
 
     private:
@@ -858,7 +892,6 @@ class WorldSession
         AccountTypes _security;
         uint32 _accountId;
         uint8 m_expansion;
-		bool _ispremium;
 
         time_t _logoutTime;
         bool m_inQueue;                                     // session wait in auth.queue

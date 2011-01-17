@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -57,7 +57,7 @@ class WaypointStore
             else return 0;
         }
 
-        inline uint32 GetRecordsCount() { return records; }
+        inline uint32 GetRecordsCount() const { return records; }
 };
 
 #define sWaypointMgr WaypointStore::instance()

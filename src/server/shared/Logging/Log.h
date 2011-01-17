@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -118,16 +118,18 @@ class Log
         void SetLogLevel(char * Level);
         void SetLogFileLevel(char * Level);
         void SetDBLogLevel(char * Level);
+        void SetSQLDriverQueryLogging(bool newStatus) { m_sqlDriverQueryLogging = newStatus; }
         void SetRealmID(uint32 id) { realm = id; }
 
         uint32 getLogFilter() const { return m_logFilter; }
         bool IsOutDebug() const { return m_logLevel > 2 || (m_logFileLevel > 2 && logfile); }
         bool IsOutCharDump() const { return m_charLog_Dump; }
 
-        bool GetLogDB() { return m_enableLogDB; }
-        bool GetLogDBLater() { return m_enableLogDBLater; }
+        bool GetLogDB() const { return m_enableLogDB; }
+        bool GetLogDBLater() const { return m_enableLogDBLater; }
         void SetLogDB(bool enable) { m_enableLogDB = enable; }
         void SetLogDBLater(bool value) { m_enableLogDBLater = value; }
+        bool GetSQLDriverQueryLogging() const { return m_sqlDriverQueryLogging; }
     private:
         FILE* openLogFile(char const* configFileName,char const* configTimeStampFlag, char const* mode);
         FILE* openGmlogPerAccount(uint32 account);
@@ -158,6 +160,10 @@ class Log
         ColorTypes m_colors[4];
 
         // log levels:
+        // false: errors only, true: full query logging
+        bool m_sqlDriverQueryLogging;
+
+        // log levels:
         // 0 minimum/string, 1 basic/error, 2 detail, 3 full/debug
         uint8 m_dbLogLevel;
         uint8 m_logLevel;
@@ -172,7 +178,7 @@ class Log
         std::string m_dumpsDir;
 };
 
-#define sLog (*ACE_Singleton<Log, ACE_Thread_Mutex>::instance())
+#define sLog ACE_Singleton<Log, ACE_Thread_Mutex>::instance()
 
 #endif
 

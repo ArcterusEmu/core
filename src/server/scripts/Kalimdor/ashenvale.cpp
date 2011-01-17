@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -352,12 +352,13 @@ class npc_muglash : public CreatureScript
 
             void EnterCombat(Unit* /*pWho*/)
             {
-                if (HasEscortState(STATE_ESCORT_PAUSED))
-                {
-                    if (urand(0, 1))
-                    DoScriptText(SAY_MUG_ON_GUARD, me);
-                    return;
-                }
+                if (Player* pPlayer = GetPlayerForEscort())
+                    if (HasEscortState(STATE_ESCORT_PAUSED))
+                    {
+                        if (urand(0, 1))
+                            DoScriptText(SAY_MUG_ON_GUARD, me, pPlayer);
+                        return;
+                    }
             }
 
             void Reset()

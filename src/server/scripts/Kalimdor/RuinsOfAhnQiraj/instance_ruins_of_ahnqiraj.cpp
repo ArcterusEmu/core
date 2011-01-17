@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -80,27 +80,27 @@ public:
             return false;
         }
 
-        void OnCreatureCreate(Creature* pCreature, bool /*add*/)
+        void OnCreatureCreate(Creature* creature)
         {
-            switch (pCreature->GetEntry())
+            switch (creature->GetEntry())
             {
                 case CREATURE_KURINAXX:
-                    uiKurinaxx = pCreature->GetGUID();
+                    uiKurinaxx = creature->GetGUID();
                     break;
                 case CREATURE_RAJAXX:
-                    uiRajaxx = pCreature->GetGUID();
+                    uiRajaxx = creature->GetGUID();
                     break;
                 case CREATURE_MOAM:
-                    uiMoam = pCreature->GetGUID();
+                    uiMoam = creature->GetGUID();
                     break;
                 case CREATURE_BURU:
-                    uiBuru = pCreature->GetGUID();
+                    uiBuru = creature->GetGUID();
                     break;
                 case CREATURE_AYAMISS:
-                    uiAyamiss = pCreature->GetGUID();
+                    uiAyamiss = creature->GetGUID();
                     break;
                 case CREATURE_OSSIRIAN:
-                    uiOssirian = pCreature->GetGUID();
+                    uiOssirian = creature->GetGUID();
                     break;
             }
         }

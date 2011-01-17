@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -24,7 +24,7 @@ static bool GetValueHelper(ACE_Configuration_Heap *mConf, const char *name, ACE_
     if (!mConf)
         return false;
 
-    ACE_GUARD_RETURN(ACE_Thread_Mutex, guard, sConfig.mMtx, false);
+    ACE_GUARD_RETURN(ACE_Thread_Mutex, guard, (sConfig->mMtx), false);
 
     ACE_TString section_name;
     ACE_Configuration_Section_Key section_key;

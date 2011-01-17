@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -66,7 +66,6 @@ struct ItemPrototype;
 struct OutdoorPvPData;
 
 #define VISIBLE_RANGE       (166.0f)                        //MAX visible range (size of grid)
-#define DEFAULT_TEXT        "<Trinity Script Text Entry Missing!>"
 
 // Generic scripting text function.
 void DoScriptText(int32 textEntry, WorldObject* pSource, Unit *pTarget = NULL);
@@ -280,10 +279,7 @@ class FormulaScript : public ScriptObject
     public:
 
         // Called after calculating honor.
-        virtual void OnHonorCalculation(float& /*honor*/, uint8 /*level*/, uint32 /*count*/) { }
-
-        // Called after calculating honor.
-        virtual void OnHonorCalculation(uint32& /*honor*/, uint8 /*level*/, uint32 /*count*/) { }
+        virtual void OnHonorCalculation(float& /*honor*/, uint8 /*level*/, float /*multiplier*/) { }
 
         // Called after gray level calculation.
         virtual void OnGrayLevelCalculation(uint8& /*grayLevel*/, uint8 /*playerLevel*/) { }
@@ -314,7 +310,7 @@ template<class TMap> class MapScript : public UpdatableScript<TMap>
             : _mapEntry(sMapStore.LookupEntry(mapId))
         {
             if (!_mapEntry)
-                sLog.outError("Invalid MapScript for %u; no such map ID.", mapId);
+                sLog->outError("Invalid MapScript for %u; no such map ID.", mapId);
         }
 
     public:
@@ -690,14 +686,14 @@ class PlayerScript : public ScriptObject
         virtual void OnDuelStart(Player* /*player1*/, Player* /*player2*/) { }
 
         // Called when a duel ends
-        virtual void OnDuelEnd(Player* /*winner*/, Player* /*looser*/, DuelCompleteType /*type*/) { }
+        virtual void OnDuelEnd(Player* /*winner*/, Player* /*loser*/, DuelCompleteType /*type*/) { }
 
         // The following methods are called when a player sends a chat message
-        virtual void OnChat(Player* /*player*/, uint32 /*type*/, uint32 /*lang*/, std::string /*msg*/) { }
-        virtual void OnChat(Player* /*player*/, uint32 /*type*/, uint32 /*lang*/, std::string /*msg*/, Player* /*receiver*/) { }
-        virtual void OnChat(Player* /*player*/, uint32 /*type*/, uint32 /*lang*/, std::string /*msg*/, Group* /*group*/) { }
-        virtual void OnChat(Player* /*player*/, uint32 /*type*/, uint32 /*lang*/, std::string /*msg*/, Guild* /*guild*/) { }
-        virtual void OnChat(Player* /*player*/, uint32 /*type*/, uint32 /*lang*/, std::string /*msg*/, Channel* /*channel*/) { }
+        virtual void OnChat(Player* /*player*/, uint32 /*type*/, uint32 /*lang*/, std::string& /*msg*/) { }
+        virtual void OnChat(Player* /*player*/, uint32 /*type*/, uint32 /*lang*/, std::string& /*msg*/, Player* /*receiver*/) { }
+        virtual void OnChat(Player* /*player*/, uint32 /*type*/, uint32 /*lang*/, std::string& /*msg*/, Group* /*group*/) { }
+        virtual void OnChat(Player* /*player*/, uint32 /*type*/, uint32 /*lang*/, std::string& /*msg*/, Guild* /*guild*/) { }
+        virtual void OnChat(Player* /*player*/, uint32 /*type*/, uint32 /*lang*/, std::string& /*msg*/, Channel* /*channel*/) { }
 
         // Both of the below are called on emote opcodes
         virtual void OnEmote(Player* /*player*/, uint32 /*emote*/) { }
@@ -713,6 +709,9 @@ class PlayerScript : public ScriptObject
         // Called when a player is created/deleted
         virtual void OnCreate(Player* /*player*/) { }
         virtual void OnDelete(uint64 /*guid*/) { }
+
+        // Called when a player is binded to an instance
+        virtual void OnBindToInstance(Player* /*player*/, Difficulty /*difficulty*/, uint32 /*mapid*/, bool /*permanent*/) { }
 };
 
 class GuildScript : public ScriptObject
@@ -749,13 +748,13 @@ public:
 
     virtual void OnAddMember(Group* /*group*/, uint64 /*guid*/) { }
     virtual void OnInviteMember(Group* /*group*/, uint64 /*guid*/) { }
-    virtual void OnRemoveMember(Group* /*group*/, uint64 /*guid*/, RemoveMethod& /*method*/) { }
+    virtual void OnRemoveMember(Group* /*group*/, uint64 /*guid*/, RemoveMethod& /*method*/, uint64 /*kicker*/, const char* /*reason*/) { }
     virtual void OnChangeLeader(Group* /*group*/, uint64 /*newLeaderGuid*/, uint64 /*oldLeaderGuid*/) { }
     virtual void OnDisband(Group* /*group*/) { }
 };
 
 // Placed here due to ScriptRegistry::AddScript dependency.
-#define sScriptMgr (*ACE_Singleton<ScriptMgr, ACE_Null_Mutex>::instance())
+#define sScriptMgr ACE_Singleton<ScriptMgr, ACE_Null_Mutex>::instance()
 
 // Manages registration, loading, and execution of scripts.
 class ScriptMgr
@@ -808,8 +807,7 @@ class ScriptMgr
 
     public: /* FormulaScript */
 
-        void OnHonorCalculation(float& honor, uint8 level, uint32 count);
-        void OnHonorCalculation(uint32& honor, uint8 level, uint32 count);
+        void OnHonorCalculation(float& honor, uint8 level, float multiplier);
         void OnGrayLevelCalculation(uint8& grayLevel, uint8 playerLevel);
         void OnColorCodeCalculation(XPColorChar& color, uint8 playerLevel, uint8 mobLevel);
         void OnZeroDifferenceCalculation(uint8& diff, uint8 playerLevel);
@@ -935,12 +933,12 @@ class ScriptMgr
         void OnPlayerReputationChange(Player *player, uint32 factionID, int32& standing, bool incremental);
         void OnPlayerDuelRequest(Player* target, Player* challenger);
         void OnPlayerDuelStart(Player* player1, Player* player2);
-        void OnPlayerDuelEnd(Player* winner, Player* looser, DuelCompleteType type);
-        void OnPlayerChat(Player* player, uint32 type, uint32 lang, std::string msg);
-        void OnPlayerChat(Player* player, uint32 type, uint32 lang, std::string msg, Player* receiver);
-        void OnPlayerChat(Player* player, uint32 type, uint32 lang, std::string msg, Group* group);
-        void OnPlayerChat(Player* player, uint32 type, uint32 lang, std::string msg, Guild* guild);
-        void OnPlayerChat(Player* player, uint32 type, uint32 lang, std::string msg, Channel* channel);
+        void OnPlayerDuelEnd(Player* winner, Player* loser, DuelCompleteType type);
+        void OnPlayerChat(Player* player, uint32 type, uint32 lang, std::string& msg);
+        void OnPlayerChat(Player* player, uint32 type, uint32 lang, std::string& msg, Player* receiver);
+        void OnPlayerChat(Player* player, uint32 type, uint32 lang, std::string& msg, Group* group);
+        void OnPlayerChat(Player* player, uint32 type, uint32 lang, std::string& msg, Guild* guild);
+        void OnPlayerChat(Player* player, uint32 type, uint32 lang, std::string& msg, Channel* channel);
         void OnPlayerEmote(Player* player, uint32 emote);
         void OnPlayerTextEmote(Player* player, uint32 text_emote, uint32 emoteNum, uint64 guid);
         void OnPlayerSpellCast(Player* player, Spell *spell, bool skipCheck);
@@ -948,6 +946,7 @@ class ScriptMgr
         void OnPlayerLogout(Player* player);
         void OnPlayerCreate(Player* player);
         void OnPlayerDelete(uint64 guid);
+        void OnPlayerBindToInstance(Player* player, Difficulty difficulty, uint32 mapid, bool permanent);
 
     public: /* GuildScript */
         void OnGuildAddMember(Guild *guild, Player *player, uint8& plRank);
@@ -958,7 +957,7 @@ class ScriptMgr
         void OnGuildDisband(Guild *guild);
         void OnGuildMemberWitdrawMoney(Guild* guild, Player* player, uint32 &amount, bool isRepair);
         void OnGuildMemberDepositMoney(Guild* guild, Player* player, uint32 &amount);
-        void OnGuildItemMove(Guild* guild, Player* player, Item* pItem, bool isSrcBank, uint8 srcContainer, uint8 srcSlotId, 
+        void OnGuildItemMove(Guild* guild, Player* player, Item* pItem, bool isSrcBank, uint8 srcContainer, uint8 srcSlotId,
             bool isDestBank, uint8 destContainer, uint8 destSlotId);
         void OnGuildEvent(Guild* guild, uint8 eventType, uint32 playerGuid1, uint32 playerGuid2, uint8 newRank);
         void OnGuildBankEvent(Guild* guild, uint8 eventType, uint8 tabId, uint32 playerGuid, uint32 itemOrMoney, uint16 itemStackCount, uint8 destTabId);
@@ -966,7 +965,7 @@ class ScriptMgr
     public: /* GroupScript */
         void OnGroupAddMember(Group* group, uint64 guid);
         void OnGroupInviteMember(Group* group, uint64 guid);
-        void OnGroupRemoveMember(Group* group, uint64 guid, RemoveMethod method);
+        void OnGroupRemoveMember(Group* group, uint64 guid, RemoveMethod method, uint64 kicker, const char* reason);
         void OnGroupChangeLeader(Group* group, uint64 newLeaderGuid, uint64 oldLeaderGuid);
         void OnGroupDisband(Group* group);
 
@@ -998,7 +997,7 @@ class ScriptMgr
                     {
                         if (it->second == script)
                         {
-                            sLog.outError("Script '%s' has same memory pointer as '%s'.",
+                            sLog->outError("Script '%s' has same memory pointer as '%s'.",
                                 script->GetName().c_str(), it->second->GetName().c_str());
 
                             return;
@@ -1029,12 +1028,12 @@ class ScriptMgr
                             if (!existing)
                             {
                                 ScriptPointerList[id] = script;
-                                sScriptMgr.IncrementScriptCount();
+                                sScriptMgr->IncrementScriptCount();
                             }
                             else
                             {
                                 // If the script is already assigned -> delete it!
-                                sLog.outError("Script '%s' already assigned with the same script name, so the script can't work.",
+                                sLog->outError("Script '%s' already assigned with the same script name, so the script can't work.",
                                     script->GetName().c_str());
 
                                 ASSERT(false); // Error that should be fixed ASAP.
@@ -1043,8 +1042,8 @@ class ScriptMgr
                         else
                         {
                             // The script uses a script name from database, but isn't assigned to anything.
-                            if (script->GetName().find("example") == std::string::npos)
-                                sLog.outErrorDb("Script named '%s' does not have a script name assigned in database.",
+                            if (script->GetName().find("example") == std::string::npos && script->GetName().find("Smart") == std::string::npos)
+                                sLog->outErrorDb("Script named '%s' does not have a script name assigned in database.",
                                     script->GetName().c_str());
                         }
                     }
@@ -1052,7 +1051,7 @@ class ScriptMgr
                     {
                         // We're dealing with a code-only script; just add it.
                         ScriptPointerList[_scriptIdCounter++] = script;
-                        sScriptMgr.IncrementScriptCount();
+                        sScriptMgr->IncrementScriptCount();
                     }
                 }
 

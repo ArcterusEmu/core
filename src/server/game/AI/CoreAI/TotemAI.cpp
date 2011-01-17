@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -77,7 +77,7 @@ TotemAI::UpdateAI(const uint32 /*diff*/)
     // Search victim if no, not attackable, or out of range, or friendly (possible in case duel end)
     if (!victim ||
         !victim->isTargetableForAttack() || !me->IsWithinDistInMap(victim, max_range) ||
-        me->IsFriendlyTo(victim) || !victim->isVisibleForOrDetect(me,false))
+        me->IsFriendlyTo(victim) || !me->canSeeOrDetect(victim))
     {
         victim = NULL;
         Trinity::NearestAttackableUnitInObjectRangeCheck u_check(me, me, max_range);

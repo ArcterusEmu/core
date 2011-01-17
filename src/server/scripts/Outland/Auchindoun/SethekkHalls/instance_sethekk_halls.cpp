@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -55,21 +55,21 @@ public:
             m_uiIkissDoorGUID = 0;
         }
 
-        void OnCreatureCreate(Creature* pCreature, bool /*add*/)
+        void OnCreatureCreate(Creature* creature)
         {
-            if (pCreature->GetEntry() == NPC_ANZU)
+            if (creature->GetEntry() == NPC_ANZU)
             {
                 if (AnzuEncounter >= IN_PROGRESS)
-                    pCreature->DisappearAndDie();
+                    creature->DisappearAndDie();
                 else
                     AnzuEncounter = IN_PROGRESS;
             }
         }
 
-        void OnGameObjectCreate(GameObject* pGo, bool /*add*/)
+        void OnGameObjectCreate(GameObject* go)
         {
-             if (pGo->GetEntry() == IKISS_DOOR)
-                m_uiIkissDoorGUID = pGo->GetGUID();
+             if (go->GetEntry() == IKISS_DOOR)
+                m_uiIkissDoorGUID = go->GetGUID();
         }
 
         void SetData(uint32 type, uint32 data)

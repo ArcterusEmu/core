@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -38,7 +38,7 @@ void UnitAI::AttackStartCaster(Unit *victim, float dist)
 
 void UnitAI::DoMeleeAttackIfReady()
 {
-    if (me->hasUnitState(UNIT_STAT_CASTING))
+    if (me->HasUnitState(UNIT_STAT_CASTING))
         return;
 
     //Make sure our attack is ready and we aren't currently casting before checking distance
@@ -64,7 +64,7 @@ void UnitAI::DoMeleeAttackIfReady()
 
 bool UnitAI::DoSpellAttackIfReady(uint32 spell)
 {
-    if (me->hasUnitState(UNIT_STAT_CASTING))
+    if (me->HasUnitState(UNIT_STAT_CASTING))
         return true;
 
     if (me->isAttackReady())
@@ -79,55 +79,6 @@ bool UnitAI::DoSpellAttackIfReady(uint32 spell)
     }
     return true;
 }
-
-// default predicate function to select target based on distance, player and/or aura criteria
-struct DefaultTargetSelector : public std::unary_function<Unit *, bool>
-{
-    const Unit *me;
-    float m_dist;
-    bool m_playerOnly;
-    int32 m_aura;
-
-    // pUnit: the reference unit
-    // dist: if 0: ignored, if > 0: maximum distance to the reference unit, if < 0: minimum distance to the reference unit
-    // playerOnly: self explaining
-    // aura: if 0: ignored, if > 0: the target shall have the aura, if < 0, the target shall NOT have the aura
-    DefaultTargetSelector(const Unit *pUnit, float dist, bool playerOnly, int32 aura) : me(pUnit), m_dist(dist), m_playerOnly(playerOnly), m_aura(aura) {}
-
-    bool operator() (const Unit *pTarget)
-    {
-        if (!me)
-            return false;
-
-        if (!pTarget)
-            return false;
-
-        if (m_playerOnly && (pTarget->GetTypeId() != TYPEID_PLAYER))
-            return false;
-
-        if (m_dist > 0.0f && !me->IsWithinCombatRange(pTarget, m_dist))
-            return false;
-
-        if (m_dist < 0.0f && me->IsWithinCombatRange(pTarget, -m_dist))
-            return false;
-
-        if (m_aura)
-        {
-            if (m_aura > 0)
-            {
-                if (!pTarget->HasAura(m_aura))
-                    return false;
-            }
-            else
-            {
-                if (pTarget->HasAura(-m_aura))
-                    return false;
-            }
-        }
-
-        return true;
-    }
-};
 
 Unit* UnitAI::SelectTarget(SelectAggroTarget targetType, uint32 position, float dist, bool playerOnly, int32 aura)
 {
@@ -205,7 +156,7 @@ void UnitAI::DoCastToAllHostilePlayers(uint32 spellid, bool triggered)
 void UnitAI::DoCast(uint32 spellId)
 {
     Unit *target = NULL;
-    //sLog.outError("aggre %u %u", spellId, (uint32)AISpellInfo[spellId].target);
+    //sLog->outError("aggre %u %u", spellId, (uint32)AISpellInfo[spellId].target);
     switch(AISpellInfo[spellId].target)
     {
         default:
@@ -214,7 +165,7 @@ void UnitAI::DoCast(uint32 spellId)
         case AITARGET_ENEMY:
         {
             const SpellEntry * spellInfo = GetSpellStore()->LookupEntry(spellId);
-            bool playerOnly = spellInfo->AttributesEx3 & SPELL_ATTR_EX3_PLAYERS_ONLY;
+            bool playerOnly = spellInfo->AttributesEx3 & SPELL_ATTR3_PLAYERS_ONLY;
             //float range = GetSpellMaxRange(spellInfo, false);
             target = SelectTarget(SELECT_TARGET_RANDOM, 0, GetSpellMaxRange(spellInfo, false), playerOnly);
             break;
@@ -224,11 +175,11 @@ void UnitAI::DoCast(uint32 spellId)
         case AITARGET_DEBUFF:
         {
             const SpellEntry * spellInfo = GetSpellStore()->LookupEntry(spellId);
-            bool playerOnly = spellInfo->AttributesEx3 & SPELL_ATTR_EX3_PLAYERS_ONLY;
+            bool playerOnly = spellInfo->AttributesEx3 & SPELL_ATTR3_PLAYERS_ONLY;
             float range = GetSpellMaxRange(spellInfo, false);
 
             DefaultTargetSelector targetSelector(me, range, playerOnly, -(int32)spellId);
-            if (!(spellInfo->Attributes & SPELL_ATTR_BREAKABLE_BY_DAMAGE)
+            if (!(spellInfo->Attributes & SPELL_ATTR0_BREAKABLE_BY_DAMAGE)
                 && !(spellInfo->AuraInterruptFlags & AURA_INTERRUPT_FLAG_NOT_VICTIM)
                 && targetSelector(me->getVictim()))
                 target = me->getVictim();
@@ -257,7 +208,7 @@ void UnitAI::FillAISpellInfo()
         if (!spellInfo)
             continue;
 
-        if (spellInfo->Attributes & SPELL_ATTR_CASTABLE_WHILE_DEAD)
+        if (spellInfo->Attributes & SPELL_ATTR0_CASTABLE_WHILE_DEAD)
             AIInfo->condition = AICOND_DIE;
         else if (IsPassiveSpell(i) || GetSpellDuration(spellInfo) == -1)
             AIInfo->condition = AICOND_AGGRO;

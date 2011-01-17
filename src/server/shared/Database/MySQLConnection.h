@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -16,7 +16,9 @@
  */
 
 #include <ace/Activation_Queue.h>
+
 #include "DatabaseWorkerPool.h"
+#include "Transaction.h"
 #include "Util.h"
 
 #ifndef _MYSQLCONNECTION_H
@@ -26,6 +28,12 @@ class DatabaseWorker;
 class PreparedStatement;
 class MySQLPreparedStatement;
 class PingOperation;
+
+enum ConnectionFlags
+{
+    CONNECTION_ASYNC = 0x1,
+    CONNECTION_SYNCH = 0x2,
+};
 
 struct MySQLConnectionInfo
 {
@@ -53,6 +61,13 @@ struct MySQLConnectionInfo
     std::string port_or_socket;
 };
 
+struct PreparedStatementTable
+{
+    uint32 index;
+    const char* query;
+    ConnectionFlags type;
+};
+
 class MySQLConnection
 {
     template <class T> friend class DatabaseWorkerPool;
@@ -77,16 +92,14 @@ class MySQLConnection
         void BeginTransaction();
         void RollbackTransaction();
         void CommitTransaction();
+        bool ExecuteTransaction(SQLTransaction& transaction);
 
         operator bool () const { return m_Mysql != NULL; }
         void Ping() { mysql_ping(m_Mysql); }
 
-    protected:
-        MYSQL* GetHandle()  { return m_Mysql; }
-        MySQLPreparedStatement* GetPreparedStatement(uint32 index);
-        void PrepareStatement(uint32 index, const char* sql);
-        std::vector<MySQLPreparedStatement*> m_stmts;       //! PreparedStatements storage
+        uint32 GetLastError() { return mysql_errno(m_Mysql); }
 
+    protected:
         bool LockIfReady()
         {
             /// Tries to acquire lock. If lock is acquired by another thread
@@ -100,11 +113,24 @@ class MySQLConnection
             m_Mutex.release();
         }
 
+        MYSQL* GetHandle()  { return m_Mysql; }
+        MySQLPreparedStatement* GetPreparedStatement(uint32 index);
+        void PrepareStatement(uint32 index, const char* sql, ConnectionFlags flags);
+
+    protected:
+        std::vector<MySQLPreparedStatement*> m_stmts;       //! PreparedStatements storage
+        PreparedStatementTable const * m_statementTable;    //! Static index/query pairs
+        bool                  m_reconnecting;               //! Are we reconnecting?
+        
+    private:
+        bool _HandleMySQLErrno(uint32 errNo);
+
     private:
         ACE_Activation_Queue* m_queue;                      //! Queue shared with other asynchroneous connections.
         DatabaseWorker*       m_worker;                     //! Core worker task.
         MYSQL *               m_Mysql;                      //! MySQL Handle.
-        MySQLConnectionInfo& m_connectionInfo;        //! Connection info (used for logging)
+        MySQLConnectionInfo&  m_connectionInfo;             //! Connection info (used for logging)
+        ConnectionFlags       m_connectionFlags;            //! Connection flags (for preparing relevant statements)
         ACE_Thread_Mutex      m_Mutex;
 };
 

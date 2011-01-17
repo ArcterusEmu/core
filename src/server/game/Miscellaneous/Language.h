@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -702,29 +702,6 @@ enum TrinityStrings
 //  LANG_BG_AB_START_TWO_MINUTES        = 754, - defined above
 //  LANG_BG_EY_START_TWO_MINUTES        = 755, - defined above
 
-    LANG_BG_WG_BATTLE_STARTS            = 756,
-    LANG_BG_WG_DEFENDED                 = 757,
-    LANG_BG_WG_CAPTURED                 = 758,
-    LANG_BG_WG_WORKSHOP_DAMAGED         = 759,
-    LANG_BG_WG_WORKSHOP_DESTROYED       = 760,
-    LANG_BG_WG_TOWER_DAMAGED            = 761,
-    LANG_BG_WG_TOWER_DESTROYED          = 762,
-    LANG_BG_WG_FORTRESS_UNDER_ATTACK    = 763,
-    LANG_BG_WG_SWITCH_FACTION           = 764,
-    LANG_BG_WG_CHANGE_TIMER             = 765,
-    LANG_BG_WG_BATTLE_FORCE_START       = 766,
-    LANG_BG_WG_BATTLE_FORCE_STOP        = 767,
-    LANG_BG_WG_STATUS                   = 768,
-    LANG_BG_WG_DISABLE                  = 769,
-    LANG_BG_WG_ENABLE                   = 770,
-    LANG_BG_WG_RANK1                    = 771,
-    LANG_BG_WG_RANK2                    = 772,
-
-    LANG_BG_WG_WORLD_ANNOUNCE_30        = 780,
-    LANG_BG_WG_WORLD_ANNOUNCE_10        = 781,
-    LANG_BG_WG_WORLD_NO_DEF             = 782,
-    LANG_BG_WG_WORLD_NO_ATK             = 783,
-
     // Room for BG/ARENA                = 773-784, 788-799 not used
     LANG_ARENA_TESTING                  = 785,
     LANG_AUTO_ANN                       = 786,
@@ -783,7 +760,9 @@ enum TrinityStrings
     LANG_CHARACTER_DELETED_SKIP_FULL    = 1024,
     LANG_CHARACTER_DELETED_SKIP_NAME    = 1025,
     LANG_CHARACTER_DELETED_LIST_LINE_CHAT = 1026,
-    // Room for more level 4              1027-1099 not used
+    LANG_SQLDRIVER_QUERY_LOGGING_ENABLED  = 1027,
+    LANG_SQLDRIVER_QUERY_LOGGING_DISABLED = 1028,
+    // Room for more level 4              1029-1099 not used
 
     // Level 3 (continue)
     LANG_ACCOUNT_SETADDON               = 1100,
@@ -820,7 +799,9 @@ enum TrinityStrings
     LANG_BANLIST_MATCHINGCHARACTER      = 1131,
     LANG_BANLIST_CHARACTERS             = 1132,
     LANG_BANLIST_CHARACTERS_HEADER      = 1133,
-    // Room for more level 3              1134-1199 not used
+    LANG_ALLOW_TICKETS                  = 1134,
+    LANG_DISALLOW_TICKETS               = 1135,
+    // Room for more level 3              1136-1199 not used
 
     // Debug commands
     LANG_CINEMATIC_NOT_EXIST            = 1200,
@@ -830,7 +811,31 @@ enum TrinityStrings
     LANG_DEBUG_AREATRIGGER_REACHED      = 1204,
     // Room for more debug                1205-1299 not used
 
-    // FREE IDS                           1300-9999
+    // Isle of Conquest
+    LANG_BG_IC_START_TWO_MINUTES        = 1205,
+    LANG_BG_IC_START_ONE_MINUTE         = 1206,
+    LANG_BG_IC_START_HALF_MINUTE        = 1207,
+    LANG_BG_IC_HAS_BEGUN                = 1208,
+    LANG_BG_IC_ALLIANCE_KEEP            = 1209,
+    LANG_BG_IC_HORDE_KEEP               = 1210,
+    LANG_BG_IC_TEAM_WINS                = 1211,
+    LANG_BG_IC_WEST_GATE_DESTROYED      = 1212,
+    LANG_BG_IC_EAST_GATE_DESTROYED      = 1213,
+    LANG_BG_IC_SOUTH_GATE_DESTROYED     = 1214,
+    LANG_BG_IC_NORTH_GATE_DESTROYED     = 1215,
+    LANG_BG_IC_TEAM_ASSAULTED_NODE_1    = 1216,
+    LANG_BG_IC_TEAM_DEFENDED_NODE       = 1217,
+    LANG_BG_IC_TEAM_ASSAULTED_NODE_2    = 1218,
+    LANG_BG_IC_TEAM_HAS_TAKEN_NODE      = 1219,
+    LANG_BG_IC_WORKSHOP                 = 1220,
+    LANG_BG_IC_DOCKS                    = 1221,
+    LANG_BG_IC_REFINERY                 = 1222,
+    LANG_BG_IC_QUARRY                   = 1223,
+    LANG_BG_IC_HANGAR                   = 1224,
+    LANG_BG_IC_ALLIANCE                 = 1225,
+    LANG_BG_IC_HORDE                    = 1226,
+
+    // FREE IDS                           1228-9999
 
     // AV
     LANG_BG_AV_ALLY                     = 1300,
@@ -925,8 +930,8 @@ enum TrinityStrings
     LANG_MOUNTABLE                      = 5019,
     LANG_NPCINFO_PHASEMASK              = 5020,
     LANG_NPCINFO_ARMOR                  = 5021,
-    LANG_CHANNEL_NOT_PUBLIC             = 5022,
-    LANG_CHANNEL_PUBLIC_CHANGED         = 5023,
+    LANG_CHANNEL_ENABLE_OWNERSHIP       = 5022,
+    LANG_CHANNEL_DISABLE_OWNERSHIP      = 5023,
     LANG_GOINFO_ENTRY                   = 5024,
     LANG_GOINFO_TYPE                    = 5025,
     LANG_GOINFO_DISPLAYID               = 5026,
@@ -966,12 +971,12 @@ enum TrinityStrings
     LANG_OPVP_HP_CAPTURE_STADIUM_A      = 10004,
     LANG_OPVP_HP_CAPTURE_BROKENHILL_H   = 10005,
     LANG_OPVP_HP_CAPTURE_BROKENHILL_A   = 10006,
-    LANG_OPVP_HP_LOOSE_OVERLOOK_H       = 10007,
-    LANG_OPVP_HP_LOOSE_OVERLOOK_A       = 10008,
-    LANG_OPVP_HP_LOOSE_STADIUM_H        = 10009,
-    LANG_OPVP_HP_LOOSE_STADIUM_A        = 10010,
-    LANG_OPVP_HP_LOOSE_BROKENHILL_H     = 10011,
-    LANG_OPVP_HP_LOOSE_BROKENHILL_A     = 10012,
+    LANG_OPVP_HP_LOSE_OVERLOOK_H       = 10007,
+    LANG_OPVP_HP_LOSE_OVERLOOK_A       = 10008,
+    LANG_OPVP_HP_LOSE_STADIUM_H        = 10009,
+    LANG_OPVP_HP_LOSE_STADIUM_A        = 10010,
+    LANG_OPVP_HP_LOSE_BROKENHILL_H     = 10011,
+    LANG_OPVP_HP_LOSE_BROKENHILL_A     = 10012,
     // opvp zm
     LANG_OPVP_ZM_CAPTURE_WEST_H         = 10013,
     LANG_OPVP_ZM_CAPTURE_WEST_A         = 10014,
@@ -979,22 +984,22 @@ enum TrinityStrings
     LANG_OPVP_ZM_CAPTURE_EAST_A         = 10016,
     LANG_OPVP_ZM_CAPTURE_GY_H           = 10017,
     LANG_OPVP_ZM_CAPTURE_GY_A           = 10018,
-    LANG_OPVP_ZM_LOOSE_WEST_H           = 10019,
-    LANG_OPVP_ZM_LOOSE_WEST_A           = 10020,
-    LANG_OPVP_ZM_LOOSE_EAST_H           = 10021,
-    LANG_OPVP_ZM_LOOSE_EAST_A           = 10022,
-    LANG_OPVP_ZM_LOOSE_GY_H             = 10023,
-    LANG_OPVP_ZM_LOOSE_GY_A             = 10024,
+    LANG_OPVP_ZM_LOSE_WEST_H           = 10019,
+    LANG_OPVP_ZM_LOSE_WEST_A           = 10020,
+    LANG_OPVP_ZM_LOSE_EAST_H           = 10021,
+    LANG_OPVP_ZM_LOSE_EAST_A           = 10022,
+    LANG_OPVP_ZM_LOSE_GY_H             = 10023,
+    LANG_OPVP_ZM_LOSE_GY_A             = 10024,
     // opvp na
     LANG_OPVP_NA_CAPTURE_H              = 10025,
     LANG_OPVP_NA_CAPTURE_A              = 10026,
-    LANG_OPVP_NA_LOOSE_H                = 10027,
-    LANG_OPVP_NA_LOOSE_A                = 10028,
+    LANG_OPVP_NA_LOSE_H                = 10027,
+    LANG_OPVP_NA_LOSE_A                = 10028,
     // opvp tf
     LANG_OPVP_TF_CAPTURE_H              = 10029,
     LANG_OPVP_TF_CAPTURE_A              = 10030,
-    LANG_OPVP_TF_LOOSE_H                = 10031,
-    LANG_OPVP_TF_LOOSE_A                = 10032,
+    LANG_OPVP_TF_LOSE_H                = 10031,
+    LANG_OPVP_TF_LOSE_A                = 10032,
     // opvp ep
     LANG_OPVP_EP_CAPTURE_NPT_H          = 10033,
     LANG_OPVP_EP_CAPTURE_NPT_A          = 10034,
@@ -1004,14 +1009,14 @@ enum TrinityStrings
     LANG_OPVP_EP_CAPTURE_CGT_A          = 10038,
     LANG_OPVP_EP_CAPTURE_PWT_H          = 10039,
     LANG_OPVP_EP_CAPTURE_PWT_A          = 10040,
-    LANG_OPVP_EP_LOOSE_NPT_H            = 10041,
-    LANG_OPVP_EP_LOOSE_NPT_A            = 10042,
-    LANG_OPVP_EP_LOOSE_EWT_H            = 10043,
-    LANG_OPVP_EP_LOOSE_EWT_A            = 10044,
-    LANG_OPVP_EP_LOOSE_CGT_H            = 10045,
-    LANG_OPVP_EP_LOOSE_CGT_A            = 10046,
-    LANG_OPVP_EP_LOOSE_PWT_H            = 10047,
-    LANG_OPVP_EP_LOOSE_PWT_A            = 10048,
+    LANG_OPVP_EP_LOSE_NPT_H            = 10041,
+    LANG_OPVP_EP_LOSE_NPT_A            = 10042,
+    LANG_OPVP_EP_LOSE_EWT_H            = 10043,
+    LANG_OPVP_EP_LOSE_EWT_A            = 10044,
+    LANG_OPVP_EP_LOSE_CGT_H            = 10045,
+    LANG_OPVP_EP_LOSE_CGT_A            = 10046,
+    LANG_OPVP_EP_LOSE_PWT_H            = 10047,
+    LANG_OPVP_EP_LOSE_PWT_A            = 10048,
     // opvp si
     LANG_OPVP_SI_CAPTURE_H              = 10049,
     LANG_OPVP_SI_CAPTURE_A              = 10050,

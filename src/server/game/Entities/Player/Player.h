@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -19,38 +19,38 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
-#include "Common.h"
-#include "ItemPrototype.h"
-#include "Unit.h"
-#include "Item.h"
-#include "DatabaseEnv.h"
-#include "NPCHandler.h"
-#include "QuestDef.h"
-#include "Group.h"
-#include "Bag.h"
-#include "WorldSession.h"
-#include "Pet.h"
-#include "MapReference.h"
-#include "Util.h"                                           // for Tokens typedef
 #include "AchievementMgr.h"
-#include "ReputationMgr.h"
 #include "Battleground.h"
+#include "Bag.h"
+#include "Common.h"
+#include "DatabaseEnv.h"
 #include "DBCEnums.h"
-#include "LFG.h"
+#include "GroupReference.h"
+#include "ItemPrototype.h"
+#include "Item.h"
+#include "MapReference.h"
+#include "NPCHandler.h"
+#include "Pet.h"
+#include "QuestDef.h"
+#include "ReputationMgr.h"
+#include "Unit.h"
+#include "Util.h"                                           // for Tokens typedef
+#include "WorldSession.h"
 
 #include<string>
 #include<vector>
 
 struct Mail;
 class Channel;
-class DynamicObject;
 class Creature;
+class DynamicObject;
+class Group;
+class OutdoorPvP;
 class Pet;
 class PlayerMenu;
-class UpdateMask;
-class SpellCastTargets;
 class PlayerSocial;
-class OutdoorPvP;
+class SpellCastTargets;
+class UpdateMask;
 
 typedef std::deque<Mail*> PlayerMails;
 
@@ -444,8 +444,9 @@ enum PlayerFieldByteFlags
 // used in PLAYER_FIELD_BYTES2 values
 enum PlayerFieldByte2Flags
 {
-    PLAYER_FIELD_BYTE2_NONE              = 0x0000,
-    PLAYER_FIELD_BYTE2_INVISIBILITY_GLOW = 0x4000
+    PLAYER_FIELD_BYTE2_NONE                 = 0x00,
+    PLAYER_FIELD_BYTE2_STEALTH              = 0x20,
+    PLAYER_FIELD_BYTE2_INVISIBILITY_GLOW    = 0x40
 };
 
 enum ActivateTaxiReplies
@@ -504,6 +505,10 @@ enum AtLoginFlags
 };
 
 typedef std::map<uint32, QuestStatusData> QuestStatusMap;
+typedef std::set<uint32> RewardedQuestSet;
+
+//               quest,  keep
+typedef std::map<uint32, bool> QuestStatusSaveMap;
 
 enum QuestSlotOffsets
 {
@@ -788,7 +793,8 @@ enum PlayerLoginQueryIndex
     PLAYER_LOGIN_QUERY_LOADRANDOMBG             = 27,
     PLAYER_LOGIN_QUERY_LOADARENASTATS           = 28,
     PLAYER_LOGIN_QUERY_LOADBANNED               = 29,
-    MAX_PLAYER_LOGIN_QUERY                      = 30
+    PLAYER_LOGIN_QUERY_LOADQUESTSTATUSREW       = 30,
+    MAX_PLAYER_LOGIN_QUERY                      = 31
 };
 
 enum PlayerDelayedOperations
@@ -1154,7 +1160,7 @@ class Player : public Unit, public GridObject<Player>
         uint8 GetBankBagSlotCount() const { return GetByteValue(PLAYER_BYTES_2, 2); }
         void SetBankBagSlotCount(uint8 count) { SetByteValue(PLAYER_BYTES_2, 2, count); }
         bool HasItemCount(uint32 item, uint32 count, bool inBankAlso = false) const;
-        bool HasItemFitToSpellReqirements(SpellEntry const* spellInfo, Item const* ignoreItem = NULL);
+        bool HasItemFitToSpellRequirements(SpellEntry const* spellInfo, Item const* ignoreItem = NULL);
         bool CanNoReagentCast(SpellEntry const* spellInfo) const;
         bool HasItemOrGemWithIdEquipped(uint32 item, uint32 count, uint8 except_slot = NULL_SLOT) const;
         bool HasItemOrGemWithLimitCategoryEquipped(uint32 limitCategory, uint32 count, uint8 except_slot = NULL_SLOT) const;
@@ -1334,6 +1340,8 @@ class Player : public Unit, public GridObject<Player>
         bool GetQuestRewardStatus(uint32 quest_id) const;
         QuestStatus GetQuestStatus(uint32 quest_id) const;
         void SetQuestStatus(uint32 quest_id, QuestStatus status);
+        void RemoveActiveQuest(uint32 quest_id);
+        void RemoveRewardedQuest(uint32 quest_id);
 
         void SetDailyQuestStatus(uint32 quest_id);
         void SetWeeklyQuestStatus(uint32 quest_id);
@@ -1472,7 +1480,8 @@ class Player : public Unit, public GridObject<Player>
             UpdateAchievementCriteria(ACHIEVEMENT_CRITERIA_TYPE_HIGHEST_GOLD_VALUE_OWNED);
         }
 
-        QuestStatusMap& getQuestStatusMap() { return mQuestStatus; };
+        RewardedQuestSet& getRewardedQuests() { return m_RewardedQuests; }
+        QuestStatusMap& getQuestStatusMap() { return m_QuestStatus; };
 
         const uint64& GetSelection() const { return m_curSelection; }
         Unit *GetSelectedUnit() const;
@@ -1604,7 +1613,7 @@ class Player : public Unit, public GridObject<Player>
         bool IsAffectedBySpellmod(SpellEntry const *spellInfo, SpellModifier *mod, Spell * spell = NULL);
         template <class T> T ApplySpellMod(uint32 spellId, SpellModOp op, T &basevalue, Spell * spell = NULL);
         void RemoveSpellMods(Spell * spell);
-        void RestoreSpellMods(Spell * spell);
+        void RestoreSpellMods(Spell *spell, uint32 ownerAuraId=0);
         void DropModCharge(SpellModifier * mod, Spell * spell);
         void SetSpellModTakingSpell(Spell* spell, bool apply);
 
@@ -1694,7 +1703,7 @@ class Player : public Unit, public GridObject<Player>
         void SetContestedPvPTimer(uint32 newTime) {m_contestedPvPTimer = newTime;}
         void ResetContestedPvP()
         {
-            clearUnitState(UNIT_STAT_ATTACK_PLAYER);
+            ClearUnitState(UNIT_STAT_ATTACK_PLAYER);
             RemoveFlag(PLAYER_FLAGS, PLAYER_FLAGS_CONTESTED_PVP);
             m_contestedPvPTimer = 0;
         }
@@ -1706,11 +1715,11 @@ class Player : public Unit, public GridObject<Player>
         void DuelComplete(DuelCompleteType type);
         void SendDuelCountdown(uint32 counter);
 
-        bool IsGroupVisibleFor(Player* p) const;
+        bool IsGroupVisibleFor(Player const* p) const;
         bool IsInSameGroupWith(Player const* p) const;
         bool IsInSameRaidWith(Player const* p) const { return p == this || (GetGroup() != NULL && GetGroup() == p->GetGroup()); }
         void UninviteFromGroup();
-        static void RemoveFromGroup(Group* group, uint64 guid, RemoveMethod method = GROUP_REMOVEMETHOD_DEFAULT);
+        static void RemoveFromGroup(Group* group, uint64 guid, RemoveMethod method = GROUP_REMOVEMETHOD_DEFAULT, uint64 kicker = 0 , const char* reason = NULL);
         void RemoveFromGroup(RemoveMethod method = GROUP_REMOVEMETHOD_DEFAULT) { RemoveFromGroup(GetGroup(),GetGUID(), method); }
         void SendUpdateToOutOfRangeGroupMembers();
 
@@ -1792,6 +1801,7 @@ class Player : public Unit, public GridObject<Player>
         float GetRatingCoefficient(CombatRating cr) const;
         float GetRatingBonusValue(CombatRating cr) const;
         uint32 GetBaseSpellPowerBonus() { return m_baseSpellPower; }
+        int32 GetSpellPenetrationItemMod() const { return m_spellPenetrationItemMod; }
 
         float GetExpertiseDodgeOrParryReduction(WeaponAttackType attType) const;
         void UpdateBlockPercentage();
@@ -1842,7 +1852,7 @@ class Player : public Unit, public GridObject<Player>
         bool SetPosition(const Position &pos, bool teleport = false) { return SetPosition(pos.GetPositionX(), pos.GetPositionY(), pos.GetPositionZ(), pos.GetOrientation(), teleport); }
         void UpdateUnderwaterState(Map * m, float x, float y, float z);
 
-        void SendMessageToSet(WorldPacket *data, bool self);// overwrite Object::SendMessageToSet
+        void SendMessageToSet(WorldPacket *data, bool self) {SendMessageToSetInRange(data, GetVisibilityRange(), self); };// overwrite Object::SendMessageToSet
         void SendMessageToSetInRange(WorldPacket *data, float fist, bool self);// overwrite Object::SendMessageToSetInRange
         void SendMessageToSetInRange(WorldPacket *data, float dist, bool self, bool own_team_only);
         void SendMessageToSet(WorldPacket *data, Player const* skipped_rcvr);
@@ -1927,6 +1937,7 @@ class Player : public Unit, public GridObject<Player>
         bool isHonorOrXPTarget(Unit* pVictim);
 
         bool GetsRecruitAFriendBonus(bool forXP);
+        uint8 GetGrantableLevels() { return GetByteValue(PLAYER_FIELD_BYTES, 1); }
 
         ReputationMgr&       GetReputationMgr()       { return m_reputationMgr; }
         ReputationMgr const& GetReputationMgr() const { return m_reputationMgr; }
@@ -1992,6 +2003,8 @@ class Player : public Unit, public GridObject<Player>
         void _ApplyAllStatBonuses();
         void _RemoveAllStatBonuses();
 
+        void ResetAllPowers();
+
         void _ApplyWeaponDependentAuraMods(Item *item, WeaponAttackType attackType, bool apply);
         void _ApplyWeaponDependentAuraCritMod(Item *item, WeaponAttackType attackType, AuraEffect const * aura, bool apply);
         void _ApplyWeaponDependentAuraDamageMod(Item *item, WeaponAttackType attackType, AuraEffect const * aura, bool apply);
@@ -2001,6 +2014,7 @@ class Player : public Unit, public GridObject<Player>
         void _ApplyAllItemMods();
         void _ApplyAllLevelScaleItemMods(bool apply);
         void _ApplyItemBonuses(ItemPrototype const *proto,uint8 slot,bool apply, bool only_level_scale = false);
+        void _ApplyWeaponDamage(uint8 slot, ItemPrototype const *proto, ScalingStatValuesEntry const *ssv, bool apply);
         void _ApplyAmmoBonuses();
         bool EnchantmentFitsRequirements(uint32 enchantmentcondition, int8 slot);
         void ToggleMetaGemsActive(uint8 exceptslot, bool apply);
@@ -2232,8 +2246,8 @@ class Player : public Unit, public GridObject<Player>
 
         bool HaveAtClient(WorldObject const* u) const { return u == this || m_clientGUIDs.find(u->GetGUID()) != m_clientGUIDs.end(); }
 
-        bool canSeeOrDetect(Unit const* u, bool detect, bool inVisibleList = false, bool is3dDistance = true) const;
-        bool IsVisibleInGridForPlayer(Player const* pl) const;
+        bool isValid() const;
+
         bool IsVisibleGloballyFor(Player* pl) const;
 
         void SendInitialVisiblePackets(Unit* target);
@@ -2245,26 +2259,13 @@ class Player : public Unit, public GridObject<Player>
         template<class T>
             void UpdateVisibilityOf(T* target, UpdateData& data, std::set<Unit*>& visibleNow);
 
-        // Stealth detection system
-        void HandleStealthedUnitsDetection();
-
         uint8 m_forced_speed_changes[MAX_MOVE_TYPE];
 
         bool HasAtLoginFlag(AtLoginFlags f) const { return m_atLoginFlags & f; }
         void SetAtLoginFlag(AtLoginFlags f) { m_atLoginFlags |= f; }
         void RemoveAtLoginFlag(AtLoginFlags f, bool in_db_also = false);
 
-        // Dungeon Finder
-        LfgDungeonSet *GetLfgDungeons() { return &m_LookingForGroup.applyDungeons; }
-        std::string GetLfgComment() { return m_LookingForGroup.comment; }
-        void SetLfgComment(std::string _comment) { m_LookingForGroup.comment = _comment; }
-        uint8 GetLfgRoles() { return m_LookingForGroup.roles; }
-        void SetLfgRoles(uint8 _roles) { m_LookingForGroup.roles = _roles; }
-        bool GetLfgUpdate() { return m_LookingForGroup.update; }
-        void SetLfgUpdate(bool update) { m_LookingForGroup.update = update; }
-        LfgState GetLfgState() { return m_LookingForGroup.state; }
-        void SetLfgState(LfgState state) { m_LookingForGroup.state = state; }
-        bool isUsingLfg() { return GetLfgState() != LFG_STATE_NONE; }
+        bool isUsingLfg();
 
         typedef std::set<uint32> DFQuestsDoneList;
         DFQuestsDoneList m_DFQuests;
@@ -2383,21 +2384,6 @@ class Player : public Unit, public GridObject<Player>
         float GetAverageItemLevel();
         bool isDebugAreaTriggers;
 
-		
-        /*********************************************************/
-        /***                 ANTICHEAT SYSTEM                  ***/
-        /*********************************************************/
-        uint32 GetLastPacketTime() { return uiLastPacketTime;}
-        uint32 GetLastOpcode() { return uiLastOpcode; }
-        float GetLastSpeedRate() { return fLastSpeedRate; }
-        void SetLastPacketTime(uint32 uiTime) { uiLastPacketTime = uiTime; }
-        void SetLastSpeedRate(float fSpeedRateRate) { fLastSpeedRate = fSpeedRateRate; }
-        void SetLastOpcode(uint32 uiOpcode) { uiLastOpcode = uiOpcode; }
-        void ElaborateCheatReport(Player* pPlayer, uint8 uiReportType);
-        bool CanFlyAnticheat(MovementInfo& pMovementInfo);
-        bool HasFirstReport();
-        void CleanTempCheatReports();
-		
     protected:
         uint32 m_AreaID;
         uint32 m_regenTimerCount;
@@ -2447,6 +2433,7 @@ class Player : public Unit, public GridObject<Player>
         void _LoadMail();
         void _LoadMailedItems(Mail *mail);
         void _LoadQuestStatus(PreparedQueryResult result);
+        void _LoadQuestStatusRewarded(PreparedQueryResult result);
         void _LoadDailyQuestStatus(PreparedQueryResult result);
         void _LoadWeeklyQuestStatus(PreparedQueryResult result);
         void _LoadRandomBGStatus(PreparedQueryResult result);
@@ -2524,7 +2511,11 @@ class Player : public Unit, public GridObject<Player>
         uint64 m_comboTarget;
         int8 m_comboPoints;
 
-        QuestStatusMap mQuestStatus;
+        QuestStatusMap m_QuestStatus;
+        QuestStatusSaveMap m_QuestStatusSave;
+
+        RewardedQuestSet m_RewardedQuests;
+        QuestStatusSaveMap m_RewardedQuestsSave;
 
         SkillStatusMap mSkillStatus;
 
@@ -2549,6 +2540,7 @@ class Player : public Unit, public GridObject<Player>
         uint32 m_baseFeralAP;
         uint32 m_baseManaRegen;
         uint32 m_baseHealthRegen;
+        int32 m_spellPenetrationItemMod;
 
         SpellModList m_spellMods[MAX_SPELLMOD];
         //uint32 m_pad;
@@ -2638,15 +2630,11 @@ class Player : public Unit, public GridObject<Player>
         DeclinedName *m_declinedname;
         Runes *m_runes;
         EquipmentSets m_EquipmentSets;
+
+        bool canSeeAlways(WorldObject const* obj) const;
+
+        bool isAlwaysDetectableFor(WorldObject const* seer) const;
     private:
-	
-        /*********************************************************/
-        /***                    ANTICHEAT SYSTEM               ***/
-        /*********************************************************/
-        uint32  uiLastPacketTime;
-        float fLastSpeedRate;
-        uint32 uiLastOpcode;
-	
         // internal common parts for CanStore/StoreItem functions
         uint8 _CanStoreItem_InSpecificSlot(uint8 bag, uint8 slot, ItemPosCountVec& dest, ItemPrototype const *pProto, uint32& count, bool swap, Item *pSrcItem) const;
         uint8 _CanStoreItem_InBag(uint8 bag, ItemPosCountVec& dest, ItemPrototype const *pProto, uint32& count, bool merge, bool non_specialized, Item *pSrcItem, uint8 skip_bag, uint8 skip_slot) const;
@@ -2696,8 +2684,6 @@ class Player : public Unit, public GridObject<Player>
         bool m_bCanDelayTeleport;
         bool m_bHasDelayedTeleport;
 
-        uint32 m_DetectInvTimer;
-
         // Temporary removed pet cache
         uint32 m_temporaryUnsummonedPetNumber;
         uint32 m_oldpetspell;
@@ -2714,8 +2700,6 @@ class Player : public Unit, public GridObject<Player>
         uint32 m_timeSyncTimer;
         uint32 m_timeSyncClient;
         uint32 m_timeSyncServer;
-
-        LookingForGroup m_LookingForGroup;
 };
 
 void AddItemsSetItem(Player*player,Item *item);
@@ -2756,7 +2740,7 @@ template <class T> T Player::ApplySpellMod(uint32 spellId, SpellModOp op, T &bas
             if (mod->op == SPELLMOD_CASTING_TIME  && basevalue >= T(10000) && mod->value <= -100)
                 continue;
 
-            totalmul *= 1.0f + (float)mod->value / 100.0f;
+            AddPctN(totalmul, mod->value);
         }
 
         DropModCharge(mod, spell);

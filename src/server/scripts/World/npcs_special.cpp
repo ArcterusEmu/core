@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -130,7 +130,7 @@ public:
             }
 
             if (!m_pSpawnAssoc)
-                sLog.outErrorDb("TCSR: Creature template entry %u has ScriptName npc_air_force_bots, but it's not handled by that script", pCreature->GetEntry());
+                sLog->outErrorDb("TCSR: Creature template entry %u has ScriptName npc_air_force_bots, but it's not handled by that script", pCreature->GetEntry());
             else
             {
                 CreatureInfo const* spawnedTemplate = GetCreatureTemplateStore(m_pSpawnAssoc->m_uiSpawnedCreatureEntry);
@@ -138,7 +138,7 @@ public:
                 if (!spawnedTemplate)
                 {
                     m_pSpawnAssoc = NULL;
-                    sLog.outErrorDb("TCSR: Creature template entry %u does not exist in DB, which is required by npc_air_force_bots", m_pSpawnAssoc->m_uiSpawnedCreatureEntry);
+                    sLog->outErrorDb("TCSR: Creature template entry %u does not exist in DB, which is required by npc_air_force_bots", m_pSpawnAssoc->m_uiSpawnedCreatureEntry);
                     return;
                 }
             }
@@ -157,7 +157,7 @@ public:
                 m_uiSpawnedGUID = pSummoned->GetGUID();
             else
             {
-                sLog.outErrorDb("TCSR: npc_air_force_bots: wasn't able to spawn Creature %u", m_pSpawnAssoc->m_uiSpawnedCreatureEntry);
+                sLog->outErrorDb("TCSR: npc_air_force_bots: wasn't able to spawn Creature %u", m_pSpawnAssoc->m_uiSpawnedCreatureEntry);
                 m_pSpawnAssoc = NULL;
             }
 
@@ -820,9 +820,6 @@ void npc_doctor::npc_doctorAI::UpdateAI(const uint32 diff)
     {
         if (SummonPatient_Timer <= diff)
         {
-            Creature* Patient = NULL;
-            Location* Point = NULL;
-
             if (Coordinates.empty())
                 return;
 
@@ -834,26 +831,25 @@ void npc_doctor::npc_doctorAI::UpdateAI(const uint32 diff)
             case DOCTOR_ALLIANCE: patientEntry = AllianceSoldierId[rand()%3]; break;
             case DOCTOR_HORDE:    patientEntry = HordeSoldierId[rand()%3]; break;
             default:
-                sLog.outError("TSCR: Invalid entry for Triage doctor. Please check your database");
+                sLog->outError("TSCR: Invalid entry for Triage doctor. Please check your database");
                 return;
             }
 
-            Point = *itr;
-
-            Patient = me->SummonCreature(patientEntry, Point->x, Point->y, Point->z, Point->o, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000);
-
-            if (Patient)
+            if (Location* Point = *itr)
             {
-                //303, this flag appear to be required for client side item->spell to work (TARGET_SINGLE_FRIEND)
-                Patient->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PVP_ATTACKABLE);
+                if (Creature* Patient = me->SummonCreature(patientEntry, Point->x, Point->y, Point->z, Point->o, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000))
+                {
+                    //303, this flag appear to be required for client side item->spell to work (TARGET_SINGLE_FRIEND)
+                    Patient->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PVP_ATTACKABLE);
 
-                Patients.push_back(Patient->GetGUID());
-                CAST_AI(npc_injured_patient::npc_injured_patientAI, Patient->AI())->Doctorguid = me->GetGUID();
+                    Patients.push_back(Patient->GetGUID());
+                    CAST_AI(npc_injured_patient::npc_injured_patientAI, Patient->AI())->Doctorguid = me->GetGUID();
 
-                if (Point)
-                    CAST_AI(npc_injured_patient::npc_injured_patientAI, Patient->AI())->Coord = Point;
+                    if (Point)
+                        CAST_AI(npc_injured_patient::npc_injured_patientAI, Patient->AI())->Coord = Point;
 
-                Coordinates.erase(itr);
+                    Coordinates.erase(itr);
+                }
             }
             SummonPatient_Timer = 10000;
             ++SummonPatientCount;
@@ -1286,7 +1282,7 @@ public:
         if (pCreature->isCanTrainingAndResetTalentsOf(pPlayer))
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, GOSSIP_HELLO_ROGUE1, GOSSIP_SENDER_MAIN, GOSSIP_OPTION_UNLEARNTALENTS);
 
-        if (!(pPlayer->GetSpecsCount() == 1 && pCreature->isCanTrainingAndResetTalentsOf(pPlayer) && !(pPlayer->getLevel() < sWorld.getIntConfig(CONFIG_MIN_DUALSPEC_LEVEL))))
+        if (!(pPlayer->GetSpecsCount() == 1 && pCreature->isCanTrainingAndResetTalentsOf(pPlayer) && !(pPlayer->getLevel() < sWorld->getIntConfig(CONFIG_MIN_DUALSPEC_LEVEL))))
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, GOSSIP_HELLO_ROGUE3, GOSSIP_SENDER_MAIN, GOSSIP_OPTION_LEARNDUALSPEC);
 
         if (pPlayer->getClass() == CLASS_ROGUE && pPlayer->getLevel() >= 24 && !pPlayer->HasItemCount(17126,1) && !pPlayer->GetQuestRewardStatus(6681))
@@ -1316,7 +1312,7 @@ public:
                 pPlayer->SendTalentWipeConfirm(pCreature->GetGUID());
                 break;
             case GOSSIP_OPTION_LEARNDUALSPEC:
-                if (pPlayer->GetSpecsCount() == 1 && !(pPlayer->getLevel() < sWorld.getIntConfig(CONFIG_MIN_DUALSPEC_LEVEL)))
+                if (pPlayer->GetSpecsCount() == 1 && !(pPlayer->getLevel() < sWorld->getIntConfig(CONFIG_MIN_DUALSPEC_LEVEL)))
                 {
                     if (!pPlayer->HasEnoughMoney(10000000))
                     {
@@ -1673,13 +1669,11 @@ public:
 
         uint32 SpellTimer;
         bool IsViper;
-        bool Spawn;
 
         void EnterCombat(Unit * /*who*/) {}
 
         void Reset()
         {
-            Spawn = true;
             SpellTimer = 0;
 
             CreatureInfo const *Info = me->GetCreatureInfo();
@@ -1694,6 +1688,12 @@ public:
             uint32 delta = (rand() % 7) * 100;
             me->SetStatFloatValue(UNIT_FIELD_BASEATTACKTIME, float(Info->baseattacktime + delta));
             me->SetStatFloatValue(UNIT_FIELD_RANGED_ATTACK_POWER , float(Info->attackpower));
+
+            // Start attacking attacker of owner on first ai update after spawn - move in line of sight may choose better target
+            if (!me->getVictim() && me->isSummon())
+                if (Unit * Owner = CAST_SUM(me)->GetSummoner())
+                    if (Owner->getAttackerForHelper())
+                        AttackStart(Owner->getAttackerForHelper());
         }
 
         //Redefined for random target selection:
@@ -1719,22 +1719,8 @@ public:
 
         void UpdateAI(const uint32 diff)
         {
-            if (Spawn)
-            {
-                Spawn = false;
-                // Start attacking attacker of owner on first ai update after spawn - move in line of sight may choose better target
-                if (!me->getVictim() && me->isSummon())
-                    if (Unit * Owner = CAST_SUM(me)->GetSummoner())
-                        if (Owner->getAttackerForHelper())
-                            AttackStart(Owner->getAttackerForHelper());
-            }
-
-            if (!me->getVictim())
-            {
-                if (me->isInCombat())
-                    DoStopAttack();
+            if (!UpdateVictim())
                 return;
-            }
 
             if (SpellTimer <= diff)
             {
@@ -1887,7 +1873,7 @@ public:
             Unit *owner = me->GetCharmerOrOwner();
 
             me->CombatStop(true);
-            if (owner && !me->hasUnitState(UNIT_STAT_FOLLOW))
+            if (owner && !me->HasUnitState(UNIT_STAT_FOLLOW))
             {
                 me->GetMotionMaster()->Clear(false);
                 me->GetMotionMaster()->MoveFollow(owner, PET_FOLLOW_DIST, me->GetFollowAngle(), MOTION_SLOT_ACTIVE);
@@ -1979,7 +1965,7 @@ public:
                     despawnTimer -= diff;
                 else
                 {
-                    me->ForcedDespawn();
+                    me->DespawnOrUnsummon();
                 }
                 return;
             }
@@ -2070,7 +2056,7 @@ public:
             if (!UpdateVictim())
                 return;
 
-            if (!me->hasUnitState(UNIT_STAT_STUNNED))
+            if (!me->HasUnitState(UNIT_STAT_STUNNED))
                 me->SetControlled(true,UNIT_STAT_STUNNED);//disable rotate
 
             if (uiEntry != NPC_ADVANCED_TARGET_DUMMY && uiEntry != NPC_TARGET_DUMMY)
@@ -2087,7 +2073,7 @@ public:
             else
             {
                 if (uiDespawnTimer <= uiDiff)
-                    me->ForcedDespawn();
+                    me->DespawnOrUnsummon();
                 else
                     uiDespawnTimer -= uiDiff;
             }

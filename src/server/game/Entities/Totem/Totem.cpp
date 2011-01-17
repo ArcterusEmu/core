@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -57,8 +57,8 @@ void Totem::InitStats(uint32 duration)
     CreatureInfo const *cinfo = GetCreatureInfo();
     if (m_owner->GetTypeId() == TYPEID_PLAYER && cinfo)
     {
-        uint32 display_id = sObjectMgr.ChooseDisplayId(m_owner->ToPlayer()->GetTeam(), cinfo);
-        CreatureModelInfo const *minfo = sObjectMgr.GetCreatureModelRandomGender(display_id);
+        uint32 display_id = sObjectMgr->ChooseDisplayId(m_owner->ToPlayer()->GetTeam(), cinfo);
+        CreatureModelInfo const *minfo = sObjectMgr->GetCreatureModelRandomGender(display_id);
         if (minfo)
             display_id = minfo->modelid;
         switch (m_owner->ToPlayer()->GetTeam())

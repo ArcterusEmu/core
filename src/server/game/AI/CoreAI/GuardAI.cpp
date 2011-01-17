@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -59,7 +59,7 @@ void GuardAI::EnterEvadeMode()
 {
     if (!me->isAlive())
     {
-        sLog.outStaticDebug("Creature stopped attacking because he is dead [guid=%u]", me->GetGUIDLow());
+        sLog->outStaticDebug("Creature stopped attacking because he is dead [guid=%u]", me->GetGUIDLow());
         me->GetMotionMaster()->MoveIdle();
 
         i_state = STATE_NORMAL;
@@ -74,23 +74,23 @@ void GuardAI::EnterEvadeMode()
 
     if (!victim)
     {
-        sLog.outStaticDebug("Creature stopped attacking because victim does not exist [guid=%u]", me->GetGUIDLow());
+        sLog->outStaticDebug("Creature stopped attacking because victim does not exist [guid=%u]", me->GetGUIDLow());
     }
     else if (!victim ->isAlive())
     {
-        sLog.outStaticDebug("Creature stopped attacking because victim is dead [guid=%u]", me->GetGUIDLow());
+        sLog->outStaticDebug("Creature stopped attacking because victim is dead [guid=%u]", me->GetGUIDLow());
     }
     else if (victim ->HasStealthAura())
     {
-        sLog.outStaticDebug("Creature stopped attacking because victim is using stealth [guid=%u]", me->GetGUIDLow());
+        sLog->outStaticDebug("Creature stopped attacking because victim is using stealth [guid=%u]", me->GetGUIDLow());
     }
     else if (victim ->isInFlight())
     {
-        sLog.outStaticDebug("Creature stopped attacking because victim is flying away [guid=%u]", me->GetGUIDLow());
+        sLog->outStaticDebug("Creature stopped attacking because victim is flying away [guid=%u]", me->GetGUIDLow());
     }
     else
     {
-        sLog.outStaticDebug("Creature stopped attacking because victim outran him [guid=%u]", me->GetGUIDLow());
+        sLog->outStaticDebug("Creature stopped attacking because victim outran him [guid=%u]", me->GetGUIDLow());
     }
 
     me->RemoveAllAuras();
@@ -124,8 +124,8 @@ void GuardAI::UpdateAI(const uint32 /*diff*/)
 
 bool GuardAI::IsVisible(Unit *pl) const
 {
-    return me->IsWithinDist(pl,sWorld.getFloatConfig(CONFIG_SIGHT_GUARDER))
-        && pl->isVisibleForOrDetect(me,true);
+    return me->IsWithinDist(pl,sWorld->getFloatConfig(CONFIG_SIGHT_GUARDER))
+        && me->canSeeOrDetect(pl);
 }
 
 void GuardAI::JustDied(Unit *killer)

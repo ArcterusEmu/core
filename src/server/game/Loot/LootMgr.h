@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -183,7 +183,7 @@ class LootStore
 
         void Verify() const;
 
-        void LoadAndCollectLootIds(LootIdSet& ids_set);
+        uint32 LoadAndCollectLootIds(LootIdSet& ids_set);
         void CheckLootRefs(LootIdSet* ref_set = NULL) const; // check existence reference and remove it from ref_set
         void ReportUnusedIds(LootIdSet const& ids_set) const;
         void ReportNotExistedId(uint32 id) const;
@@ -200,7 +200,7 @@ class LootStore
         char const* GetEntryName() const { return m_entryName; }
         bool IsRatesAllowed() const { return m_ratesAllowed; }
     protected:
-        void LoadLootTable();
+        uint32 LoadLootTable();
         void Clear();
     private:
         LootTemplateMap m_LootTemplates;
@@ -218,7 +218,7 @@ class LootTemplate
         // Adds an entry to the group (at loading stage)
         void AddEntry(LootStoreItem& item);
         // Rolls for every item in the template and adds the rolled items the the loot
-        void Process(Loot& loot, LootStore const& store, bool rate, uint16 lootMode, uint8 groupId = 0) const;
+        void Process(Loot& loot, bool rate, uint16 lootMode, uint8 groupId = 0) const;
         void CopyConditions(ConditionList conditions);
 
         // True if template includes at least 1 quest drop entry

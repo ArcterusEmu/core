@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -184,11 +184,13 @@ public:
         if (pCreature->isQuestGiver())
             pPlayer->PrepareQuestMenu(pCreature->GetGUID());
 
-        if (pPlayer->GetQuestStatus(m_isSylvana ? QUEST_DELIVRANCE_FROM_THE_PIT_H2 : QUEST_DELIVRANCE_FROM_THE_PIT_A2) == QUEST_STATUS_COMPLETE)
+        QuestStatus status = pPlayer->GetQuestStatus(m_isSylvana ? QUEST_DELIVRANCE_FROM_THE_PIT_H2 : QUEST_DELIVRANCE_FROM_THE_PIT_A2);
+        if (status == QUEST_STATUS_COMPLETE || status == QUEST_STATUS_REWARDED)
             pPlayer->ADD_GOSSIP_ITEM( 0, "Can you remove the sword?", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
 
         // once last quest is completed, she offers this shortcut of the starting event
-        if (pPlayer->GetQuestStatus(m_isSylvana ? QUEST_WRATH_OF_THE_LICH_KING_H2 : QUEST_WRATH_OF_THE_LICH_KING_A2) == QUEST_STATUS_COMPLETE)
+        status = pPlayer->GetQuestStatus(m_isSylvana ? QUEST_WRATH_OF_THE_LICH_KING_H2 : QUEST_WRATH_OF_THE_LICH_KING_A2);
+        if (status == QUEST_STATUS_COMPLETE || status == QUEST_STATUS_REWARDED)
             pPlayer->ADD_GOSSIP_ITEM( 0, "Dark Lady, I think I hear Arthas coming. Whatever you're going to do, do it quickly.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
 
         pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
@@ -223,7 +225,7 @@ public:
 
             me->SetFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
             me->SetStandState(UNIT_STAND_STATE_STAND);
-            me->SetVisibility(VISIBILITY_ON);
+            me->SetVisible(true);
         }
 
         void DoAction(const int32 actionId)
@@ -476,9 +478,9 @@ public:
                 case EVENT_INTRO_LK_5:
                     // summon Falric and Marwyn. then go back to the door
                     if (Creature* pFalric = me->GetCreature(*me, pInstance->GetData64(DATA_FALRIC)))
-                        pFalric->SetVisibility(VISIBILITY_ON);
+                        pFalric->SetVisible(true);
                     if (Creature* pMarwyn = me->GetCreature(*me, pInstance->GetData64(DATA_MARWYN)))
-                        pMarwyn->SetVisibility(VISIBILITY_ON);
+                        pMarwyn->SetVisible(true);
 
                     if (Creature* pLichKing = me->GetCreature(*me, uiLichKing))
                     {
@@ -533,9 +535,9 @@ public:
                     // TODO: implement
 
                     if (Creature* pFalric = me->GetCreature(*me, pInstance->GetData64(DATA_FALRIC)))
-                        pFalric->SetVisibility(VISIBILITY_ON);
+                        pFalric->SetVisible(true);
                     if (Creature* pMarwyn = me->GetCreature(*me, pInstance->GetData64(DATA_MARWYN)))
-                        pMarwyn->SetVisibility(VISIBILITY_ON);
+                        pMarwyn->SetVisible(true);
 
                     me->GetMotionMaster()->MovePoint(0, LichKingSpawnPos);
                     // TODO: Loralen/Koreln shall run also
@@ -657,7 +659,7 @@ public:
 
             events.Update(diff);
 
-            if (me->hasUnitState(UNIT_STAT_CASTING))
+            if (me->HasUnitState(UNIT_STAT_CASTING))
                 return;
 
             while (uint32 eventId = events.ExecuteEvent())
@@ -740,7 +742,7 @@ public:
 
             events.Update(diff);
 
-            if (me->hasUnitState(UNIT_STAT_CASTING))
+            if (me->HasUnitState(UNIT_STAT_CASTING))
                 return;
 
             while (uint32 eventId = events.ExecuteEvent())
@@ -840,7 +842,7 @@ public:
 
             events.Update(diff);
 
-            if (me->hasUnitState(UNIT_STAT_CASTING))
+            if (me->HasUnitState(UNIT_STAT_CASTING))
                 return;
 
             while (uint32 eventId = events.ExecuteEvent())
@@ -910,7 +912,7 @@ public:
 
             events.Update(diff);
 
-            if (me->hasUnitState(UNIT_STAT_CASTING))
+            if (me->HasUnitState(UNIT_STAT_CASTING))
                 return;
 
             while (uint32 eventId = events.ExecuteEvent())
@@ -976,7 +978,7 @@ public:
 
             events.Update(diff);
 
-            if (me->hasUnitState(UNIT_STAT_CASTING))
+            if (me->HasUnitState(UNIT_STAT_CASTING))
                 return;
 
             while (uint32 eventId = events.ExecuteEvent())

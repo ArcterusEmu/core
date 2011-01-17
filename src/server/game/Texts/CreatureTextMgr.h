@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -62,22 +62,22 @@ class CreatureTextMgr
         void LoadCreatureTexts();
         CreatureTextMap  const& GetTextMap() const { return mTextMap; }
 
-        void SendSound(Creature* source,uint32 sound, ChatType msgtype, uint64 whisperGuid, TextRange range);
-        void SendEmote(Creature* source, uint32 emote);
-        
-        //if sent, returns the 'duration' of the text else 0 if error
-        uint32 SendChat(Creature* source, uint8 textGroup, uint64 whisperGuid = 0, ChatType msgtype = CHAT_TYPE_END, Language language = LANG_ADDON, TextRange range = TEXT_RANGE_NORMAL, uint32 sound = 0);
-        void SendChatString(WorldObject* source, char const* text, ChatType msgtype = CHAT_TYPE_SAY, Language language = LANG_UNIVERSAL, uint64 whisperGuid = 0, TextRange range = TEXT_RANGE_NORMAL) const;
+        void SendSound(Creature* source,uint32 sound, ChatType msgtype, uint64 whisperGuid, TextRange range, Team team, bool gmOnly);
+        void SendEmote(Unit* source, uint32 emote);
 
+        //if sent, returns the 'duration' of the text else 0 if error
+        uint32 SendChat(Creature* source, uint8 textGroup, uint64 whisperGuid = 0, ChatType msgtype = CHAT_TYPE_END, Language language = LANG_ADDON, TextRange range = TEXT_RANGE_NORMAL, uint32 sound = 0, Team team = TEAM_OTHER, bool gmOnly = false, Player* srcPlr = NULL);
+        void SendChatString(WorldObject* source, char const* text, ChatType msgtype = CHAT_TYPE_SAY, Language language = LANG_UNIVERSAL, uint64 whisperGuid = 0, TextRange range = TEXT_RANGE_NORMAL, Team team = TEAM_OTHER, bool gmOnly = false) const;
+        bool TextExist(uint32 sourceEntry, uint8 textGroup);
     private:
         CreatureTextRepeatIds GetRepeatGroup(Creature* source, uint8 textGroup);
         void SetRepeatId(Creature* source, uint8 textGroup, uint8 id);
         void BuildMonsterChat(WorldPacket *data, WorldObject* source, ChatType msgtype, char const* text, Language language, uint64 whisperGuid) const;
-        void SendChatPacket(WorldPacket *data, WorldObject* source, ChatType msgtype, uint64 whisperGuid, TextRange range) const;
+        void SendChatPacket(WorldPacket *data, WorldObject* source, ChatType msgtype, uint64 whisperGuid, TextRange range, Team team, bool gmOnly) const;
 
         CreatureTextMap mTextMap;
         CreatureTextRepeatMap mTextRepeatMap;
 };
 
-#define sCreatureTextMgr (*ACE_Singleton<CreatureTextMgr, ACE_Null_Mutex>::instance())
+#define sCreatureTextMgr ACE_Singleton<CreatureTextMgr, ACE_Null_Mutex>::instance()
 #endif

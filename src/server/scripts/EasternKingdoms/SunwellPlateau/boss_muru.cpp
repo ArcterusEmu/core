@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -151,7 +151,7 @@ public:
                     summoned->CastSpell(summoned,SPELL_DARKFIEND_VISUAL,false);
                     break;
                 case CREATURE_DARKNESS:
-                    summoned->addUnitState(UNIT_STAT_STUNNED);
+                    summoned->AddUnitState(UNIT_STAT_STUNNED);
                     float x,y,z,o;
                     summoned->GetHomePosition(x,y,z,o);
                     me->SummonCreature(CREATURE_DARK_FIENDS, x,y,z,o, TEMPSUMMON_CORPSE_DESPAWN, 0);
@@ -239,7 +239,7 @@ public:
             Timer[TIMER_SENTINEL] = 31500;
 
             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-            me->SetVisibility(VISIBILITY_ON);
+            me->SetVisible(true);
 
             Summons.DespawnAll();
 
@@ -274,7 +274,7 @@ public:
             switch(summoned->GetEntry())
             {
                 case BOSS_ENTROPIUS:
-                    me->SetVisibility(VISIBILITY_OFF);
+                    me->SetVisible(false);
                     break;
                 case CREATURE_DARK_FIENDS:
                     summoned->CastSpell(summoned,SPELL_DARKFIEND_VISUAL,false);
@@ -401,7 +401,7 @@ public:
             InAction = false;
             SummonSentinel = false;
 
-            me->addUnitState(UNIT_STAT_STUNNED);
+            me->AddUnitState(UNIT_STAT_STUNNED);
 
             Summons.DespawnAll();
         }
@@ -475,7 +475,7 @@ public:
             WaitTimer = 2000;
             InAction = false;
 
-            me->addUnitState(UNIT_STAT_STUNNED);
+            me->AddUnitState(UNIT_STAT_STUNNED);
         }
 
         void SpellHit(Unit* /*caster*/, const SpellEntry* Spell)
@@ -494,7 +494,7 @@ public:
             {
                 if (!InAction)
                 {
-                    me->clearUnitState(UNIT_STAT_STUNNED);
+                    me->ClearUnitState(UNIT_STAT_STUNNED);
                     DoCastAOE(SPELL_DARKFIEND_SKIN, false);
                     AttackStart(SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true));
                     InAction = true;
@@ -604,7 +604,7 @@ public:
             SpellTimer = 5000;
             Phase = 0;
 
-            me->addUnitState(UNIT_STAT_STUNNED);
+            me->AddUnitState(UNIT_STAT_STUNNED);
             DoCastAOE(SPELL_BLACKHOLE_SPAWN, true);
         }
 
@@ -616,7 +616,7 @@ public:
                 switch (NeedForAHack)
                 {
                     case 0:
-                        me->clearUnitState(UNIT_STAT_STUNNED);
+                        me->ClearUnitState(UNIT_STAT_STUNNED);
                         DoCastAOE(SPELL_BLACKHOLE_GROW, false);
                         if (Victim)
                             AttackStart(Victim);

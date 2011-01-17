@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2007 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -128,7 +128,7 @@ struct PlayerAbilityStruct
 {
     uint32 spell;
     AbilityTarget target;
-    uint32 cooldown;
+    uint32 cooldown; //FIXME - it's never used
 };
 
 static PlayerAbilityStruct PlayerAbility[][3] =

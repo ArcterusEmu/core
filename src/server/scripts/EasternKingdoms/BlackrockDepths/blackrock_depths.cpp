@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -238,7 +238,7 @@ public:
                 if (pInstance)
                 {
                     pInstance->SetData(TYPE_RING_OF_LAW,DONE);
-                    sLog.outDebug("TSCR: npc_grimstone: event reached end and set complete.");
+                    sLog->outDebug("TSCR: npc_grimstone: event reached end and set complete.");
                 }
                 break;
             }
@@ -318,7 +318,7 @@ public:
                         break;
                     case 4:
                         CanWalk = true;
-                        me->SetVisibility(VISIBILITY_OFF);
+                        me->SetVisible(false);
                         SummonRingMob();
                         Event_Timer = 8000;
                         break;
@@ -332,7 +332,7 @@ public:
                         Event_Timer = 0;
                         break;
                     case 7:
-                        me->SetVisibility(VISIBILITY_ON);
+                        me->SetVisible(true);
                         HandleGameObject(DATA_ARENA1, false);
                         DoScriptText(SCRIPT_TEXT6, me);//4
                         CanWalk = true;
@@ -343,7 +343,7 @@ public:
                         Event_Timer = 5000;
                         break;
                     case 9:
-                        me->SetVisibility(VISIBILITY_OFF);
+                        me->SetVisible(false);
                         SummonRingBoss();
                         Event_Timer = 0;
                         break;

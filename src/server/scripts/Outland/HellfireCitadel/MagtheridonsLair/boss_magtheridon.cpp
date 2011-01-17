@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -129,7 +129,7 @@ class mob_abyssal : public CreatureScript
                 if (trigger == 2 && spell->Id == SPELL_BLAZE_TARGET)
                 {
                     DoCast(me, SPELL_BLAZE_TRAP, true);
-                    me->SetVisibility(VISIBILITY_OFF);
+                    me->SetVisible(false);
                     Despawn_Timer = 130000;
                 }
             }
@@ -180,7 +180,7 @@ class mob_abyssal : public CreatureScript
 
                 if (Despawn_Timer <= diff)
                 {
-                    me->ForcedDespawn();
+                    me->DespawnOrUnsummon();
                 }
                 else Despawn_Timer -= diff;
 
@@ -267,7 +267,7 @@ class boss_magtheridon : public CreatureScript
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
-                me->addUnitState(UNIT_STAT_STUNNED);
+                me->AddUnitState(UNIT_STAT_STUNNED);
                 DoCast(me, SPELL_SHADOW_CAGE_C, true);
             }
 
@@ -348,7 +348,7 @@ class boss_magtheridon : public CreatureScript
 
             void AttackStart(Unit *who)
             {
-                if (!me->hasUnitState(UNIT_STAT_STUNNED))
+                if (!me->HasUnitState(UNIT_STAT_STUNNED))
                     ScriptedAI::AttackStart(who);
             }
 
@@ -402,7 +402,7 @@ class boss_magtheridon : public CreatureScript
                 if (BlastNova_Timer <= diff)
                 {
                     // to avoid earthquake interruption
-                    if (!me->hasUnitState(UNIT_STAT_STUNNED))
+                    if (!me->HasUnitState(UNIT_STAT_STUNNED))
                     {
                         DoScriptText(EMOTE_BLASTNOVA, me);
                         DoCast(me, SPELL_BLASTNOVA);
@@ -445,7 +445,7 @@ class boss_magtheridon : public CreatureScript
 
                 if (!Phase3 && HealthBelowPct(30)
                     && !me->IsNonMeleeSpellCasted(false) // blast nova
-                    && !me->hasUnitState(UNIT_STAT_STUNNED)) // shadow cage and earthquake
+                    && !me->HasUnitState(UNIT_STAT_STUNNED)) // shadow cage and earthquake
                 {
                     Phase3 = true;
                     DoScriptText(SAY_CHAMBER_DESTROY, me);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -168,5 +168,5 @@ class MapManager
         uint32 i_MaxInstanceId;
         MapUpdater m_updater;
 };
-#define sMapMgr (*ACE_Singleton<MapManager, ACE_Thread_Mutex>::instance())
+#define sMapMgr ACE_Singleton<MapManager, ACE_Thread_Mutex>::instance()
 #endif

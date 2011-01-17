@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -72,8 +72,6 @@ class Corpse : public WorldObject, public GridObject<Corpse>
 
         GridPair const& GetGrid() const { return m_grid; }
         void SetGrid(GridPair const& grid) { m_grid = grid; }
-
-        bool isVisibleForInState(Player const* u, bool inVisibleList) const;
 
         Loot loot;                                          // remove insignia ONLY at BG
         Player* lootRecipient;

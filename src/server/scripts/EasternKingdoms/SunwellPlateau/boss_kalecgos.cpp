@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -163,7 +163,7 @@ public:
             {
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE + UNIT_FLAG_NOT_SELECTABLE);
                 me->RemoveUnitMovementFlag(MOVEMENTFLAG_LEVITATING);
-                me->SetVisibility(VISIBILITY_ON);
+                me->SetVisible(true);
                 me->SetStandState(UNIT_STAND_STATE_SLEEP);
             }
             me->SetFullHealth();//dunno why it does not resets health at evade..
@@ -185,7 +185,7 @@ public:
         void EnterEvadeMode()
         {
             bJustReset = true;
-            me->SetVisibility(VISIBILITY_OFF);
+            me->SetVisible(false);
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE + UNIT_FLAG_NOT_SELECTABLE);
             ScriptedAI::EnterEvadeMode();
         }
@@ -235,7 +235,7 @@ public:
                     {
                         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE|UNIT_FLAG_NOT_SELECTABLE);
                         me->RemoveUnitMovementFlag(MOVEMENTFLAG_LEVITATING);
-                        me->SetVisibility(VISIBILITY_ON);
+                        me->SetVisible(true);
                         me->SetStandState(UNIT_STAND_STATE_SLEEP);
                         ResetTimer = 10000;
                         bJustReset = false;
@@ -272,7 +272,7 @@ public:
                         }
                         else
                         {
-                            sLog.outError("TSCR: Didn't find Shathrowar. Kalecgos event reseted.");
+                            sLog->outError("TSCR: Didn't find Shathrowar. Kalecgos event reseted.");
                             EnterEvadeMode();
                             return;
                         }
@@ -367,7 +367,7 @@ public:
         {
             if (type != POINT_MOTION_TYPE)
                 return;
-            me->SetVisibility(VISIBILITY_OFF);
+            me->SetVisible(false);
             if (isFriendly)
             {
                 me->setDeathState(JUST_DIED);

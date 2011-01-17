@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -389,7 +389,7 @@ void hyjalAI::Reset()
     me->SetFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP);
 
     //Initialize spells
-    memset(Spell, 0, sizeof(Spell));
+    memset(Spells, 0, sizeof(Spell) * HYJAL_AI_MAX_SPELLS);
 
     //Reset Instance Data for trash count
     if (pInstance)
@@ -402,7 +402,7 @@ void hyjalAI::Reset()
             pInstance->DoUpdateWorldState(WORLD_STATE_ENEMYCOUNT, 0);
             pInstance->SetData(DATA_RESET_TRASH_COUNT, 0);
         }
-    } else sLog.outError(ERROR_INST_DATA);
+    } else sLog->outError(ERROR_INST_DATA);
 
     //Visibility
     DoHide = true;
@@ -425,9 +425,9 @@ void hyjalAI::EnterEvadeMode()
 void hyjalAI::EnterCombat(Unit * /*who*/)
 {
     if (IsDummy)return;
-    for (uint8 i = 0; i < 3; ++i)
-        if (Spell[i].Cooldown)
-            SpellTimer[i] = Spell[i].Cooldown;
+    for (uint8 i = 0; i < HYJAL_AI_MAX_SPELLS; ++i)
+        if (Spells[i].Cooldown)
+            SpellTimer[i] = Spells[i].Cooldown;
 
     Talk(ATTACKED);
 }
@@ -533,7 +533,7 @@ void hyjalAI::SummonNextWave(const Wave wave[18], uint32 Count, float Base[4][3]
 
     if (!pInstance)
     {
-        sLog.outError(ERROR_INST_DATA);
+        sLog->outError(ERROR_INST_DATA);
         return;
     }
     InfernalCount = 0;//reset infernal count every new wave
@@ -563,7 +563,7 @@ void hyjalAI::SummonNextWave(const Wave wave[18], uint32 Count, float Base[4][3]
         else
         {
             NextWaveTimer = 15000;
-            sLog.outDebug("TSCR: HyjalAI: debug mode is enabled. Next Wave in 15 seconds");
+            sLog->outDebug("TSCR: HyjalAI: debug mode is enabled. Next Wave in 15 seconds");
         }
     }
     else
@@ -607,7 +607,7 @@ uint32 hyjalAI::GetInstanceData(uint32 Event)
 {
     if (pInstance)
         return pInstance->GetData(Event);
-    else sLog.outError(ERROR_INST_DATA);
+    else sLog->outError(ERROR_INST_DATA);
 
     return 0;
 }
@@ -756,19 +756,19 @@ void hyjalAI::UpdateAI(const uint32 diff)
             case JAINA:
                 if (pInstance && pInstance->GetData(DATA_ALLIANCE_RETREAT))
                 {
-                    me->SetVisibility(VISIBILITY_OFF);
+                    me->SetVisible(false);
                     HideNearPos(me->GetPositionX(), me->GetPositionY());
                     HideNearPos(5037.76f, -1889.71f);
                     for (uint8 i = 0; i < 92; ++i)//summon fires
                         me->SummonGameObject(FLAMEOBJECT,AllianceFirePos[i][0],AllianceFirePos[i][1],AllianceFirePos[i][2],AllianceFirePos[i][3],AllianceFirePos[i][4],AllianceFirePos[i][5],AllianceFirePos[i][6],AllianceFirePos[i][7],0);
 
                 }
-                else me->SetVisibility(VISIBILITY_ON);
+                else me->SetVisible(true);
                 break;
             case THRALL: //thrall
                 if (pInstance && pInstance->GetData(DATA_HORDE_RETREAT))
                 {
-                    me->SetVisibility(VISIBILITY_OFF);
+                    me->SetVisible(false);
                     HideNearPos(me->GetPositionX(), me->GetPositionY());
                     HideNearPos(5563, -2763.19f);
                     HideNearPos(5542.2f, -2629.36f);
@@ -776,7 +776,7 @@ void hyjalAI::UpdateAI(const uint32 diff)
                         me->SummonGameObject(FLAMEOBJECT,HordeFirePos[i][0],HordeFirePos[i][1],HordeFirePos[i][2],HordeFirePos[i][3],HordeFirePos[i][4],HordeFirePos[i][5],HordeFirePos[i][6],HordeFirePos[i][7],0);
 
                 }
-                else me->SetVisibility(VISIBILITY_ON);
+                else me->SetVisible(true);
                 break;
         }
     }
@@ -794,10 +794,10 @@ void hyjalAI::UpdateAI(const uint32 diff)
                 RespawnNearPos(5563, -2763.19f);
                 RespawnNearPos(5542.2f, -2629.36f);
             }
-            me->SetVisibility(VISIBILITY_ON);
+            me->SetVisible(true);
         }else{
             RespawnTimer -= diff;
-            me->SetVisibility(VISIBILITY_OFF);
+            me->SetVisible(false);
         }
         return;
     }
@@ -821,7 +821,7 @@ void hyjalAI::UpdateAI(const uint32 diff)
                     HideNearPos(5603.75f, -2853.12f);
                     break;
             }
-            me->SetVisibility(VISIBILITY_OFF);
+            me->SetVisible(false);
         } else RetreatTimer -= diff;
     }
 
@@ -881,9 +881,9 @@ void hyjalAI::UpdateAI(const uint32 diff)
     if (!UpdateVictim())
         return;
 
-    for (uint8 i = 0; i < 3; ++i)
+    for (uint8 i = 0; i < HYJAL_AI_MAX_SPELLS; ++i)
     {
-        if (Spell[i].SpellId)
+        if (Spells[i].SpellId)
         {
             if (SpellTimer[i] <= diff)
             {
@@ -892,7 +892,7 @@ void hyjalAI::UpdateAI(const uint32 diff)
 
                 Unit *pTarget = NULL;
 
-                switch(Spell[i].TargetType)
+                switch(Spells[i].TargetType)
                 {
                     case TARGETTYPE_SELF: pTarget = me; break;
                     case TARGETTYPE_RANDOM: pTarget = SelectUnit(SELECT_TARGET_RANDOM, 0); break;
@@ -901,8 +901,8 @@ void hyjalAI::UpdateAI(const uint32 diff)
 
                 if (pTarget && pTarget->isAlive())
                 {
-                    DoCast(pTarget, Spell[i].SpellId);
-                    SpellTimer[i] = Spell[i].Cooldown;
+                    DoCast(pTarget, Spells[i].SpellId);
+                    SpellTimer[i] = Spells[i].Cooldown;
                 }
             } else SpellTimer[i] -= diff;
         }
@@ -914,7 +914,7 @@ void hyjalAI::JustDied(Unit* /*killer*/)
 {
     if (IsDummy)return;
     me->Respawn();
-    me->SetVisibility(VISIBILITY_OFF);
+    me->SetVisible(false);
     DoRespawn = true;
     RespawnTimer = 120000;
     Talk(DEATH);
@@ -954,7 +954,7 @@ void hyjalAI::HideNearPos(float x, float y)
     {
         for (std::list<Creature*>::const_iterator itr = creatures.begin(); itr != creatures.end(); ++itr)
         {
-            (*itr)->SetVisibility(VISIBILITY_OFF);
+            (*itr)->SetVisible(false);
             (*itr)->setFaction(35);//make them friendly so mobs won't attack them
         }
     }

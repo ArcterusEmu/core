@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -112,7 +112,7 @@ public:
                 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_BRACK2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 9);
 
             //Spinebreaker Post
-            if (pPlayer->GetQuestStatus(10242) == QUEST_STATUS_COMPLETE && !pPlayer->GetQuestRewardStatus(10242))
+            if (pPlayer->GetQuestStatus(10242) == QUEST_STATUS_COMPLETE)
                 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_BRACK3, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 10);
             break;
         case 23413: // Blade's Edge Mountains - Skyguard Handler Irena
@@ -132,7 +132,7 @@ public:
             break;
         case 20162: // Netherstorm - Veronia
             //Behind Enemy Lines
-            if (pPlayer->GetQuestStatus(10652) && !pPlayer->GetQuestRewardStatus(10652))
+            if (pPlayer->GetQuestStatus(10652) != QUEST_STATUS_REWARDED)
                 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_VERONIA, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 15);
             break;
         case 23415: // Terokkar Forest - Skyguard Handler Deesak
@@ -170,6 +170,7 @@ public:
         case 26602:
             if (pCreature->isTaxi())
                 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TAXI, GOSSIP_THRICESTAR1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 26);
+
             if (pPlayer->GetQuestStatus(11692) == QUEST_STATUS_COMPLETE)
                 pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_THRICESTAR2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 27);
             break;

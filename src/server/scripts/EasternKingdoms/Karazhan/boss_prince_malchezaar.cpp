@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -274,7 +274,7 @@ public:
                 if (Unit *pInfernal = Unit::GetUnit(*me, *itr))
                     if (pInfernal->isAlive())
                     {
-                        pInfernal->SetVisibility(VISIBILITY_OFF);
+                        pInfernal->SetVisible(false);
                         pInfernal->setDeathState(JUST_DIED);
                     }
 
@@ -393,7 +393,7 @@ public:
                 EnfeebleResetTimer = 0;
             } else EnfeebleResetTimer -= diff;
 
-            if (me->hasUnitState(UNIT_STAT_STUNNED))      // While shifting to phase 2 malchezaar stuns himself
+            if (me->HasUnitState(UNIT_STAT_STUNNED))      // While shifting to phase 2 malchezaar stuns himself
                 return;
 
             if (me->GetUInt64Value(UNIT_FIELD_TARGET) != me->getVictim()->GetGUID())

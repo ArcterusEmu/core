@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -142,7 +142,6 @@ enum WorldBoolConfigs
     CONFIG_OFFHAND_CHECK_AT_SPELL_UNLEARN,
     CONFIG_VMAP_INDOOR_CHECK,
     CONFIG_PET_LOS,
-    CONFIG_BG_START_MUSIC,
     CONFIG_START_ALL_SPELLS,
     CONFIG_START_ALL_EXPLORED,
     CONFIG_START_ALL_REP,
@@ -161,14 +160,9 @@ enum WorldBoolConfigs
     CONFIG_CHATLOG_BGROUND,
     CONFIG_DUNGEON_FINDER_ENABLE,
     CONFIG_AUTOBROADCAST,
-    CONFIG_OUTDOORPVP_WINTERGRASP_ENABLED,
-    CONFIG_OUTDOORPVP_WINTERGRASP_CUSTOM_HONOR,
-    CONFIG_CONFIG_OUTDOORPVP_WINTERGRASP_ANTIFARM_ENABLE,
-	CONFIG_ANTICHEAT_ENABLE,
-    CONFIG_GMISLAND_PLAYERS_ACCESS,
-    CONFIG_GMISLAND_BAN_ENABLE,
-	CONFIG_PLAYERS_ACCESS_UNUSED_AREA,
-    CONFIG_UNUSED_AREA_BAN_ENABLE,
+    CONFIG_ALLOW_TICKETS,
+    CONFIG_DBC_ENFORCE_ITEM_ATTRIBUTES,
+    CONFIG_PRESERVE_CUSTOM_CHANNELS,
     BOOL_CONFIG_VALUE_COUNT
 };
 
@@ -185,7 +179,6 @@ enum WorldFloatConfigs
     CONFIG_CREATURE_FAMILY_ASSISTANCE_RADIUS,
     CONFIG_THREAT_RADIUS,
     CONFIG_CHANCE_OF_GM_SURVEY,
-	CONFIG_ANTICHEAT_MAX_DISTANCE_DIFF_ALLOWED,
     FLOAT_CONFIG_VALUE_COUNT
 };
 
@@ -198,7 +191,6 @@ enum WorldIntConfigs
     CONFIG_INTERVAL_CHANGEWEATHER,
     CONFIG_INTERVAL_DISCONNECT_TOLERANCE,
     CONFIG_PORT_WORLD,
-    CONFIG_SOCKET_SELECTTIME,
     CONFIG_SOCKET_TIMEOUTTIME,
     CONFIG_SESSION_ADD_DELAY,
     CONFIG_GAME_TYPE,
@@ -315,21 +307,8 @@ enum WorldIntConfigs
     CONFIG_AUTOBROADCAST_INTERVAL,
     CONFIG_MAX_RESULTS_LOOKUP_COMMANDS,
     CONFIG_DB_PING_INTERVAL,
-    CONFIG_ANTICHEAT_MAX_DIFF_TIME,
- 	CONFIG_ANTICHEAT_MIN_DIFF_TIME,
-    CONFIG_ANTICHEAT_REPORTS_FOR_GM_WARNING,
-    CONFIG_OUTDOORPVP_WINTERGRASP_START_TIME,
-    CONFIG_OUTDOORPVP_WINTERGRASP_BATTLE_TIME,
-    CONFIG_OUTDOORPVP_WINTERGRASP_INTERVAL,
-    CONFIG_OUTDOORPVP_WINTERGRASP_WIN_BATTLE,
-    CONFIG_OUTDOORPVP_WINTERGRASP_LOSE_BATTLE,
-    CONFIG_OUTDOORPVP_WINTERGRASP_DAMAGED_TOWER,
-    CONFIG_OUTDOORPVP_WINTERGRASP_DESTROYED_TOWER,
-    CONFIG_OUTDOORPVP_WINTERGRASP_DAMAGED_BUILDING,
-    CONFIG_OUTDOORPVP_WINTERGRASP_INTACT_BUILDING,
-    CONFIG_OUTDOORPVP_WINTERGRASP_SAVESTATE_PERIOD,
-    CONFIG_CONFIG_OUTDOORPVP_WINTERGRASP_ANTIFARM_ATK,
-    CONFIG_CONFIG_OUTDOORPVP_WINTERGRASP_ANTIFARM_DEF,
+    CONFIG_PRESERVE_CUSTOM_CHANNEL_DURATION,
+    CONFIG_PERSISTENT_CHARACTER_CLEAN_FLAGS,
     INT_CONFIG_VALUE_COUNT
 };
 
@@ -355,12 +334,9 @@ enum Rates
     RATE_DROP_ITEM_REFERENCED,
     RATE_DROP_ITEM_REFERENCED_AMOUNT,
     RATE_DROP_MONEY,
-	RATE_XP_KILL,
-    RATE_XP_KILL_PREMIUM,
+    RATE_XP_KILL,
     RATE_XP_QUEST,
-    RATE_XP_QUEST_PREMIUM,
     RATE_XP_EXPLORE,
-    RATE_XP_EXPLORE_PREMIUM,
     RATE_REPAIRCOST,
     RATE_REPUTATION_GAIN,
     RATE_REPUTATION_LOWLEVEL_KILL,
@@ -537,6 +513,8 @@ struct CliCommandHolder
     ~CliCommandHolder() { delete[] m_command; }
 };
 
+typedef UNORDERED_MAP<uint32, WorldSession*> SessionMap;
+
 /// The World
 class World
 {
@@ -547,12 +525,12 @@ class World
         ~World();
 
         WorldSession* FindSession(uint32 id) const;
-        void SendWintergraspState();
         void AddSession(WorldSession *s);
         void SendAutoBroadcast();
         bool RemoveSession(uint32 id);
         /// Get the number of current active sessions
         void UpdateMaxSessionCounters();
+        const SessionMap& GetAllSessions() const { return m_sessions; }
         uint32 GetActiveAndQueuedSessionCount() const { return m_sessions.size(); }
         uint32 GetActiveSessionCount() const { return m_sessions.size() - m_QueuedPlayer.size(); }
         uint32 GetQueuedSessionCount() const { return m_QueuedPlayer.size(); }
@@ -593,7 +571,6 @@ class World
         bool RemoveQueuedPlayer(WorldSession* session);
         int32 GetQueuePos(WorldSession*);
         bool HasRecentlyDisconnected(WorldSession*);
-        uint32 GetQueueSize() const { return m_QueuedPlayer.size(); }
 
         /// \todo Actions on m_allowMovement still to be implemented
         /// Is movement allowed?
@@ -730,27 +707,10 @@ class World
         static float GetMaxVisibleDistanceOnContinents()    { return m_MaxVisibleDistanceOnContinents; }
         static float GetMaxVisibleDistanceInInstances()     { return m_MaxVisibleDistanceInInstances;  }
         static float GetMaxVisibleDistanceInBGArenas()      { return m_MaxVisibleDistanceInBGArenas;   }
-        static float GetMaxVisibleDistanceForObject()       { return m_MaxVisibleDistanceForObject;    }
-
-        static float GetMaxVisibleDistanceInFlight()        { return m_MaxVisibleDistanceInFlight;     }
-        static float GetVisibleUnitGreyDistance()           { return m_VisibleUnitGreyDistance;        }
-        static float GetVisibleObjectGreyDistance()         { return m_VisibleObjectGreyDistance;      }
 
         static int32 GetVisibilityNotifyPeriodOnContinents(){ return m_visibility_notify_periodOnContinents; }
         static int32 GetVisibilityNotifyPeriodInInstances() { return m_visibility_notify_periodInInstances;  }
         static int32 GetVisibilityNotifyPeriodInBGArenas()  { return m_visibility_notify_periodInBGArenas;   }
-
-        void SetWintergrapsTimer(uint32 timer, uint32 state)
-        {
-            m_WintergrapsTimer = timer;
-            m_WintergrapsState = state;
-        }
-
-        uint32 GetWintergrapsTimer() { return m_WintergrapsTimer; }
-        uint32 GetWintergrapsState() { return m_WintergrapsState; }
-
-        uint32 m_WintergrapsTimer;
-        uint32 m_WintergrapsState;
 
         void ProcessCliCommands();
         void QueueCliCommand(CliCommandHolder* commandHolder) { cliCmdQueue.add(commandHolder); }
@@ -763,8 +723,8 @@ class World
 
         //used World DB version
         void LoadDBVersion();
-        char const* GetDBVersion() { return m_DBVersion.c_str(); }
-        char const* GetCreatureEventAIVersion() { return m_CreatureEventAIVersion.c_str(); }
+        char const* GetDBVersion() const { return m_DBVersion.c_str(); }
+        char const* GetCreatureEventAIVersion() const { return m_CreatureEventAIVersion.c_str(); }
 
         void RecordTimeDiff(const char * text, ...);
 
@@ -774,9 +734,12 @@ class World
 
         void ProcessStartEvent();
         void ProcessStopEvent();
-        bool GetEventKill() { return isEventKillStart; }
+        bool GetEventKill() const { return isEventKillStart; }
 
         bool isEventKillStart;
+
+        uint32 GetCleaningFlags() { return m_CleaningFlags; }
+        void   SetCleaningFlags(uint32 flags) { m_CleaningFlags = flags; }
     protected:
         void _UpdateGameTime();
         // callback for UpdateRealmCharacters
@@ -794,6 +757,8 @@ class World
         uint32 m_ShutdownTimer;
         uint32 m_ShutdownMask;
 
+        uint32 m_CleaningFlags;
+
         bool m_isClosed;
 
         //atomic op counter for active scripts amount
@@ -808,7 +773,7 @@ class World
         uint32 m_updateTimeCount;
         uint32 m_currentTime;
 
-        typedef UNORDERED_MAP<uint32, WorldSession*> SessionMap;
+        //typedef UNORDERED_MAP<uint32, WorldSession*> SessionMap;
         SessionMap m_sessions;
         typedef UNORDERED_MAP<uint32, time_t> DisconnectMap;
         DisconnectMap m_disconnects;
@@ -838,11 +803,6 @@ class World
         static float m_MaxVisibleDistanceOnContinents;
         static float m_MaxVisibleDistanceInInstances;
         static float m_MaxVisibleDistanceInBGArenas;
-        static float m_MaxVisibleDistanceForObject;
-
-        static float m_MaxVisibleDistanceInFlight;
-        static float m_VisibleUnitGreyDistance;
-        static float m_VisibleObjectGreyDistance;
 
         static int32 m_visibility_notify_periodOnContinents;
         static int32 m_visibility_notify_periodInInstances;
@@ -876,6 +836,6 @@ class World
 
 extern uint32 realmID;
 
-#define sWorld (*ACE_Singleton<World, ACE_Null_Mutex>::instance())
+#define sWorld ACE_Singleton<World, ACE_Null_Mutex>::instance()
 #endif
 /// @}

@@ -1,20 +1,20 @@
-/* Copyright (C) 2008 - 2010 TrinityCore <http://www.trinitycore.org>
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+/*
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation; either version 2 of the License, or (at your
+ * option) any later version.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ScriptPCH.h"
 #include "ScriptLoader.h"
 
 
@@ -23,9 +23,7 @@ void AddSC_example_creature();
 void AddSC_example_escort();
 void AddSC_example_gossip_codebox();
 void AddSC_example_misc();
-
-//TeleNPC2
-void AddSC_npc_teleport();
+void AddSC_example_commandscript();
 
 // spells
 void AddSC_deathknight_spell_scripts();
@@ -43,6 +41,26 @@ void AddSC_quest_spell_scripts();
 void AddSC_item_spell_scripts();
 void AddSC_example_spell_scripts();
 
+void AddSC_SmartSCripts();
+
+//Commands
+void AddSC_account_commandscript();
+void AddSC_achievement_commandscript();
+void AddSC_debug_commandscript();
+void AddSC_event_commandscript();
+void AddSC_gm_commandscript();
+void AddSC_go_commandscript();
+void AddSC_gobject_commandscript();
+void AddSC_honor_commandscript();
+void AddSC_learn_commandscript();
+void AddSC_modify_commandscript();
+void AddSC_npc_commandscript();
+void AddSC_quest_commandscript();
+void AddSC_reload_commandscript();
+void AddSC_tele_commandscript();
+void AddSC_titles_commandscript();
+void AddSC_wp_commandscript();
+
 #ifdef SCRIPTS
 //world
 void AddSC_areatrigger_scripts();
@@ -58,9 +76,6 @@ void AddSC_npc_innkeeper();
 void AddSC_npcs_special();
 void AddSC_npc_taxi();
 void AddSC_achievement_scripts();
-
-// isle of conquest
-void AddSC_isle_of_conquest();
 
 //eastern kingdoms
 void AddSC_alterac_valley();                 //Alterac Valley
@@ -396,20 +411,14 @@ void AddSC_boss_krystallus();
 void AddSC_boss_sjonnir();
 void AddSC_instance_halls_of_stone();
 void AddSC_halls_of_stone();
-void AddSC_boss_Algalon();		//Ulduar Ulduar
-void AddSC_boss_assembly_of_iron();
-void AddSC_boss_auriaya();
+void AddSC_boss_auriaya();               //Ulduar Ulduar
 void AddSC_boss_flame_leviathan();
-void AddSC_boss_freya();
-void AddSC_boss_general_vezax();
-void AddSC_boss_hodir();
 void AddSC_boss_ignis();
-void AddSC_boss_kologarn();
-void AddSC_boss_mimiron();
 void AddSC_boss_razorscale();
-void AddSC_boss_thorim();
 void AddSC_boss_xt002();
-void AddSC_boss_yogg_saron();
+void AddSC_boss_kologarn();
+void AddSC_boss_assembly_of_iron();
+void AddSC_boss_general_vezax();
 void AddSC_ulduar_teleporter();
 void AddSC_instance_ulduar();
 void AddSC_boss_keleseth();              //Utgarde Keep
@@ -454,28 +463,16 @@ void AddSC_instance_halls_of_reflection();   // Halls of Reflection
 void AddSC_halls_of_reflection();
 void AddSC_boss_falric();
 void AddSC_boss_marwyn();
-
-
 void AddSC_boss_lord_marrowgar();       // Icecrown Citadel
 void AddSC_boss_lady_deathwhisper();
-void AddSC_boss_saurfang();
+void AddSC_boss_deathbringer_saurfang();
 void AddSC_boss_festergut();
 void AddSC_boss_rotface();
 void AddSC_boss_professor_putricide();
-void AddSC_boss_rat_des_blutes();
+void AddSC_boss_blood_prince_council();
+void AddSC_boss_blood_queen_lana_thel();
 void AddSC_icecrown_citadel_teleport();
 void AddSC_instance_icecrown_citadel();
-void AddSC_boss_valithria();
-void AddSC_boss_lichking();
-void AddSC_boss_sindragosa();
-void AddSC_boss_blood_queen_lana_thel();
-
-
-void AddSC_boss_baltharus();    //RubySanctum
-void AddSC_boss_halion();
-void AddSC_boss_ragefire();
-void AddSC_boss_zarithrian();
-void AddSC_instance_ruby_sanctum();
 
 void AddSC_dalaran();
 void AddSC_borean_tundra();
@@ -487,6 +484,7 @@ void AddSC_sholazar_basin();
 void AddSC_storm_peaks();
 void AddSC_zuldrak();
 void AddSC_crystalsong_forest();
+void AddSC_isle_of_conquest();
 
 //outland
 void AddSC_boss_exarch_maladaar();           //Auchindoun Auchenai Crypts
@@ -569,7 +567,6 @@ void AddSC_shadowmoon_valley();
 void AddSC_shattrath_city();
 void AddSC_terokkar_forest();
 void AddSC_zangarmarsh();
-void AddSC_wintergrasp();
 
 // battlegrounds
 
@@ -580,7 +577,6 @@ void AddSC_outdoorpvp_na();
 void AddSC_outdoorpvp_si();
 void AddSC_outdoorpvp_tf();
 void AddSC_outdoorpvp_zm();
-void AddSC_outdoorpvp_wg();
 
 // player
 void AddSC_chat_log();
@@ -591,6 +587,8 @@ void AddScripts()
 {
     AddExampleScripts();
     AddSpellScripts();
+    AddSC_SmartSCripts();
+    AddCommandScripts();
 #ifdef SCRIPTS
     AddWorldScripts();
     AddEasternKingdomsScripts();
@@ -609,6 +607,7 @@ void AddExampleScripts()
     AddSC_example_escort();
     AddSC_example_gossip_codebox();
     AddSC_example_misc();
+    AddSC_example_commandscript();
 }
 
 void AddSpellScripts()
@@ -627,6 +626,26 @@ void AddSpellScripts()
     AddSC_quest_spell_scripts();
     AddSC_item_spell_scripts();
     AddSC_example_spell_scripts();
+}
+
+void AddCommandScripts()
+{
+    AddSC_account_commandscript();
+    AddSC_achievement_commandscript();
+    AddSC_debug_commandscript();
+    AddSC_event_commandscript();
+    AddSC_gm_commandscript();
+    AddSC_go_commandscript();
+    AddSC_gobject_commandscript();
+    AddSC_honor_commandscript();
+    AddSC_learn_commandscript();
+    AddSC_modify_commandscript();
+    AddSC_npc_commandscript();
+    AddSC_quest_commandscript();
+    AddSC_reload_commandscript();
+    AddSC_tele_commandscript();
+    AddSC_titles_commandscript();
+    AddSC_wp_commandscript();
 }
 
 void AddWorldScripts()
@@ -1014,7 +1033,6 @@ void AddOutlandScripts()
 void AddNorthrendScripts()
 {
 #ifdef SCRIPTS
-    AddSC_isle_of_conquest();				// isle of conquest
     AddSC_boss_slad_ran();               //Gundrak
     AddSC_boss_moorabi();
     AddSC_boss_drakkari_colossus();
@@ -1080,20 +1098,14 @@ void AddNorthrendScripts()
     AddSC_boss_sjonnir();
     AddSC_instance_halls_of_stone();
     AddSC_halls_of_stone();
-    AddSC_boss_Algalon();		//Ulduar Ulduar
-    AddSC_boss_assembly_of_iron();
-    AddSC_boss_auriaya();
+    AddSC_boss_auriaya();               //Ulduar Ulduar
     AddSC_boss_flame_leviathan();
-    AddSC_boss_freya();
-    AddSC_boss_general_vezax();
-    AddSC_boss_hodir();
     AddSC_boss_ignis();
-    AddSC_boss_kologarn();
-    AddSC_boss_mimiron();
     AddSC_boss_razorscale();
-    AddSC_boss_thorim();
     AddSC_boss_xt002();
-    AddSC_boss_yogg_saron();
+    AddSC_boss_general_vezax();
+    AddSC_boss_assembly_of_iron();
+    AddSC_boss_kologarn();
     AddSC_ulduar_teleporter();
     AddSC_instance_ulduar();
     AddSC_boss_keleseth();              //Utgarde Keep
@@ -1138,25 +1150,16 @@ void AddNorthrendScripts()
     AddSC_halls_of_reflection();
     AddSC_boss_falric();
     AddSC_boss_marwyn();
-	AddSC_boss_lord_marrowgar();       // Icecrown Citadel
-	AddSC_boss_lady_deathwhisper();
-	AddSC_boss_saurfang();
-	AddSC_boss_festergut();
-	AddSC_boss_rotface();
-	AddSC_boss_professor_putricide();
-	AddSC_boss_rat_des_blutes();
-	AddSC_icecrown_citadel_teleport();
-	AddSC_instance_icecrown_citadel();
-	AddSC_boss_valithria();
-	AddSC_boss_lichking();
-	AddSC_boss_sindragosa();
-	AddSC_boss_blood_queen_lana_thel();
-
-	AddSC_boss_baltharus();     //RubySanctum
-    AddSC_boss_halion();
-    AddSC_boss_ragefire();
-    AddSC_boss_zarithrian();
-    AddSC_instance_ruby_sanctum();
+    AddSC_boss_lord_marrowgar();        // Icecrown Citadel
+    AddSC_boss_lady_deathwhisper();
+    AddSC_boss_deathbringer_saurfang();
+    AddSC_boss_festergut();
+    AddSC_boss_rotface();
+    AddSC_boss_professor_putricide();
+    AddSC_boss_blood_prince_council();
+    AddSC_boss_blood_queen_lana_thel();
+    AddSC_icecrown_citadel_teleport();
+    AddSC_instance_icecrown_citadel();
 
     AddSC_dalaran();
     AddSC_borean_tundra();
@@ -1168,7 +1171,7 @@ void AddNorthrendScripts()
     AddSC_storm_peaks();
     AddSC_zuldrak();
     AddSC_crystalsong_forest();
-    AddSC_wintergrasp();
+    AddSC_isle_of_conquest();
 #endif
 }
 
@@ -1181,7 +1184,6 @@ void AddOutdoorPvPScripts()
     AddSC_outdoorpvp_si();
     AddSC_outdoorpvp_tf();
     AddSC_outdoorpvp_zm();
-    AddSC_outdoorpvp_wg();
 #endif
 }
 
@@ -1200,7 +1202,6 @@ void AddCustomScripts()
 {
 #ifdef SCRIPTS
     /* This is where custom scripts should be added. */
-    //TeleNPC2
-    AddSC_npc_teleport();
+
 #endif
 }

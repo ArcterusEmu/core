@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -185,3 +185,18 @@ void HostileRefManager::setOnlineOfflineState(Unit *pCreature, bool bIsOnline)
 
 //=================================================
 
+void HostileRefManager::UpdateVisibility()
+{
+    HostileReference* ref = getFirst();
+    while (ref)
+    {
+        HostileReference* nextRef = ref->next();
+        if (!ref->getSource()->getOwner()->canSeeOrDetect(getOwner()))
+        {
+            nextRef = ref->next();
+            ref->removeReference();
+            delete ref;
+        }
+        ref = nextRef;
+    }
+}

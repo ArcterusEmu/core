@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -155,7 +155,7 @@ public:
         {
             if (!Intro || IsIntro)
                 return;
-            sLog.outError("Start Intro");
+            sLog->outError("Start Intro");
             Creature *Madrigosa = Unit::GetCreature(*me, pInstance ? pInstance->GetData64(DATA_MADRIGOSA) : 0);
             if (Madrigosa)
             {
@@ -170,7 +170,7 @@ public:
             }else
             {
                 //Madrigosa not found, end intro
-                sLog.outError("Madrigosa was not found");
+                sLog->outError("Madrigosa was not found");
                 EndIntro();
             }
         }
@@ -180,7 +180,7 @@ public:
             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
             Intro = false;
             IsIntro = false;
-            sLog.outError("End Intro");
+            sLog->outError("End Intro");
         }
 
         void AttackStart(Unit* pWho)

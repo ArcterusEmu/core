@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -66,7 +66,7 @@ public:
             if (!me->HasFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE))
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
-            me->clearUnitState(UNIT_STAT_STUNNED | UNIT_STAT_ROOT);
+            me->ClearUnitState(UNIT_STAT_STUNNED | UNIT_STAT_ROOT);
             me->SetReactState(REACT_PASSIVE);
             MightyBlowTimer = 10*IN_MILLISECONDS;
             bHealth = false;
@@ -86,14 +86,14 @@ public:
 
             if (bRestore)
             {
-                pWho->clearUnitState(UNIT_STAT_STUNNED | UNIT_STAT_ROOT);
+                pWho->ClearUnitState(UNIT_STAT_STUNNED | UNIT_STAT_ROOT);
                 pWho->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                 if (pWho == me)
                     me->RemoveAura(SPELL_FREEZE_ANIM);
             }else
             {
                 pWho->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
-                pWho->addUnitState(UNIT_STAT_STUNNED | UNIT_STAT_ROOT);
+                pWho->AddUnitState(UNIT_STAT_STUNNED | UNIT_STAT_ROOT);
                 if (pWho == me)
                     DoCast(me,SPELL_FREEZE_ANIM);
             }
@@ -127,7 +127,7 @@ public:
                 MightyBlowTimer = 10*IN_MILLISECONDS;
             } else MightyBlowTimer -= diff;
 
-            if (!me->hasUnitState(UNIT_STAT_STUNNED))
+            if (!me->HasUnitState(UNIT_STAT_STUNNED))
                 DoMeleeAttackIfReady();
         }
 

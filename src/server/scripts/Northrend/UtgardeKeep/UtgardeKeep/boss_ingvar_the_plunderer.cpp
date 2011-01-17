@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -206,7 +206,7 @@ public:
 
             if (uiCleaveTimer <= diff)
             {
-                if (!me->hasUnitState(UNIT_STAT_CASTING))
+                if (!me->HasUnitState(UNIT_STAT_CASTING))
                 {
                     if (bIsUndead)
                         DoCast(me->getVictim(), SPELL_WOE_STRIKE);
@@ -218,7 +218,7 @@ public:
 
             if (uiSmashTimer <= diff)
             {
-                if (!me->hasUnitState(UNIT_STAT_CASTING))
+                if (!me->HasUnitState(UNIT_STAT_CASTING))
                 {
                     if (bIsUndead)
                         DoCast(me->getVictim(), SPELL_DARK_SMASH);
@@ -239,7 +239,7 @@ public:
             {
                 if (uiEnrageTimer <= diff)
                 {
-                    if (!me->hasUnitState(UNIT_STAT_CASTING))
+                    if (!me->HasUnitState(UNIT_STAT_CASTING))
                     {
                         // Spawn target for Axe
                         Unit *pTarget = SelectUnit(SELECT_TARGET_TOPAGGRO, 1);
@@ -256,7 +256,7 @@ public:
 
             if (uiRoarTimer <= diff)
             {
-                if (!me->hasUnitState(UNIT_STAT_CASTING))
+                if (!me->HasUnitState(UNIT_STAT_CASTING))
                 {
                     if (bIsUndead)
                         DoCast(me, SPELL_DREADFUL_ROAR);
@@ -344,7 +344,7 @@ public:
                     uiResurectPhase = 1;
                     break;
                 case 2:
-                    me->SetVisibility(VISIBILITY_OFF);
+                    me->SetVisible(false);
                     me->DealDamage(me,me->GetHealth());
                     me->RemoveCorpse();
                     break;

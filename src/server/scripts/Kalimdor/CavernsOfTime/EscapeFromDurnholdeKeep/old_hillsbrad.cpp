@@ -1,5 +1,5 @@
  /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -80,7 +80,7 @@ public:
         if (pInstance && pInstance->GetData(TYPE_BARREL_DIVERSION) != DONE && !pPlayer->HasItemCount(ITEM_ENTRY_BOMBS,1))
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_HELLO_EROZION1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
 
-        if (!pPlayer->GetQuestRewardStatus(QUEST_ENTRY_RETURN) && pPlayer->GetQuestStatus(QUEST_ENTRY_RETURN) == QUEST_STATUS_COMPLETE)
+        if (pPlayer->GetQuestStatus(QUEST_ENTRY_RETURN) == QUEST_STATUS_COMPLETE)
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_HELLO_EROZION2, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
 
         pPlayer->SEND_GOSSIP_MENU(9778, pCreature->GetGUID());
@@ -452,7 +452,7 @@ public:
                             for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
                             {
                                 if (Player* pPlayer = itr->getSource())
-                                    pPlayer->KilledMonsterCredit(20156,me->GetGUID());
+                                    pPlayer->KilledMonsterCredit(20156, 0);
                             }
                         }
 
@@ -462,7 +462,7 @@ public:
                     break;
                 case 108:
                     //last waypoint, just set Thrall invisible, respawn is turned off
-                    me->SetVisibility(VISIBILITY_OFF);
+                    me->SetVisible(false);
                     break;
             }
         }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -51,22 +51,22 @@ class instance_ramparts : public InstanceMapScript
                 m_uiChestHGUID = 0;
             }
 
-            void OnGameObjectCreate(GameObject* pGo, bool /*add*/)
+            void OnGameObjectCreate(GameObject* go)
             {
-                switch(pGo->GetEntry())
+                switch(go->GetEntry())
                 {
                     case 185168:
-                        m_uiChestNGUID = pGo->GetGUID();
+                        m_uiChestNGUID = go->GetGUID();
                         break;
                     case 185169:
-                        m_uiChestHGUID = pGo->GetGUID();
+                        m_uiChestHGUID = go->GetGUID();
                         break;
                 }
             }
 
             void SetData(uint32 uiType, uint32 uiData)
             {
-                sLog.outDebug("TSCR: Instance Ramparts: SetData received for type %u with data %u",uiType,uiData);
+                sLog->outDebug("TSCR: Instance Ramparts: SetData received for type %u with data %u",uiType,uiData);
 
                 switch(uiType)
                 {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -89,6 +89,7 @@ static CouncilYells CouncilEnrage[]=
 #define SPELL_EMPOWERED_SMITE      41471
 #define SPELL_CIRCLE_OF_HEALING    41455
 #define SPELL_REFLECTIVE_SHIELD    41475
+#define SPELL_REFLECTIVE_SHIELD_T  33619
 #define SPELL_DIVINE_WRATH         41472
 #define SPELL_HEAL_VISUAL          24171
 
@@ -155,7 +156,7 @@ public:
                 Council[1] = pInstance->GetData64(DATA_VERASDARKSHADOW);
                 Council[2] = pInstance->GetData64(DATA_LADYMALANDE);
                 Council[3] = pInstance->GetData64(DATA_HIGHNETHERMANCERZEREVOR);
-            } else sLog.outError(ERROR_INST_DATA);
+            } else sLog->outError(ERROR_INST_DATA);
         }
 
         void EnterCombat(Unit* /*who*/) {}
@@ -401,7 +402,7 @@ struct boss_illidari_councilAI : public ScriptedAI
         }
         else
         {
-            sLog.outError(ERROR_INST_DATA);
+            sLog->outError(ERROR_INST_DATA);
             EnterEvadeMode();
             return;
         }
@@ -449,7 +450,7 @@ struct boss_illidari_councilAI : public ScriptedAI
     {
         if (!pInstance)
         {
-            sLog.outError(ERROR_INST_DATA);
+            sLog->outError(ERROR_INST_DATA);
             return;
         }
 
@@ -802,7 +803,7 @@ public:
             AppearEnvenomTimer = 150000;
 
             HasVanished = false;
-            me->SetVisibility(VISIBILITY_ON);
+            me->SetVisible(true);
             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
         }
 
@@ -842,7 +843,7 @@ public:
                         VanishTimer = 30000;
                         AppearEnvenomTimer= 28000;
                         HasVanished = true;
-                        me->SetVisibility(VISIBILITY_OFF);
+                        me->SetVisible(false);
                         me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                         DoResetThreat();
                                                                 // Chase a unit. Check before DoMeleeAttackIfReady prevents from attacking
@@ -872,20 +873,49 @@ public:
                 {
                     me->GetMotionMaster()->Clear();
                     me->GetMotionMaster()->MoveChase(me->getVictim());
-                    me->SetVisibility(VISIBILITY_ON);
+                    me->SetVisible(true);
                     AppearEnvenomTimer = 6000;
                 } else AppearEnvenomTimer -= diff;
             }
         }
     };
-
 };
 
+// SPELL_REFLECTIVE_SHIELD
+class spell_boss_lady_malande_shield : public SpellScriptLoader
+{
+public:
+    spell_boss_lady_malande_shield() : SpellScriptLoader("spell_boss_lady_malande_shield") { }
 
+    class spell_boss_lady_malande_shield_AuraScript : public AuraScript
+    {
+        PrepareAuraScript(spell_boss_lady_malande_shield_AuraScript);
 
+        bool Validate(SpellEntry const * /*spellEntry*/)
+        {
+            return sSpellStore.LookupEntry(SPELL_REFLECTIVE_SHIELD_T);
+        }
 
+        void Trigger(AuraEffect * aurEff, DamageInfo & dmgInfo, uint32 & absorbAmount)
+        {
+            Unit * target = GetTarget();
+            if (dmgInfo.GetAttacker() == target)
+                return;
+            int32 bp = absorbAmount / 2;
+            target->CastCustomSpell(dmgInfo.GetAttacker(), SPELL_REFLECTIVE_SHIELD_T, &bp, NULL, NULL, true, NULL, aurEff);
+        }
 
+        void Register()
+        {
+             AfterEffectAbsorb += AuraEffectAbsorbFn(spell_boss_lady_malande_shield_AuraScript::Trigger, EFFECT_0);
+        }
+    };
 
+    AuraScript *GetAuraScript() const
+    {
+        return new spell_boss_lady_malande_shield_AuraScript();
+    }
+};
 
 void AddSC_boss_illidari_council()
 {
@@ -895,4 +925,5 @@ void AddSC_boss_illidari_council()
     new boss_lady_malande();
     new boss_veras_darkshadow();
     new boss_high_nethermancer_zerevor();
+    new spell_boss_lady_malande_shield();
 }

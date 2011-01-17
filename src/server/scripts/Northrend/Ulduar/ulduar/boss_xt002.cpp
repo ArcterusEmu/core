@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -37,7 +37,7 @@ enum Spells
     SPELL_SEARING_LIGHT_25                      = 65121,
 
     SPELL_GRAVITY_BOMB_10                       = 63024,
-    SPELL_GRAVITY_BOMB_25                       = 63234,
+    SPELL_GRAVITY_BOMB_25                       = 64234,
     SPELL_GRAVITY_BOMB_AURA_10                  = 63025,
     SPELL_GRAVITY_BOMB_AURA_25                  = 63233,
 
@@ -176,7 +176,7 @@ public:
 
     struct boss_xt002_AI : public BossAI
     {
-        boss_xt002_AI(Creature *pCreature) : BossAI(pCreature, BOSS_XT002)
+        boss_xt002_AI(Creature *pCreature) : BossAI(pCreature, TYPE_XT002)
         {
         }
 
@@ -322,7 +322,7 @@ public:
                     gravity_bomb_active = true;
                 } else uiGravityBombTimer -= diff;
 
-                if (uiTympanicTantrumTimer <= 0)
+                if (uiTympanicTantrumTimer <= diff)
                 {
                     DoScriptText(SAY_TYMPANIC_TANTRUM, me);
                     DoCast(SPELL_TYMPANIC_TANTRUM);
@@ -547,7 +547,7 @@ public:
         void JustDied(Unit * /*victim*/)
         {
             if (m_pInstance)
-                if (Creature* pXT002 = me->GetCreature(*me, m_pInstance->GetData64(BOSS_XT002)))
+                if (Creature* pXT002 = me->GetCreature(*me, m_pInstance->GetData64(TYPE_XT002)))
                     if (pXT002->AI())
                         pXT002->AI()->DoAction(ACTION_ENTER_HARD_MODE);
 
@@ -557,7 +557,7 @@ public:
 
         void DamageTaken(Unit * /*pDone*/, uint32 &damage)
         {
-            if (Creature* pXT002 = me->GetCreature(*me, m_pInstance->GetData64(BOSS_XT002)))
+            if (Creature* pXT002 = me->GetCreature(*me, m_pInstance->GetData64(TYPE_XT002)))
                 if (pXT002->AI())
                 {
                     uint32 health = me->GetHealth();
@@ -600,13 +600,13 @@ public:
         {
             me->SetReactState(REACT_PASSIVE);
 
-            if (Creature* pXT002 = me->GetCreature(*me, m_pInstance->GetData64(BOSS_XT002)))
+            if (Creature* pXT002 = me->GetCreature(*me, m_pInstance->GetData64(TYPE_XT002)))
                 me->GetMotionMaster()->MoveChase(pXT002);
         }
 
         void UpdateAI(const uint32 /*diff*/)
         {
-            if (Creature* pXT002 = me->GetCreature(*me, m_pInstance->GetData64(BOSS_XT002)))
+            if (Creature* pXT002 = me->GetCreature(*me, m_pInstance->GetData64(TYPE_XT002)))
             {
                 if (me->GetDistance2d(pXT002) <= 0.5)
                 {
@@ -616,7 +616,7 @@ public:
                     pXT002->ModifyHealth(int32(pXT002->CountPctFromMaxHealth(1)));
 
                     // Despawns the scrapbot
-                    me->ForcedDespawn();
+                    me->DespawnOrUnsummon();
                 }
             }
         }
@@ -720,7 +720,7 @@ public:
         {
             me->SetReactState(REACT_PASSIVE);
 
-            if (Creature* pXT002 = me->GetCreature(*me, m_pInstance->GetData64(BOSS_XT002)))
+            if (Creature* pXT002 = me->GetCreature(*me, m_pInstance->GetData64(TYPE_XT002)))
                 me->GetMotionMaster()->MoveChase(pXT002);
         }
 
@@ -731,7 +731,7 @@ public:
 
         void UpdateAI(const uint32 /*diff*/)
         {
-            if (Creature* pXT002 = me->GetCreature(*me, m_pInstance->GetData64(BOSS_XT002)))
+            if (Creature* pXT002 = me->GetCreature(*me, m_pInstance->GetData64(TYPE_XT002)))
             {
                 if (me->GetDistance2d(pXT002) <= 0.5)
                 {
@@ -739,7 +739,7 @@ public:
                     DoCast(me, SPELL_BOOM);
 
                     //Despawns the boombot
-                    me->ForcedDespawn();
+                    me->DespawnOrUnsummon();
                 }
             }
         }

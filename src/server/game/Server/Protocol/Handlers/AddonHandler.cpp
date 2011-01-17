@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -98,7 +98,7 @@ bool AddonHandler::BuildAddonPacket(WorldPacket *Source, WorldPacket *Target)
 
             AddOnPacked >> enabled >> crc >> unk2;
 
-            sLog.outDebug("ADDON: Name: %s, Enabled: 0x%x, CRC: 0x%x, Unknown2: 0x%x", addonName.c_str(), enabled, crc, unk2);
+            sLog->outDebug("ADDON: Name: %s, Enabled: 0x%x, CRC: 0x%x, Unknown2: 0x%x", addonName.c_str(), enabled, crc, unk2);
 
             uint8 state = (enabled ? 2 : 1);
             *Target << uint8(state);
@@ -131,11 +131,11 @@ bool AddonHandler::BuildAddonPacket(WorldPacket *Source, WorldPacket *Target)
         *Target << uint32(count);
 
         if(AddOnPacked.rpos() != AddOnPacked.size())
-            sLog.outDebug("packet under read!");
+            sLog->outDebug("packet under read!");
     }
     else
     {
-        sLog.outError("Addon packet uncompress error :(");
+        sLog->outError("Addon packet uncompress error :(");
         return false;
     }
     return true;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -88,7 +88,7 @@ public:
                         int32 TickCount = aurEff->GetTotalTicks();
                         spellId = HUNTER_SPELL_CHIMERA_SHOT_SERPENT;
                         basePoint = caster->SpellDamageBonus(unitTarget, aura->GetSpellProto(), aurEff->GetAmount(), DOT, aura->GetStackAmount());
-                        basePoint = basePoint * TickCount * 40 / 100;
+                        ApplyPctN(basePoint, TickCount * 40);
                     }
                     // Viper Sting - Instantly restores mana to you equal to 60% of the total amount drained by your Viper Sting.
                     else if (familyFlag[1] & 0x00000080)
@@ -97,11 +97,11 @@ public:
                         spellId = HUNTER_SPELL_CHIMERA_SHOT_VIPER;
 
                         // Amount of one aura tick
-                        basePoint = aurEff->GetAmount() * unitTarget->GetMaxPower(POWER_MANA) / 100 ;
-                        int32 casterBasePoint = aurEff->GetAmount() * unitTarget->GetMaxPower(POWER_MANA) / 50 ;
+                        basePoint = int32(CalculatePctN(unitTarget->GetMaxPower(POWER_MANA), aurEff->GetAmount()));
+                        int32 casterBasePoint = aurEff->GetAmount() * unitTarget->GetMaxPower(POWER_MANA) / 50; // TODO: WTF? caster uses unitTarget?
                         if (basePoint > casterBasePoint)
                             basePoint = casterBasePoint;
-                        basePoint = basePoint * TickCount * 60 / 100;
+                        ApplyPctN(basePoint, TickCount * 60);
                     }
                     // Scorpid Sting - Attempts to Disarm the target for 10 sec. This effect cannot occur more than once per 1 minute.
                     else if (familyFlag[0] & 0x00008000)
@@ -275,7 +275,9 @@ public:
             {
                 SpellEntry const *spellInfo = sSpellStore.LookupEntry(itr->first);
 
-                if (spellInfo->SpellFamilyName == SPELLFAMILY_HUNTER &&
+                ///! If spellId in cooldown map isn't valid, the above will return a null pointer.
+                if (spellInfo &&
+                    spellInfo->SpellFamilyName == SPELLFAMILY_HUNTER &&
                     spellInfo->Id != HUNTER_SPELL_READINESS &&
                     spellInfo->Id != HUNTER_SPELL_BESTIAL_WRATH &&
                     GetSpellRecoveryTime(spellInfo) > 0)
@@ -355,35 +357,33 @@ public:
             return true;
         }
 
-        void HandlePeriodic(AuraEffect const * aurEff, AuraApplication const * aurApp)
+        void HandlePeriodic(AuraEffect const * aurEff)
         {
             PreventDefaultAction();
             if (aurEff->GetAmount() > 0)
                 return;
 
-            if (Unit* pTarget = aurApp->GetTarget())
+            uint32 spellId = SPELL_SNIPER_TRAINING_BUFF_R1 + GetId() - SPELL_SNIPER_TRAINING_R1;
+            Unit * pTarget = GetTarget();
+            if (!pTarget->HasAura(spellId))
             {
-                uint32 spellId = SPELL_SNIPER_TRAINING_BUFF_R1 + GetId() - SPELL_SNIPER_TRAINING_R1;
-                if (!pTarget->HasAura(spellId))
-                {
-                    const SpellEntry* triggeredSpellInfo = sSpellStore.LookupEntry(spellId);
-                    Unit* triggerCaster = GetTriggeredSpellCaster(triggeredSpellInfo, GetCaster(), pTarget);
-                    triggerCaster->CastSpell(pTarget, triggeredSpellInfo, true, 0, aurEff);
-                }
+                SpellEntry const * triggeredSpellInfo = sSpellStore.LookupEntry(spellId);
+                Unit* triggerCaster = GetTriggeredSpellCaster(triggeredSpellInfo, GetCaster(), pTarget);
+                triggerCaster->CastSpell(pTarget, triggeredSpellInfo, true, 0, aurEff);
             }
         }
 
         void HandleUpdatePeriodic(AuraEffect * aurEff)
         {
-            if (Unit* pTarget = GetUnitOwner())
-                if (Player* pPlayerTarget = pTarget->ToPlayer())
-                {
-                    int32 baseAmount = aurEff->GetBaseAmount();
-                    int32 amount = pPlayerTarget->isMoving() ?
-                        pTarget->CalculateSpellDamage(pTarget, GetSpellProto(), aurEff->GetEffIndex(), &baseAmount) :
-                        aurEff->GetAmount() - 1;
-                    aurEff->SetAmount(amount);
-                }
+            Unit * pTarget = GetUnitOwner();
+            if (Player* pPlayerTarget = pTarget->ToPlayer())
+            {
+                int32 baseAmount = aurEff->GetBaseAmount();
+                int32 amount = pPlayerTarget->isMoving() ?
+                pTarget->CalculateSpellDamage(pTarget, GetSpellProto(), aurEff->GetEffIndex(), &baseAmount) :
+                aurEff->GetAmount() - 1;
+                aurEff->SetAmount(amount);
+            }
         }
 
         void Register()
@@ -419,9 +419,10 @@ public:
         void HandleScript(SpellEffIndex /*effIndex*/)
         {
             Unit *caster = GetCaster();
-            if (caster->HasAura(HUNTER_PET_HEART_OF_THE_PHOENIX_DEBUFF))
+            Unit *owner = caster->GetOwner();
+            if (!owner || caster->HasAura(HUNTER_PET_HEART_OF_THE_PHOENIX_DEBUFF))
                 return;
-            caster->CastCustomSpell(HUNTER_PET_HEART_OF_THE_PHOENIX_TRIGGERED, SPELLVALUE_BASE_POINT0, 100, caster, true);
+            owner->CastCustomSpell(HUNTER_PET_HEART_OF_THE_PHOENIX_TRIGGERED, SPELLVALUE_BASE_POINT0, 100, caster, true);
             caster->CastSpell(caster, HUNTER_PET_HEART_OF_THE_PHOENIX_DEBUFF, true);
         }
 

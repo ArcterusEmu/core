@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -27,6 +27,7 @@
 #include "Creature.h"
 #include "World.h"
 #include "Util.h"
+#include "Group.h"
 
 int PetAI::Permissible(const Creature *creature)
 {
@@ -63,7 +64,7 @@ void PetAI::_stopAttack()
 {
     if (!me->isAlive())
     {
-        sLog.outStaticDebug("Creature stoped attacking cuz his dead [guid=%u]", me->GetGUIDLow());
+        sLog->outStaticDebug("Creature stoped attacking cuz his dead [guid=%u]", me->GetGUIDLow());
         me->GetMotionMaster()->Clear();
         me->GetMotionMaster()->MoveIdle();
         me->CombatStop();
@@ -95,7 +96,7 @@ void PetAI::UpdateAI(const uint32 diff)
     {
         if (_needToStop())
         {
-            sLog.outStaticDebug("Pet AI stopped attacking [guid=%u]", me->GetGUIDLow());
+            sLog->outStaticDebug("Pet AI stopped attacking [guid=%u]", me->GetGUIDLow());
             _stopAttack();
             return;
         }
@@ -114,14 +115,14 @@ void PetAI::UpdateAI(const uint32 diff)
         else
             HandleReturnMovement();
     }
-    else if (owner && !me->hasUnitState(UNIT_STAT_FOLLOW)) // no charm info and no victim
+    else if (owner && !me->HasUnitState(UNIT_STAT_FOLLOW)) // no charm info and no victim
         me->GetMotionMaster()->MoveFollow(owner,PET_FOLLOW_DIST, me->GetFollowAngle());
 
     if (!me->GetCharmInfo())
         return;
 
     // Autocast (casted only in combat or persistent spells in any state)
-    if (me->GetGlobalCooldown() == 0 && !me->hasUnitState(UNIT_STAT_CASTING))
+    if (me->GetGlobalCooldown() == 0 && !me->HasUnitState(UNIT_STAT_CASTING))
     {
         typedef std::vector<std::pair<Unit*, Spell*> > TargetSpellList;
         TargetSpellList targetSpellStore;
@@ -426,7 +427,7 @@ void PetAI::MovementInform(uint32 moveType, uint32 data)
                 me->GetCharmInfo()->SetIsReturning(false);
                 me->GetCharmInfo()->SetIsFollowing(true);
                 me->GetCharmInfo()->SetIsCommandAttack(false);
-                me->addUnitState(UNIT_STAT_FOLLOW);
+                me->AddUnitState(UNIT_STAT_FOLLOW);
             }
         }
         break;
@@ -469,7 +470,7 @@ bool PetAI::_CanAttack(Unit *target)
 
 bool PetAI::_CheckTargetCC(Unit *target)
 {
-    if (me->GetCharmerOrOwnerGUID() && target->HasNegativeAuraWithAttribute(SPELL_ATTR_BREAKABLE_BY_DAMAGE, me->GetCharmerOrOwnerGUID()))
+    if (me->GetCharmerOrOwnerGUID() && target->HasNegativeAuraWithAttribute(SPELL_ATTR0_BREAKABLE_BY_DAMAGE, me->GetCharmerOrOwnerGUID()))
         return true;
 
     return false;

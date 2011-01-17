@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -27,8 +27,6 @@ EndScriptData */
 
 enum eEnums
 {
-    EMOTE_GENERIC_FRENZY_KILL   = -1000001,
-
     SPELL_FLAMESTRIKE            = 18399,
     SPELL_BLAST_WAVE             = 16046,
     SPELL_FIRESHIELD             = 19626,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -70,7 +70,7 @@ public:
         {
         }
 
-        void KilledUnit()
+        void KilledUnit(Unit* /*victim*/)
         {
             // When a player, pet or totem gets killed, Lord Kazzak casts this spell to instantly regenerate 70,000 health.
             DoCast(me, SPELL_CAPTURESOUL);

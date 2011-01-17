@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -524,26 +524,6 @@ inline bool CreatureAI::UpdateVictimWithGaze()
     return me->getVictim();
 }
 
-inline bool CreatureAI::UpdateCombatState()
-{
-    if (!me->isInCombat())
-        return false;
-
-    if (!me->HasReactState(REACT_PASSIVE))
-    {
-        if (Unit *victim = me->SelectVictim())
-            AttackStart(victim);
-        return me->getVictim();
-    }
-    else if (me->getThreatManager().isThreatListEmpty())
-    {
-        EnterEvadeMode();
-        return false;
-    }
-
-    return true;
-}
-
 inline bool CreatureAI::UpdateVictim()
 {
     if (!me->isInCombat())
@@ -596,7 +576,7 @@ inline bool CreatureAI::_EnterEvadeMode()
 
 inline void UnitAI::DoCast(Unit* victim, uint32 spellId, bool triggered)
 {
-    if (!victim || (me->hasUnitState(UNIT_STAT_CASTING) && !triggered))
+    if (!victim || (me->HasUnitState(UNIT_STAT_CASTING) && !triggered))
         return;
 
     me->CastSpell(victim, spellId, triggered);
@@ -609,7 +589,7 @@ inline void UnitAI::DoCastVictim(uint32 spellId, bool triggered)
 
 inline void UnitAI::DoCastAOE(uint32 spellId, bool triggered)
 {
-    if (!triggered && me->hasUnitState(UNIT_STAT_CASTING))
+    if (!triggered && me->HasUnitState(UNIT_STAT_CASTING))
         return;
 
     me->CastSpell((Unit*)NULL, spellId, triggered);

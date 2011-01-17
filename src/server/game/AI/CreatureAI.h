@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -21,6 +21,7 @@
 
 #include "UnitAI.h"
 #include "Common.h"
+#include "CreatureTextMgr.h"
 
 class WorldObject;
 class Unit;
@@ -69,7 +70,6 @@ class CreatureAI : public UnitAI
 
         bool UpdateVictim();
         bool UpdateVictimWithGaze();
-        bool UpdateCombatState();
 
         void SetGazeOn(Unit *target);
 
@@ -78,6 +78,7 @@ class CreatureAI : public UnitAI
         Creature *DoSummonFlyer(uint32 uiEntry, WorldObject *obj, float fZ, float fRadius = 5.0f, uint32 uiDespawntime = 30000, TempSummonType uiType = TEMPSUMMON_CORPSE_TIMED_DESPAWN);
 
     public:
+        void Talk(uint8 id, uint64 WhisperGuid = 0);
         explicit CreatureAI(Creature *c) : UnitAI((Unit*)c), me(c), m_MoveInLineOfSight_locked(false) {}
 
         virtual ~CreatureAI() {}
@@ -86,6 +87,9 @@ class CreatureAI : public UnitAI
 
         // Called if IsVisible(Unit *who) is true at each *who move, reaction at visibility zone enter
         void MoveInLineOfSight_Safe(Unit *who);
+
+        // Called in Creature::Update when deathstate = DEAD. Inherited classes may maniuplate the ability to respawn based on scripted events.
+        virtual bool CanRespawn() { return true; }
 
         // Called for reaction at stopping attack at no attackers or targets
         virtual void EnterEvadeMode();
@@ -104,6 +108,7 @@ class CreatureAI : public UnitAI
         virtual void IsSummonedBy(Unit * /*summoner*/) {}
 
         virtual void SummonedCreatureDespawn(Creature* /*unit*/) {}
+        virtual void SummonedCreatureDies(Creature* /*unit*/, Unit* /*killer*/) {}
 
         // Called when hit by a spell
         virtual void SpellHit(Unit*, const SpellEntry*) {}

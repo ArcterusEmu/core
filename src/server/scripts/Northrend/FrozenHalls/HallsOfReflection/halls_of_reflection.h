@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -91,7 +91,7 @@ struct boss_horAI : ScriptedAI
     void Reset()
     {
         events.Reset();
-        me->SetVisibility(VISIBILITY_OFF);
+        me->SetVisible(false);
         me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE|UNIT_FLAG_NOT_SELECTABLE);
         me->SetReactState(REACT_PASSIVE);
     }
@@ -108,7 +108,7 @@ struct boss_horAI : ScriptedAI
         {
             case ACTION_ENTER_COMBAT:  // called by InstanceScript when boss shall enter in combat.
                 // Just in case. Should have been done by InstanceScript
-                me->SetVisibility(VISIBILITY_ON);
+                me->SetVisible(true);
 
                 // Reset flags
                 me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE|UNIT_FLAG_NOT_SELECTABLE);

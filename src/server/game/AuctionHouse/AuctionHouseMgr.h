@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -24,8 +24,6 @@
 #include "Common.h"
 #include "DatabaseEnv.h"
 #include "DBCStructure.h"
-
-#include "AuctionHouseBot/AuctionHouseBot.h"
 
 class Item;
 class Player;
@@ -63,6 +61,7 @@ struct AuctionEntry
     uint32 bidder;
     uint32 deposit;                                         //deposit can be calculated only when creating auction
     AuctionHouseEntry const* auctionHouseEntry;             // in AuctionHouse.dbc
+    uint32 factionTemplateId;
 
     // helpers
     uint32 GetHouseId() const { return auctionHouseEntry->houseId; }
@@ -72,6 +71,7 @@ struct AuctionEntry
     bool BuildAuctionInfo(WorldPacket & data) const;
     void DeleteFromDB(SQLTransaction& trans) const;
     void SaveToDB(SQLTransaction& trans) const;
+    bool LoadFromDB(Field* fields);
 };
 
 //this class is used as auctionhouse instance
@@ -149,7 +149,7 @@ class AuctionHouseMgr
         void SendAuctionOutbiddedMail(AuctionEntry * auction, uint32 newPrice, Player* newBidder, SQLTransaction& trans);
         void SendAuctionCancelledToBidderMail(AuctionEntry* auction, SQLTransaction& trans);
 
-        static uint32 GetAuctionDeposit(AuctionHouseEntry const* entry, uint32 time, Item *pItem);
+        static uint32 GetAuctionDeposit(AuctionHouseEntry const* entry, uint32 time, Item *pItem, uint32 count);
         static AuctionHouseEntry const* GetAuctionHouseEntry(uint32 factionTemplateId);
 
     public:
@@ -172,6 +172,6 @@ class AuctionHouseMgr
         ItemMap mAitems;
 };
 
-#define sAuctionMgr (*ACE_Singleton<AuctionHouseMgr, ACE_Null_Mutex>::instance())
+#define sAuctionMgr ACE_Singleton<AuctionHouseMgr, ACE_Null_Mutex>::instance()
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -185,7 +185,7 @@ public:
                         anchorGUID = anchor->GetGUID();
                     }
                     else
-                        sLog.outError("npc_unworthy_initiateAI: unable to find anchor!");
+                        sLog->outError("npc_unworthy_initiateAI: unable to find anchor!");
 
                     float dist = 99.0f;
                     GameObject *prison = NULL;
@@ -205,7 +205,7 @@ public:
                     if (prison)
                         prison->ResetDoorOrButton();
                     else
-                        sLog.outError("npc_unworthy_initiateAI: unable to find prison!");
+                        sLog->outError("npc_unworthy_initiateAI: unable to find prison!");
                 }
                 break;
             case PHASE_TO_EQUIP:
@@ -216,7 +216,7 @@ public:
                     else
                     {
                         me->GetMotionMaster()->MovePoint(1, anchorX, anchorY, me->GetPositionZ());
-                        //sLog.outDebug("npc_unworthy_initiateAI: move to %f %f %f", anchorX, anchorY, me->GetPositionZ());
+                        //sLog->outDebug("npc_unworthy_initiateAI: move to %f %f %f", anchorX, anchorY, me->GetPositionZ());
                         phase = PHASE_EQUIPING;
                         wait_timer = 0;
                     }
@@ -574,12 +574,12 @@ public:
                         Phase = 2;
                         break;
                     case 2:
-                        me->SetVisibility(VISIBILITY_OFF);
+                        me->SetVisible(false);
                         PhaseTimer = 2000;
                         Phase = 3;
                         break;
                     case 3:
-                        me->ForcedDespawn();
+                        me->DespawnOrUnsummon();
                         break;
                     default:
                         break;
@@ -1082,9 +1082,9 @@ public:
                     {
                         car->AI()->SetGUID(miner->GetGUID());
                         CAST_AI(npc_scarlet_miner::npc_scarlet_minerAI, miner->AI())->InitCartQuest(pPlayer);
-                    } else sLog.outError("TSCR: OnGossipHello vehicle entry is not correct.");
-                } else sLog.outError("TSCR: OnGossipHello player is not on the vehicle.");
-            } else sLog.outError("TSCR: OnGossipHello Scarlet Miner cant be found by script.");
+                    } else sLog->outError("TSCR: OnGossipHello vehicle entry is not correct.");
+                } else sLog->outError("TSCR: OnGossipHello player is not on the vehicle.");
+            } else sLog->outError("TSCR: OnGossipHello Scarlet Miner cant be found by script.");
         }
         return true;
     }

@@ -1,21 +1,19 @@
 /*
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
- * Copyright (C) 2008-2010 Trinity <http://www.trinitycore.org/>
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation; either version 2 of the License, or (at your
+ * option) any later version.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef __BATTLEGROUNDEY_H
@@ -104,11 +102,11 @@ enum EYBattlegroundObjectEntry
 enum EYBattlegroundPointsTrigger
 {
     TR_BLOOD_ELF_POINT        = 4476,
-    TR_FEL_REALVER_POINT      = 4514,
+    TR_FEL_REAVER_POINT      = 4514,
     TR_MAGE_TOWER_POINT       = 4516,
     TR_DRAENEI_RUINS_POINT    = 4518,
     TR_BLOOD_ELF_BUFF         = 4568,
-    TR_FEL_REALVER_BUFF       = 4569,
+    TR_FEL_REAVER_BUFF       = 4569,
     TR_MAGE_TOWER_BUFF        = 4570,
     TR_DRAENEI_RUINS_BUFF     = 4571
 };
@@ -117,7 +115,7 @@ enum EYBattlegroundGaveyards
 {
     EY_GRAVEYARD_MAIN_ALLIANCE     = 1103,
     EY_GRAVEYARD_MAIN_HORDE        = 1104,
-    EY_GRAVEYARD_FEL_REALVER       = 1105,
+    EY_GRAVEYARD_FEL_REAVER       = 1105,
     EY_GRAVEYARD_BLOOD_ELF         = 1106,
     EY_GRAVEYARD_DRAENEI_RUINS     = 1107,
     EY_GRAVEYARD_MAGE_TOWER        = 1108
@@ -125,7 +123,7 @@ enum EYBattlegroundGaveyards
 
 enum EYBattlegroundPoints
 {
-    FEL_REALVER     = 0,
+    FEL_REAVER     = 0,
     BLOOD_ELF       = 1,
     DRAENEI_RUINS   = 2,
     MAGE_TOWER      = 3,
@@ -136,14 +134,14 @@ enum EYBattlegroundPoints
 
 enum EYBattlegroundCreaturesTypes
 {
-    EY_SPIRIT_FEL_REALVER      = 0,
+    EY_SPIRIT_FEL_REAVER      = 0,
     EY_SPIRIT_BLOOD_ELF        = 1,
     EY_SPIRIT_DRAENEI_RUINS    = 2,
     EY_SPIRIT_MAGE_TOWER       = 3,
     EY_SPIRIT_MAIN_ALLIANCE    = 4,
     EY_SPIRIT_MAIN_HORDE       = 5,
 
-    EY_TRIGGER_FEL_REALVER      = 6,
+    EY_TRIGGER_FEL_REAVER      = 6,
     EY_TRIGGER_BLOOD_ELF        = 7,
     EY_TRIGGER_DRAENEI_RUINS    = 8,
     EY_TRIGGER_MAGE_TOWER       = 9,
@@ -155,9 +153,9 @@ enum EYBattlegroundObjectTypes
 {
     BG_EY_OBJECT_DOOR_A                         = 0,
     BG_EY_OBJECT_DOOR_H                         = 1,
-    BG_EY_OBJECT_A_BANNER_FEL_REALVER_CENTER    = 2,
-    BG_EY_OBJECT_A_BANNER_FEL_REALVER_LEFT      = 3,
-    BG_EY_OBJECT_A_BANNER_FEL_REALVER_RIGHT     = 4,
+    BG_EY_OBJECT_A_BANNER_FEL_REAVER_CENTER    = 2,
+    BG_EY_OBJECT_A_BANNER_FEL_REAVER_LEFT      = 3,
+    BG_EY_OBJECT_A_BANNER_FEL_REAVER_RIGHT     = 4,
     BG_EY_OBJECT_A_BANNER_BLOOD_ELF_CENTER      = 5,
     BG_EY_OBJECT_A_BANNER_BLOOD_ELF_LEFT        = 6,
     BG_EY_OBJECT_A_BANNER_BLOOD_ELF_RIGHT       = 7,
@@ -167,9 +165,9 @@ enum EYBattlegroundObjectTypes
     BG_EY_OBJECT_A_BANNER_MAGE_TOWER_CENTER     = 11,
     BG_EY_OBJECT_A_BANNER_MAGE_TOWER_LEFT       = 12,
     BG_EY_OBJECT_A_BANNER_MAGE_TOWER_RIGHT      = 13,
-    BG_EY_OBJECT_H_BANNER_FEL_REALVER_CENTER    = 14,
-    BG_EY_OBJECT_H_BANNER_FEL_REALVER_LEFT      = 15,
-    BG_EY_OBJECT_H_BANNER_FEL_REALVER_RIGHT     = 16,
+    BG_EY_OBJECT_H_BANNER_FEL_REAVER_CENTER    = 14,
+    BG_EY_OBJECT_H_BANNER_FEL_REAVER_LEFT      = 15,
+    BG_EY_OBJECT_H_BANNER_FEL_REAVER_RIGHT     = 16,
     BG_EY_OBJECT_H_BANNER_BLOOD_ELF_CENTER      = 17,
     BG_EY_OBJECT_H_BANNER_BLOOD_ELF_LEFT        = 18,
     BG_EY_OBJECT_H_BANNER_BLOOD_ELF_RIGHT       = 19,
@@ -179,9 +177,9 @@ enum EYBattlegroundObjectTypes
     BG_EY_OBJECT_H_BANNER_MAGE_TOWER_CENTER     = 23,
     BG_EY_OBJECT_H_BANNER_MAGE_TOWER_LEFT       = 24,
     BG_EY_OBJECT_H_BANNER_MAGE_TOWER_RIGHT      = 25,
-    BG_EY_OBJECT_N_BANNER_FEL_REALVER_CENTER    = 26,
-    BG_EY_OBJECT_N_BANNER_FEL_REALVER_LEFT      = 27,
-    BG_EY_OBJECT_N_BANNER_FEL_REALVER_RIGHT     = 28,
+    BG_EY_OBJECT_N_BANNER_FEL_REAVER_CENTER    = 26,
+    BG_EY_OBJECT_N_BANNER_FEL_REAVER_LEFT      = 27,
+    BG_EY_OBJECT_N_BANNER_FEL_REAVER_RIGHT     = 28,
     BG_EY_OBJECT_N_BANNER_BLOOD_ELF_CENTER      = 29,
     BG_EY_OBJECT_N_BANNER_BLOOD_ELF_LEFT        = 30,
     BG_EY_OBJECT_N_BANNER_BLOOD_ELF_RIGHT       = 31,
@@ -191,19 +189,19 @@ enum EYBattlegroundObjectTypes
     BG_EY_OBJECT_N_BANNER_MAGE_TOWER_CENTER     = 35,
     BG_EY_OBJECT_N_BANNER_MAGE_TOWER_LEFT       = 36,
     BG_EY_OBJECT_N_BANNER_MAGE_TOWER_RIGHT      = 37,
-    BG_EY_OBJECT_TOWER_CAP_FEL_REALVER          = 38,
+    BG_EY_OBJECT_TOWER_CAP_FEL_REAVER          = 38,
     BG_EY_OBJECT_TOWER_CAP_BLOOD_ELF            = 39,
     BG_EY_OBJECT_TOWER_CAP_DRAENEI_RUINS        = 40,
     BG_EY_OBJECT_TOWER_CAP_MAGE_TOWER           = 41,
     BG_EY_OBJECT_FLAG_NETHERSTORM               = 42,
-    BG_EY_OBJECT_FLAG_FEL_REALVER               = 43,
+    BG_EY_OBJECT_FLAG_FEL_REAVER               = 43,
     BG_EY_OBJECT_FLAG_BLOOD_ELF                 = 44,
     BG_EY_OBJECT_FLAG_DRAENEI_RUINS             = 45,
     BG_EY_OBJECT_FLAG_MAGE_TOWER                = 46,
     //buffs
-    BG_EY_OBJECT_SPEEDBUFF_FEL_REALVER          = 47,
-    BG_EY_OBJECT_REGENBUFF_FEL_REALVER          = 48,
-    BG_EY_OBJECT_BERSERKBUFF_FEL_REALVER        = 49,
+    BG_EY_OBJECT_SPEEDBUFF_FEL_REAVER          = 47,
+    BG_EY_OBJECT_REGENBUFF_FEL_REAVER          = 48,
+    BG_EY_OBJECT_BERSERKBUFF_FEL_REAVER        = 49,
     BG_EY_OBJECT_SPEEDBUFF_BLOOD_ELF            = 50,
     BG_EY_OBJECT_REGENBUFF_BLOOD_ELF            = 51,
     BG_EY_OBJECT_BERSERKBUFF_BLOOD_ELF          = 52,
@@ -256,15 +254,15 @@ struct BattlegroundEYPointIconsStruct
 
 // x, y, z, o
 const float BG_EY_TriggerPositions[EY_POINTS_MAX][4] = {
-    {2044.28f, 1729.68f, 1189.96f, -0.017453f}, // FEL_REALVER center
+    {2044.28f, 1729.68f, 1189.96f, 0.017453f},  // FEL_REAVER center
     {2048.83f, 1393.65f, 1194.49f, 0.20944f},   // BLOOD_ELF center
     {2286.56f, 1402.36f, 1197.11f, 3.72381f},   // DRAENEI_RUINS center
     {2284.48f, 1731.23f, 1189.99f, 2.89725f}    // MAGE_TOWER center
 };
 
-struct BattlegroundEYLoosingPointStruct
+struct BattlegroundEYLosingPointStruct
 {
-    BattlegroundEYLoosingPointStruct(uint32 _SpawnNeutralObjectType, uint32 _DespawnObjectTypeAlliance, uint32 _MessageIdAlliance, uint32 _DespawnObjectTypeHorde, uint32 _MessageIdHorde)
+    BattlegroundEYLosingPointStruct(uint32 _SpawnNeutralObjectType, uint32 _DespawnObjectTypeAlliance, uint32 _MessageIdAlliance, uint32 _DespawnObjectTypeHorde, uint32 _MessageIdHorde)
         : SpawnNeutralObjectType(_SpawnNeutralObjectType),
         DespawnObjectTypeAlliance(_DespawnObjectTypeAlliance), MessageIdAlliance(_MessageIdAlliance),
         DespawnObjectTypeHorde(_DespawnObjectTypeHorde), MessageIdHorde(_MessageIdHorde)
@@ -305,16 +303,16 @@ const BattlegroundEYPointIconsStruct m_PointsIconStruct[EY_POINTS_MAX] =
     BattlegroundEYPointIconsStruct(DRAENEI_RUINS_UNCONTROL, DRAENEI_RUINS_ALLIANCE_CONTROL, DRAENEI_RUINS_HORDE_CONTROL),
     BattlegroundEYPointIconsStruct(MAGE_TOWER_UNCONTROL, MAGE_TOWER_ALLIANCE_CONTROL, MAGE_TOWER_HORDE_CONTROL)
 };
-const BattlegroundEYLoosingPointStruct m_LoosingPointTypes[EY_POINTS_MAX] =
+const BattlegroundEYLosingPointStruct m_LosingPointTypes[EY_POINTS_MAX] =
 {
-    BattlegroundEYLoosingPointStruct(BG_EY_OBJECT_N_BANNER_FEL_REALVER_CENTER, BG_EY_OBJECT_A_BANNER_FEL_REALVER_CENTER, LANG_BG_EY_HAS_LOST_A_F_RUINS, BG_EY_OBJECT_H_BANNER_FEL_REALVER_CENTER, LANG_BG_EY_HAS_LOST_H_F_RUINS),
-    BattlegroundEYLoosingPointStruct(BG_EY_OBJECT_N_BANNER_BLOOD_ELF_CENTER, BG_EY_OBJECT_A_BANNER_BLOOD_ELF_CENTER, LANG_BG_EY_HAS_LOST_A_B_TOWER, BG_EY_OBJECT_H_BANNER_BLOOD_ELF_CENTER, LANG_BG_EY_HAS_LOST_H_B_TOWER),
-    BattlegroundEYLoosingPointStruct(BG_EY_OBJECT_N_BANNER_DRAENEI_RUINS_CENTER, BG_EY_OBJECT_A_BANNER_DRAENEI_RUINS_CENTER, LANG_BG_EY_HAS_LOST_A_D_RUINS, BG_EY_OBJECT_H_BANNER_DRAENEI_RUINS_CENTER, LANG_BG_EY_HAS_LOST_H_D_RUINS),
-    BattlegroundEYLoosingPointStruct(BG_EY_OBJECT_N_BANNER_MAGE_TOWER_CENTER, BG_EY_OBJECT_A_BANNER_MAGE_TOWER_CENTER, LANG_BG_EY_HAS_LOST_A_M_TOWER, BG_EY_OBJECT_H_BANNER_MAGE_TOWER_CENTER, LANG_BG_EY_HAS_LOST_H_M_TOWER)
+    BattlegroundEYLosingPointStruct(BG_EY_OBJECT_N_BANNER_FEL_REAVER_CENTER, BG_EY_OBJECT_A_BANNER_FEL_REAVER_CENTER, LANG_BG_EY_HAS_LOST_A_F_RUINS, BG_EY_OBJECT_H_BANNER_FEL_REAVER_CENTER, LANG_BG_EY_HAS_LOST_H_F_RUINS),
+    BattlegroundEYLosingPointStruct(BG_EY_OBJECT_N_BANNER_BLOOD_ELF_CENTER, BG_EY_OBJECT_A_BANNER_BLOOD_ELF_CENTER, LANG_BG_EY_HAS_LOST_A_B_TOWER, BG_EY_OBJECT_H_BANNER_BLOOD_ELF_CENTER, LANG_BG_EY_HAS_LOST_H_B_TOWER),
+    BattlegroundEYLosingPointStruct(BG_EY_OBJECT_N_BANNER_DRAENEI_RUINS_CENTER, BG_EY_OBJECT_A_BANNER_DRAENEI_RUINS_CENTER, LANG_BG_EY_HAS_LOST_A_D_RUINS, BG_EY_OBJECT_H_BANNER_DRAENEI_RUINS_CENTER, LANG_BG_EY_HAS_LOST_H_D_RUINS),
+    BattlegroundEYLosingPointStruct(BG_EY_OBJECT_N_BANNER_MAGE_TOWER_CENTER, BG_EY_OBJECT_A_BANNER_MAGE_TOWER_CENTER, LANG_BG_EY_HAS_LOST_A_M_TOWER, BG_EY_OBJECT_H_BANNER_MAGE_TOWER_CENTER, LANG_BG_EY_HAS_LOST_H_M_TOWER)
 };
 const BattlegroundEYCapturingPointStruct m_CapturingPointTypes[EY_POINTS_MAX] =
 {
-    BattlegroundEYCapturingPointStruct(BG_EY_OBJECT_N_BANNER_FEL_REALVER_CENTER, BG_EY_OBJECT_A_BANNER_FEL_REALVER_CENTER, LANG_BG_EY_HAS_TAKEN_A_F_RUINS, BG_EY_OBJECT_H_BANNER_FEL_REALVER_CENTER, LANG_BG_EY_HAS_TAKEN_H_F_RUINS, EY_GRAVEYARD_FEL_REALVER),
+    BattlegroundEYCapturingPointStruct(BG_EY_OBJECT_N_BANNER_FEL_REAVER_CENTER, BG_EY_OBJECT_A_BANNER_FEL_REAVER_CENTER, LANG_BG_EY_HAS_TAKEN_A_F_RUINS, BG_EY_OBJECT_H_BANNER_FEL_REAVER_CENTER, LANG_BG_EY_HAS_TAKEN_H_F_RUINS, EY_GRAVEYARD_FEL_REAVER),
     BattlegroundEYCapturingPointStruct(BG_EY_OBJECT_N_BANNER_BLOOD_ELF_CENTER, BG_EY_OBJECT_A_BANNER_BLOOD_ELF_CENTER, LANG_BG_EY_HAS_TAKEN_A_B_TOWER, BG_EY_OBJECT_H_BANNER_BLOOD_ELF_CENTER, LANG_BG_EY_HAS_TAKEN_H_B_TOWER, EY_GRAVEYARD_BLOOD_ELF),
     BattlegroundEYCapturingPointStruct(BG_EY_OBJECT_N_BANNER_DRAENEI_RUINS_CENTER, BG_EY_OBJECT_A_BANNER_DRAENEI_RUINS_CENTER, LANG_BG_EY_HAS_TAKEN_A_D_RUINS, BG_EY_OBJECT_H_BANNER_DRAENEI_RUINS_CENTER, LANG_BG_EY_HAS_TAKEN_H_D_RUINS, EY_GRAVEYARD_DRAENEI_RUINS),
     BattlegroundEYCapturingPointStruct(BG_EY_OBJECT_N_BANNER_MAGE_TOWER_CENTER, BG_EY_OBJECT_A_BANNER_MAGE_TOWER_CENTER, LANG_BG_EY_HAS_TAKEN_A_M_TOWER, BG_EY_OBJECT_H_BANNER_MAGE_TOWER_CENTER, LANG_BG_EY_HAS_TAKEN_H_M_TOWER, EY_GRAVEYARD_MAGE_TOWER)
@@ -372,6 +370,7 @@ class BattlegroundEY : public Battleground
         bool IsAllNodesConrolledByTeam(uint32 team) const;
     private:
         void EventPlayerCapturedFlag(Player *Source, uint32 BgObjectType);
+        void EventPlayerCapturedFlag(Player * /*Source*/) {}
         void EventTeamCapturedPoint(Player *Source, uint32 Point);
         void EventTeamLostPoint(Player *Source, uint32 Point);
         void UpdatePointsCount(uint32 Team);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -83,30 +83,30 @@ class instance_the_eye : public InstanceMapScript
                 return false;
             }
 
-            void OnCreatureCreate(Creature* pCreature, bool /*add*/)
+            void OnCreatureCreate(Creature* creature)
             {
-                switch(pCreature->GetEntry())
+                switch(creature->GetEntry())
                 {
                 case 20064:
-                    ThaladredTheDarkener = pCreature->GetGUID();
+                    ThaladredTheDarkener = creature->GetGUID();
                     break;
                 case 20063:
-                    MasterEngineerTelonicus = pCreature->GetGUID();
+                    MasterEngineerTelonicus = creature->GetGUID();
                     break;
                 case 20062:
-                    GrandAstromancerCapernian = pCreature->GetGUID();
+                    GrandAstromancerCapernian = creature->GetGUID();
                     break;
                 case 20060:
-                    LordSanguinar = pCreature->GetGUID();
+                    LordSanguinar = creature->GetGUID();
                     break;
                 case 19622:
-                    Kaelthas = pCreature->GetGUID();
+                    Kaelthas = creature->GetGUID();
                     break;
                 case 18805:
-                    Astromancer = pCreature->GetGUID();
+                    Astromancer = creature->GetGUID();
                     break;
                 case 19514:
-                    Alar = pCreature->GetGUID();
+                    Alar = creature->GetGUID();
                     break;
                 }
             }

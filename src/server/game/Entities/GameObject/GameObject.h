@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -21,6 +21,7 @@
 
 #include "Common.h"
 #include "SharedDefines.h"
+#include "Unit.h"
 #include "Object.h"
 #include "LootMgr.h"
 #include "DatabaseEnv.h"
@@ -136,7 +137,7 @@ struct GameObjectInfo
             uint32 serverOnly;                              //8
             uint32 stealthed;                               //9
             uint32 large;                                   //10
-            uint32 stealthAffected;                         //11
+            uint32 invisible;                               //11
             uint32 openTextID;                              //12 can be used to replace castBarCaption?
             uint32 closeTextID;                             //13
             uint32 ignoreTotems;                            //14
@@ -733,8 +734,16 @@ class GameObject : public WorldObject, public GridObject<GameObject>
 
         void TriggeringLinkedGameObject(uint32 trapEntry, Unit* target);
 
-        bool isVisibleForInState(Player const* u, bool inVisibleList) const;
-        bool canDetectTrap(Player const* u, float distance) const;
+        bool isAlwaysVisibleFor(WorldObject const* seer) const;
+        bool isVisibleForInState(WorldObject const* seer) const;
+
+        uint8 getLevelForTarget(WorldObject const* target) const
+        {
+            if (Unit* owner = GetOwner())
+                return owner->getLevelForTarget(target);
+
+            return 1;
+        }
 
         GameObject* LookupFishingHoleAround(float range);
 
@@ -752,6 +761,7 @@ class GameObject : public WorldObject, public GridObject<GameObject>
 
         std::string GetAIName() const;
     protected:
+        bool AIM_Initialize();
         uint32      m_spellId;
         time_t      m_respawnTime;                          // (secs) time of next respawn (or despawn if GO have owner()),
         uint32      m_respawnDelayTime;                     // (secs) if 0 then current GO state no dependent from timer
@@ -779,6 +789,5 @@ class GameObject : public WorldObject, public GridObject<GameObject>
     private:
         void SwitchDoorOrButton(bool activate, bool alternative = false);
         GameObjectAI* m_AI;
-        bool AIM_Initialize();
 };
 #endif

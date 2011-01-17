@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -282,11 +282,14 @@ public:
             switch (pAI->uiGossipStep)
             {
                 case 0: //This one is a workaround since the very beggining of the script is wrong.
-                    if (pPlayer->GetQuestStatus(13149) != QUEST_STATUS_COMPLETE)
+                {
+                    QuestStatus status = pPlayer->GetQuestStatus(13149);
+                    if (status != QUEST_STATUS_COMPLETE && status != QUEST_STATUS_REWARDED)
                         return false;
                     pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_ARTHAS_0, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF);
                     pPlayer->SEND_GOSSIP_MENU(907, pCreature->GetGUID());
                     break;
+                }
                 case 1:
                     pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_ITEM_ARTHAS_1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1);
                     pPlayer->SEND_GOSSIP_MENU(GOSSIP_MENU_ARTHAS_1, pCreature->GetGUID());
@@ -843,7 +846,7 @@ public:
                             break;
                         case 39:
                             if (Creature* pMalganis = Unit::GetCreature(*me, uiMalganisGUID))
-                                pMalganis->SetVisibility(VISIBILITY_OFF);
+                                pMalganis->SetVisible(false);
                             DoScriptText(SAY_PHASE208, me);
                             JumpToNextStep(7000);
                             break;

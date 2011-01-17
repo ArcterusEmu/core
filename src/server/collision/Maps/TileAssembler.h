@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2010 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -82,7 +82,6 @@ namespace VMAP
             bool convertRawFile(const std::string& pModelFilename);
             void setModelNameFilterMethod(bool (*pFilterMethod)(char *pName)) { iFilterMethod = pFilterMethod; }
             std::string getDirEntryNameFromModName(unsigned int pMapId, const std::string& pModPosName);
-            unsigned int getUniqueNameId(const std::string pName);
     };
 
 }                                                           // VMAP

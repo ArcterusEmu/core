@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -252,7 +252,7 @@ class boss_janalai : public CreatureScript
                     cell.Visit(pair, cSearcher, *(me->GetMap()));
                 }
 
-                //sLog.outError("Eggs %d at middle", templist.size());
+                //sLog->outError("Eggs %d at middle", templist.size());
                 if (!templist.size())
                     return false;
 
@@ -539,7 +539,7 @@ class mob_janalai_hatcher : public CreatureScript
                     cell.Visit(pair, cSearcher, *(me->GetMap()));
                 }
 
-                //sLog.outError("Eggs %d at %d", templist.size(), side);
+                //sLog->outError("Eggs %d at %d", templist.size(), side);
 
                 for (std::list<Creature*>::const_iterator i = templist.begin(); i != templist.end() && num > 0; ++i)
                     if ((*i)->GetDisplayId() != 11686)

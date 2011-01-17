@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -25,14 +25,14 @@ class TempSummon : public Creature
 {
     public:
         explicit TempSummon(SummonPropertiesEntry const *properties, Unit *owner);
-        virtual ~TempSummon(){};
+        virtual ~TempSummon() {}
         void Update(uint32 time);
         virtual void InitStats(uint32 lifetime);
         virtual void InitSummon();
         void UnSummon();
         void RemoveFromWorld();
         void SetTempSummonType(TempSummonType type);
-        void SaveToDB();
+        void SaveToDB(uint32 /*mapid*/, uint8 /*spawnMask*/, uint32 /*phaseMask*/) {}
         Unit* GetSummoner() const;
         uint64 const& GetSummonerGUID() { return m_summonerGUID; }
 

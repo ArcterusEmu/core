@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -241,6 +241,7 @@ public:
                 for (uint8 i = 0; i < 16; i++)
                 {
                     if (!DoneAdds[i % 4])
+                    {
                         if (next == 0)
                         {
                             move = (Phase)(i % 4);
@@ -248,6 +249,7 @@ public:
                         }
                         else if (next > 0)
                             --next;
+                    }
                 }
                 ++AddCount;
                 DoneAdds[move] = true;

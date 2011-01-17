@@ -1,21 +1,19 @@
 /*
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
- * Copyright (C) 2008-2010 Trinity <http://www.trinitycore.org/>
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation; either version 2 of the License, or (at your
+ * option) any later version.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef __BATTLEGROUND_H
@@ -138,8 +136,8 @@ enum BattlegroundRandomRewards
     BG_REWARD_WINNER_ARENA_FIRST    = 25,
     BG_REWARD_WINNER_HONOR_LAST     = 15,
     BG_REWARD_WINNER_ARENA_LAST     = 0,
-    BG_REWARD_LOOSER_HONOR_FIRST    = 5,
-    BG_REWARD_LOOSER_HONOR_LAST     = 5
+    BG_REWARD_LOSER_HONOR_FIRST    = 5,
+    BG_REWARD_LOSER_HONOR_LAST     = 5
 };
 
 const uint32 Buff_Entries[3] = { BG_OBJECTID_SPEEDBUFF_ENTRY, BG_OBJECTID_REGENBUFF_ENTRY, BG_OBJECTID_BERSERKERBUFF_ENTRY };
@@ -210,7 +208,10 @@ enum ScoreType
     SCORE_SECONDARY_OBJECTIVES  = 17,
     //SOTA
     SCORE_DESTROYED_DEMOLISHER  = 18,
-    SCORE_DESTROYED_WALL        = 19
+    SCORE_DESTROYED_WALL        = 19,
+    //IC
+    SCORE_BASE_ASSAULTED        = 20,
+    SCORE_BASE_DEFENDED         = 21
 };
 
 enum ArenaType
@@ -312,6 +313,7 @@ enum BGHonorMode
 };
 
 #define BG_AWARD_ARENA_POINTS_MIN_LEVEL 71
+#define ARENA_TIMELIMIT_POINTS_LOSS    -16
 
 /*
 This class is used to:
@@ -374,7 +376,7 @@ class Battleground
         uint32 GetScriptId() const          { return ScriptId; }
         uint32 GetBattlemasterEntry() const;
         uint32 GetBonusHonorFromKill(uint32 kills) const;
-        bool IsRandom() { return m_IsRandom; }
+        bool IsRandom() const { return m_IsRandom; }
 
         // Set methods:
         void SetName(char const* Name)      { m_Name = Name; }
@@ -477,6 +479,7 @@ class Battleground
         void PlaySoundToTeam(uint32 SoundID, uint32 TeamID);
         void PlaySoundToAll(uint32 SoundID);
         void CastSpellOnTeam(uint32 SpellID, uint32 TeamID);
+        void RemoveAuraOnTeam(uint32 SpellID, uint32 TeamID);
         void RewardHonorToTeam(uint32 Honor, uint32 TeamID);
         void RewardReputationToTeam(uint32 faction_id, uint32 Reputation, uint32 TeamID);
         void UpdateWorldState(uint32 Field, uint32 Value);
@@ -515,6 +518,7 @@ class Battleground
         int32 GetArenaTeamRatingChangeForTeam(uint32 Team) const    { return m_ArenaTeamRatingChanges[GetTeamIndexByTeamId(Team)]; }
         void SetArenaMatchmakerRating(uint32 Team, uint32 MMR){ m_ArenaTeamMMR[GetTeamIndexByTeamId(Team)] = MMR; }
         uint32 GetArenaMatchmakerRating(uint32 Team)                { return m_ArenaTeamMMR[GetTeamIndexByTeamId(Team)]; }
+        void CheckArenaAfterTimerConditions();
         void CheckArenaWinConditions();
         void UpdateArenaWorldState();
 
@@ -533,6 +537,11 @@ class Battleground
         void EventPlayerLoggedOut(Player* player);
         virtual void EventPlayerDamagedGO(Player* /*plr*/, GameObject* /*go*/, uint8 /*hitType*/, uint32 /*destroyedEvent*/) {}
         virtual void EventPlayerUsedGO(Player* /*player*/, GameObject* /*go*/){}
+
+        // this function can be used by spell to interact with the BG map
+        virtual void DoAction(uint32 /*action*/, uint64 /*var*/) {}
+
+        virtual void HandlePlayerResurrect(Player* /*player*/) {}
 
         /* Death related */
         virtual WorldSafeLocsEntry const* GetClosestGraveYard(Player* player);
@@ -569,9 +578,9 @@ class Battleground
         virtual bool HandlePlayerUnderMap(Player * /*plr*/) { return false; }
 
         // since arenas can be AvA or Hvh, we have to get the "temporary" team of a player
-        uint32 GetPlayerTeam(uint64 guid);
-        uint32 GetOtherTeam(uint32 teamId);
-        bool IsPlayerInBattleground(uint64 guid);
+        uint32 GetPlayerTeam(uint64 guid) const;
+        uint32 GetOtherTeam(uint32 teamId) const;
+        bool IsPlayerInBattleground(uint64 guid) const;
 
         void SetDeleteThis() {m_SetDeleteThis = true;}
 
@@ -617,6 +626,7 @@ class Battleground
         BattlegroundStatus m_Status;
         uint32 m_ClientInstanceID;                          //the instance-id which is sent to the client and without any other internal use
         uint32 m_StartTime;
+        uint32 m_ResetStatTimer;
         int32 m_EndTime;                                    // it is set to 120000 when bg is ending and it decreases itself
         uint32 m_LastResurrectTime;
         BattlegroundBracketId m_BracketId;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -23,6 +23,7 @@
 #include "QueryResult.h"
 
 typedef ACE_Future<QueryResult> QueryResultFuture;
+typedef ACE_Future<PreparedQueryResult> PreparedQueryResultFuture;
 
 /*! A simple template using ACE_Future to manage callbacks from the thread and object that
     issued the request. <ParamType> is variable type of parameter that is used as parameter

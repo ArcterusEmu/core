@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -271,7 +271,7 @@ public:
                 if (((uiUndergroundPhase == 0 && HealthBelowPct(75))
                     || (uiUndergroundPhase == 1 && HealthBelowPct(50))
                     || (uiUndergroundPhase == 2 && HealthBelowPct(25)))
-                    && !me->hasUnitState(UNIT_STAT_CASTING))
+                    && !me->HasUnitState(UNIT_STAT_CASTING))
                 {
                     bGuardianSummoned = false;
                     bVenomancerSummoned = false;

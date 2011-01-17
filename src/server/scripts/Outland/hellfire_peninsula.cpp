@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -160,7 +160,7 @@ public:
             if (pCreature->GetOwner() && pCreature->GetOwner()->GetTypeId() == TYPEID_PLAYER)
                 Start(false, false, pCreature->GetOwner()->GetGUID());
             else
-                sLog.outError("TRINITY: npc_ancestral_wolf can not obtain owner or owner is not a player.");
+                sLog->outError("TRINITY: npc_ancestral_wolf can not obtain owner or owner is not a player.");
 
             pCreature->SetSpeed(MOVE_WALK, 1.5f);
             Reset();

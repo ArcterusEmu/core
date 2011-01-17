@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2008 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -79,6 +79,22 @@ namespace ACE_Based
                 result = _queue.front();
                 _queue.pop_front();
 
+                return true;
+            }
+
+            template<class Checker>
+            bool next(T& result, Checker& check)
+            {
+                ACE_Guard<LockType> g(this->_lock);
+
+                if (_queue.empty())
+                    return false;
+
+                result = _queue.front();
+                if(!check.Process(result))
+                    return false;
+
+                _queue.pop_front();
                 return true;
             }
 

@@ -1,5 +1,6 @@
 set(scripts_STAT_SRCS
   ${scripts_STAT_SRCS}
+  Northrend/isle_of_conquest.cpp
   Northrend/storm_peaks.cpp
   Northrend/Ulduar/HallsOfLightning/instance_halls_of_lightning.cpp
   Northrend/Ulduar/HallsOfLightning/boss_bjarngrim.cpp
@@ -142,31 +143,19 @@ set(scripts_STAT_SRCS
   Northrend/VioletHold/boss_xevozz.cpp
   Northrend/VioletHold/boss_erekem.cpp
   Northrend/VioletHold/violet_hold.cpp
-  Northrend/RubySanctum/boss_baltharus.cpp
-  Northrend/RubySanctum/boss_halion.cpp
-  Northrend/RubySanctum/boss_ragefire.cpp
-  Northrend/RubySanctum/boss_zarithrian.cpp
-  Northrend/RubySanctum/instance_ruby_sanctum.cpp
-  Northrend/RubySanctum/ruby_sanctum.h
   Northrend/IcecrownCitadel/instance_icecrown_citadel.cpp
-  Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
-  Northrend/IcecrownCitadel/boss_lady_deathwhisper.cpp
-  Northrend/IcecrownCitadel/boss_professor_putricide.cpp
   Northrend/IcecrownCitadel/icecrown_citadel.h
-  Northrend/IcecrownCitadel/boss_festergut.cpp
-  Northrend/IcecrownCitadel/boss_lord_marrowgar.cpp
-  Northrend/IcecrownCitadel/icecrown_citadel.cpp
-  Northrend/IcecrownCitadel/boss_valithria_dreamwalker.cpp
-  Northrend/IcecrownCitadel/boss_the_lich_king.cpp
-  Northrend/IcecrownCitadel/boss_sindragosa.cpp
-  Northrend/IcecrownCitadel/boss_rotface.cpp
-  Northrend/IcecrownCitadel/boss_blood_prince_council.cpp
-  Northrend/IcecrownCitadel/boss_blood_queen_lanathel.cpp
   Northrend/IcecrownCitadel/icecrown_citadel_teleport.cpp
-  Northrend/IcecrownCitadel/dev.h
+  Northrend/IcecrownCitadel/boss_lord_marrowgar.cpp
+  Northrend/IcecrownCitadel/boss_lady_deathwhisper.cpp
+  Northrend/IcecrownCitadel/boss_deathbringer_saurfang.cpp
+  Northrend/IcecrownCitadel/boss_festergut.cpp
+  Northrend/IcecrownCitadel/boss_rotface.cpp
+  Northrend/IcecrownCitadel/boss_professor_putricide.cpp
+  Northrend/IcecrownCitadel/boss_blood_prince_council.cpp
+  Northrend/IcecrownCitadel/boss_blood_queen_lana_thel.cpp
   Northrend/zuldrak.cpp
   Northrend/icecrown.cpp
-  Northrend/wintergrasp.cpp
   Northrend/Gundrak/boss_slad_ran.cpp
   Northrend/Gundrak/instance_gundrak.cpp
   Northrend/Gundrak/boss_drakkari_colossus.cpp
@@ -177,7 +166,6 @@ set(scripts_STAT_SRCS
   Northrend/borean_tundra.cpp
   Northrend/howling_fjord.cpp
   Northrend/dalaran.cpp
-  Northrend/isle_of_conquest.cpp
   Northrend/DraktharonKeep/boss_trollgore.cpp
   Northrend/DraktharonKeep/instance_drak_tharon_keep.cpp
   Northrend/DraktharonKeep/boss_novos.cpp

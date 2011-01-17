@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -20,6 +20,7 @@
 #define _THREATMANAGER
 
 #include "Common.h"
+#include "Util.h"
 #include "SharedDefines.h"
 #include "LinkedReference/Reference.h"
 #include "UnitEvents.h"
@@ -58,8 +59,8 @@ class HostileReference : public Reference<Unit, ThreatManager>
         void addThreatPercent(int32 pPercent)
         {
             float tmpThreat = iThreat;
-            tmpThreat = tmpThreat * (pPercent+100.0f) / 100.0f;
-            addThreat(tmpThreat-iThreat);
+            AddPctN(tmpThreat, pPercent);
+            addThreat(tmpThreat - iThreat);
         }
 
         float getThreat() const { return iThreat; }
@@ -170,9 +171,9 @@ class ThreatContainer
 
         void setDirty(bool pDirty) { iDirty = pDirty; }
 
-        bool isDirty() { return iDirty; }
+        bool isDirty() const { return iDirty; }
 
-        bool empty() { return(iThreatList.empty()); }
+        bool empty() const { return(iThreatList.empty()); }
 
         HostileReference* getMostHated() { return iThreatList.empty() ? NULL : iThreatList.front(); }
 

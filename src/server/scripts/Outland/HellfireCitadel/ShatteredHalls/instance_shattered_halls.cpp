@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -53,22 +53,22 @@ class instance_shattered_halls : public InstanceMapScript
                 nethekurseDoorGUID = 0;
             }
 
-            void OnGameObjectCreate(GameObject* pGo, bool /*add*/)
+            void OnGameObjectCreate(GameObject* go)
             {
-                switch(pGo->GetEntry())
+                switch(go->GetEntry())
                 {
                     case DOOR_NETHEKURSE:
-                        nethekurseDoorGUID = pGo->GetGUID();
+                        nethekurseDoorGUID = go->GetGUID();
                         break;
                 }
             }
 
-            void OnCreatureCreate(Creature* pCreature, bool /*add*/)
+            void OnCreatureCreate(Creature* creature)
             {
-                switch(pCreature->GetEntry())
+                switch(creature->GetEntry())
                 {
                     case 16807:
-                        nethekurseGUID = pCreature->GetGUID();
+                        nethekurseGUID = creature->GetGUID();
                         break;
                 }
             }

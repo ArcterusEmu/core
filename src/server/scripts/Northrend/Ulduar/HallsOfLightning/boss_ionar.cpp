@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -71,30 +71,6 @@ class boss_ionar : public CreatureScript
 public:
     boss_ionar() : CreatureScript("boss_ionar") { }
 
-    bool EffectDummyCreature(Unit* /*pCaster*/, uint32 uiSpellId, uint32 uiEffIndex, Creature* pCreatureTarget)
-    {
-        //always check spellid and effectindex
-        if (uiSpellId == SPELL_DISPERSE && uiEffIndex == 0)
-        {
-            if (pCreatureTarget->GetEntry() != NPC_IONAR)
-                return true;
-
-            for (uint8 i = 0; i < DATA_MAX_SPARKS; ++i)
-                pCreatureTarget->CastSpell(pCreatureTarget, SPELL_SUMMON_SPARK, true);
-
-            pCreatureTarget->AttackStop();
-            pCreatureTarget->SetVisibility(VISIBILITY_OFF);
-            pCreatureTarget->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE|UNIT_FLAG_NOT_SELECTABLE|UNIT_FLAG_DISABLE_MOVE);
-
-            pCreatureTarget->GetMotionMaster()->Clear();
-            pCreatureTarget->GetMotionMaster()->MoveIdle();
-
-            //always return true when we are handling this spell and effect
-            return true;
-        }
-        return false;
-    }
-
     CreatureAI* GetAI(Creature* pCreature) const
     {
         return new boss_ionarAI(pCreature);
@@ -137,8 +113,8 @@ public:
 
             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE|UNIT_FLAG_NOT_SELECTABLE|UNIT_FLAG_DISABLE_MOVE);
 
-            if (me->GetVisibility() == VISIBILITY_OFF)
-                me->SetVisibility(VISIBILITY_ON);
+            if (!me->IsVisible())
+                me->SetVisible(true);
 
             if (pInstance)
                 pInstance->SetData(TYPE_IONAR, NOT_STARTED);
@@ -167,6 +143,22 @@ public:
             DoScriptText(RAND(SAY_SLAY_1,SAY_SLAY_2,SAY_SLAY_3), me);
         }
 
+        void SpellHit(Unit* /*caster*/, const SpellEntry* spell)
+        {
+            if (spell->Id == SPELL_DISPERSE)
+            {
+                for (uint8 i = 0; i < DATA_MAX_SPARKS; ++i)
+                    me->CastSpell(me, SPELL_SUMMON_SPARK, true);
+
+                me->AttackStop();
+                me->SetVisible(false);
+                me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE|UNIT_FLAG_NOT_SELECTABLE|UNIT_FLAG_DISABLE_MOVE);
+
+                me->GetMotionMaster()->Clear();
+                me->GetMotionMaster()->MoveIdle();
+            }
+        }
+
         //make sparks come back
         void CallBackSparks()
         {
@@ -188,14 +180,14 @@ public:
                         pSpark->GetMotionMaster()->MovePoint(DATA_POINT_CALLBACK, pos);
                     }
                     else
-                        pSpark->ForcedDespawn();
+                        pSpark->DespawnOrUnsummon();
                 }
             }
         }
 
         void DamageTaken(Unit * /*pDoneBy*/, uint32 &uiDamage)
         {
-            if (me->GetVisibility() == VISIBILITY_OFF)
+            if (!me->IsVisible())
                 uiDamage = 0;
         }
 
@@ -230,7 +222,7 @@ public:
                 return;
 
             // Splitted
-            if (me->GetVisibility() == VISIBILITY_OFF)
+            if (!me->IsVisible())
             {
                 if (uiSplitTimer <= uiDiff)
                 {
@@ -245,7 +237,7 @@ public:
                     // Lightning effect and restore Ionar
                     else if (lSparkList.empty())
                     {
-                        me->SetVisibility(VISIBILITY_ON);
+                        me->SetVisible(true);
                         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE|UNIT_FLAG_NOT_SELECTABLE|UNIT_FLAG_DISABLE_MOVE);
 
                         DoCast(me, SPELL_SPARK_DESPAWN, false);
@@ -291,7 +283,7 @@ public:
                 if (me->IsNonMeleeSpellCasted(false))
                     me->InterruptNonMeleeSpells(false);
 
-                DoCast(me, SPELL_DISPERSE, true);
+                DoCast(me, SPELL_DISPERSE, false);
             }
 
             DoMeleeAttackIfReady();
@@ -339,7 +331,7 @@ public:
                 return;
 
             if (uiPointId == DATA_POINT_CALLBACK)
-                me->ForcedDespawn();
+                me->DespawnOrUnsummon();
         }
 
         void DamageTaken(Unit * /*pDoneBy*/, uint32 &uiDamage)
@@ -352,7 +344,7 @@ public:
             // Despawn if the encounter is not running
             if (pInstance && pInstance->GetData(TYPE_IONAR) != IN_PROGRESS)
             {
-                me->ForcedDespawn();
+                me->DespawnOrUnsummon();
                 return;
             }
 
@@ -375,7 +367,7 @@ public:
                         }
                     }
                     else
-                        me->ForcedDespawn();
+                        me->DespawnOrUnsummon();
                 }
                 uiCheckTimer = 2*IN_MILLISECONDS;
             }

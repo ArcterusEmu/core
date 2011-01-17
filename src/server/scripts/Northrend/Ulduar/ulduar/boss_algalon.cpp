@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -122,7 +122,7 @@ public:
             }
 
             if (pInstance)
-                pInstance->SetData(BOSS_ALGALON, IN_PROGRESS);
+                pInstance->SetData(TYPE_ALGALON, IN_PROGRESS);
         }
 
         void KilledUnit(Unit * /*victim*/)
@@ -136,7 +136,7 @@ public:
 
             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
             if (pInstance)
-                pInstance->SetData(BOSS_ALGALON, NOT_STARTED);
+                pInstance->SetData(TYPE_ALGALON, NOT_STARTED);
 
             BlackHoleGUID = 0;
 
@@ -167,7 +167,7 @@ public:
                 if (Creature* pTemp = Unit::GetCreature(*me, *itr))
                 {
                     if (pTemp->isAlive())
-                        pTemp->ForcedDespawn();
+                        pTemp->DespawnOrUnsummon();
                 }
             }
             m_lCollapsingStarGUIDList.clear();
@@ -217,7 +217,7 @@ public:
                 me->DisappearAndDie();
 
                 if (pInstance)
-                    pInstance->SetData(BOSS_ALGALON, DONE);
+                    pInstance->SetData(TYPE_ALGALON, DONE);
 
                 return;
             }

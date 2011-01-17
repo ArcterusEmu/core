@@ -71,7 +71,7 @@ add_executable(authserver
 add_dependencies(authserver revision.h)
 
 if( NOT WIN32 )
-  add_definitions(-D_TRINITY_REALM_CONFIG="${CONF_DIR}/authserver.conf")
+  add_definitions(-D_TRINITY_REALM_CONFIG='"${CONF_DIR}/authserver.ini"')
 endif()
 
 if( UNIX )
@@ -95,7 +95,7 @@ target_link_libraries(authserver
 if( WIN32 )
   add_custom_command(TARGET authserver
     POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/authserver.conf.dist ${CMAKE_BINARY_DIR}/bin/$(ConfigurationName)/
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/authserver.ini ${CMAKE_BINARY_DIR}/bin/$(ConfigurationName)/
   )
 endif()
 

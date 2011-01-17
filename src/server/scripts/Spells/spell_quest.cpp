@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -49,7 +49,7 @@ public:
                     pCreatureTarget->AI()->AttackStart(GetCaster());
 
                 if (_despawnTime)
-                    pCreatureTarget->ForcedDespawn(_despawnTime);
+                    pCreatureTarget->DespawnOrUnsummon(_despawnTime);
             }
     }
 
@@ -166,7 +166,7 @@ public:
                         if (uiNewEntry)
                         {
                             pCreatureTarget->UpdateEntry(uiNewEntry);
-                            pCreatureTarget->ForcedDespawn(DESPAWN_TIME);
+                            pCreatureTarget->DespawnOrUnsummon(DESPAWN_TIME);
                         }
                     }
         }
@@ -200,6 +200,123 @@ public:
     {
         return new spell_generic_quest_update_entry_SpellScript(SPELL_EFFECT_DUMMY, EFFECT_0, NPC_HELBOAR, NPC_DREADTUSK, true);
     }
+};
+
+// http://www.wowhead.com/quest=11396 Bring Down Those Shields (A)
+// http://www.wowhead.com/quest=11399 Bring Down Those Shields (H)
+enum eQuest11396_11399Data
+{
+    SPELL_FORCE_SHIELD_ARCANE_PURPLE_X3 = 43874,
+    SPELL_SCOURGING_CRYSTAL_CONTROLLER = 43878
+};
+
+// 43874 Scourge Mur'gul Camp: Force Shield Arcane Purple x3
+class spell_q11396_11399_force_shield_arcane_purple_x3 : public SpellScriptLoader
+{
+public:
+    spell_q11396_11399_force_shield_arcane_purple_x3() : SpellScriptLoader("spell_q11396_11399_force_shield_arcane_purple_x3") { }
+
+    class spell_q11396_11399_force_shield_arcane_purple_x3_AuraScript : public AuraScript
+    {
+        PrepareAuraScript(spell_q11396_11399_force_shield_arcane_purple_x3_AuraScript)
+        void HandleEffectApply(AuraEffect const * /*aurEff*/, AuraEffectHandleModes /*mode*/)
+        {
+            Unit* pTarget = GetTarget();
+            pTarget->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
+            pTarget->AddUnitState(UNIT_STAT_ROOT);
+        }
+
+        void HandleEffectRemove(AuraEffect const * /*aurEff*/, AuraEffectHandleModes /*mode*/)
+        {
+            GetTarget()->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
+        }
+
+        void Register()
+        {
+            OnEffectApply += AuraEffectApplyFn(spell_q11396_11399_force_shield_arcane_purple_x3_AuraScript::HandleEffectApply, EFFECT_0, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL);
+            OnEffectRemove += AuraEffectRemoveFn(spell_q11396_11399_force_shield_arcane_purple_x3_AuraScript::HandleEffectRemove, EFFECT_0, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL);
+        }
+
+    };
+
+    AuraScript* GetAuraScript() const
+    {
+        return new spell_q11396_11399_force_shield_arcane_purple_x3_AuraScript();
+    }
+};
+
+// 50133 Scourging Crystal Controller
+class spell_q11396_11399_scourging_crystal_controller : public SpellScriptLoader
+{
+public:
+    spell_q11396_11399_scourging_crystal_controller() : SpellScriptLoader("spell_q11396_11399_scourging_crystal_controller") { }
+
+    class spell_q11396_11399_scourging_crystal_controller_SpellScript : public SpellScript
+    {
+        PrepareSpellScript(spell_q11396_11399_scourging_crystal_controller_SpellScript);
+        bool Validate(SpellEntry const * /*spellEntry*/)
+        {
+            if (!sSpellStore.LookupEntry(SPELL_FORCE_SHIELD_ARCANE_PURPLE_X3))
+                return false;
+            if (!sSpellStore.LookupEntry(SPELL_SCOURGING_CRYSTAL_CONTROLLER))
+                return false;
+            return true;
+        }
+
+        void HandleDummy(SpellEffIndex /*effIndex*/)
+        {
+            if (Unit* pTarget = GetTargetUnit())
+                if (pTarget->GetTypeId() == TYPEID_UNIT && pTarget->HasAura(SPELL_FORCE_SHIELD_ARCANE_PURPLE_X3))
+                    // Make sure nobody else is channeling the same target
+                    if (!pTarget->HasAura(SPELL_SCOURGING_CRYSTAL_CONTROLLER))
+                        GetCaster()->CastSpell(pTarget, SPELL_SCOURGING_CRYSTAL_CONTROLLER, true, GetCastItem());
+        }
+
+        void Register()
+        {
+            OnEffect += SpellEffectFn(spell_q11396_11399_scourging_crystal_controller_SpellScript::HandleDummy, EFFECT_0, SPELL_EFFECT_DUMMY);
+        }
+    };
+
+    SpellScript* GetSpellScript() const
+    {
+        return new spell_q11396_11399_scourging_crystal_controller_SpellScript();
+    };
+};
+
+// 43882 Scourging Crystal Controller Dummy
+class spell_q11396_11399_scourging_crystal_controller_dummy : public SpellScriptLoader
+{
+public:
+    spell_q11396_11399_scourging_crystal_controller_dummy() : SpellScriptLoader("spell_q11396_11399_scourging_crystal_controller_dummy") { }
+
+    class spell_q11396_11399_scourging_crystal_controller_dummy_SpellScript : public SpellScript
+    {
+        PrepareSpellScript(spell_q11396_11399_scourging_crystal_controller_dummy_SpellScript);
+        bool Validate(SpellEntry const * /*spellEntry*/)
+        {
+            if (!sSpellStore.LookupEntry(SPELL_FORCE_SHIELD_ARCANE_PURPLE_X3))
+                return false;
+            return true;
+        }
+
+        void HandleDummy(SpellEffIndex /*effIndex*/)
+        {
+            if (Unit* pTarget = GetTargetUnit())
+                if (pTarget->GetTypeId() == TYPEID_UNIT)
+                    pTarget->RemoveAurasDueToSpell(SPELL_FORCE_SHIELD_ARCANE_PURPLE_X3);
+        }
+
+        void Register()
+        {
+            OnEffect += SpellEffectFn(spell_q11396_11399_scourging_crystal_controller_dummy_SpellScript::HandleDummy, EFFECT_0, SPELL_EFFECT_DUMMY);
+        }
+    };
+
+    SpellScript* GetSpellScript() const
+    {
+        return new spell_q11396_11399_scourging_crystal_controller_dummy_SpellScript();
+    };
 };
 
 // http://www.wowhead.com/quest=11515 Blood for Blood
@@ -343,7 +460,7 @@ public:
             }
             pCaster->CastSpell(pCaster, spellId, true, castItem);
             pCaster->CastSpell(pCaster, SPELL_ROBOT_KILL_CREDIT, true);
-            pTarget->ForcedDespawn();
+            pTarget->DespawnOrUnsummon();
         }
 
         void Register()
@@ -535,7 +652,7 @@ public:
                 {
                     pPlayer->CastSpell(pPlayer, SPELL_TRIGGER_AID_OF_THE_EARTHEN, true, NULL);
                     pPlayer->KilledMonsterCredit(NPC_FALLEN_EARTHEN_DEFENDER, 0);
-                    pTarget->ForcedDespawn();
+                    pTarget->DespawnOrUnsummon();
                 }
             }
         }
@@ -558,6 +675,9 @@ void AddSC_quest_spell_scripts()
     new spell_q5206_test_fetid_skull();
     new spell_q6124_6129_apply_salve();
     new spell_q10255_administer_antidote();
+    new spell_q11396_11399_force_shield_arcane_purple_x3();
+    new spell_q11396_11399_scourging_crystal_controller();
+    new spell_q11396_11399_scourging_crystal_controller_dummy();
     new spell_q11515_fel_siphon_dummy();
     new spell_q11587_arcane_prisoner_rescue();
     new spell_q11730_ultrasonic_screwdriver();

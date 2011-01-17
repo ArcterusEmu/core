@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -79,8 +79,8 @@ public:
                 case 0: RandX = 0.0f - Rand; break;
                 case 1: RandX = 0.0f + Rand; break;
             }
-            Rand = 0;
-            Rand =  10 + (rand()%10);
+
+            Rand = 10 + (rand()%10);
             switch (rand()%2)
             {
                 case 0: RandY = 0.0f - Rand; break;

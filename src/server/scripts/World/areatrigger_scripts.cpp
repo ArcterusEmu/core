@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -280,7 +280,8 @@ class AreaTrigger_at_scent_larkorwi : public AreaTriggerScript
 
 enum eAtLastRites
 {
-    QUEST_LAST_RITES                          = 12019
+    QUEST_LAST_RITES                          = 12019,
+    QUEST_BREAKING_THROUGH                    = 11898,
 };
 
 class AreaTrigger_at_last_rites : public AreaTriggerScript
@@ -294,7 +295,10 @@ class AreaTrigger_at_last_rites : public AreaTriggerScript
 
         bool OnTrigger(Player* player, AreaTriggerEntry const* trigger)
         {
-            if (player->GetQuestStatus(QUEST_LAST_RITES) != QUEST_STATUS_INCOMPLETE)
+            if (!(player->GetQuestStatus(QUEST_LAST_RITES) == QUEST_STATUS_INCOMPLETE || 
+                player->GetQuestStatus(QUEST_LAST_RITES) == QUEST_STATUS_COMPLETE ||
+                player->GetQuestStatus(QUEST_BREAKING_THROUGH) == QUEST_STATUS_INCOMPLETE ||
+                player->GetQuestStatus(QUEST_BREAKING_THROUGH) == QUEST_STATUS_COMPLETE))
                 return false;
 
             WorldLocation pPosition;

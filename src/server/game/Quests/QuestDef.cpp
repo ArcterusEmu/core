@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -202,7 +202,7 @@ int32  Quest::GetRewOrReqMoney() const
     if (RewOrReqMoney <= 0)
         return RewOrReqMoney;
 
-    return int32(RewOrReqMoney * sWorld.getRate(RATE_DROP_MONEY));
+    return int32(RewOrReqMoney * sWorld->getRate(RATE_DROP_MONEY));
 }
 
 bool Quest::IsAllowedInRaid() const
@@ -210,5 +210,5 @@ bool Quest::IsAllowedInRaid() const
     if (IsRaidQuest())
         return true;
 
-    return sWorld.getBoolConfig(CONFIG_QUEST_IGNORE_RAID);
+    return sWorld->getBoolConfig(CONFIG_QUEST_IGNORE_RAID);
 }

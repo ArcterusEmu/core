@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -38,7 +38,7 @@ namespace FactorySelector
 
         //scriptname in db
         if (!ai_factory)
-            if (CreatureAI* scriptedAI = sScriptMgr.GetCreatureAI(creature))
+            if (CreatureAI* scriptedAI = sScriptMgr->GetCreatureAI(creature))
                 return scriptedAI;
 
         // AIname in db
@@ -95,7 +95,7 @@ namespace FactorySelector
         // select NullCreatureAI if not another cases
         ainame = (ai_factory == NULL) ? "NullCreatureAI" : ai_factory->key();
 
-        sLog.outStaticDebug("Creature %u used AI is %s.", creature->GetGUIDLow(), ainame.c_str());
+        sLog->outStaticDebug("Creature %u used AI is %s.", creature->GetGUIDLow(), ainame.c_str());
         return (ai_factory == NULL ? new NullCreatureAI(creature) : ai_factory->Create(creature));
     }
 
@@ -137,9 +137,9 @@ namespace FactorySelector
 
         //future goAI types go here
 
-        std::string ainame = (ai_factory == NULL) ? "NullGameObjectAI" : ai_factory->key();
+        std::string ainame = (ai_factory == NULL || go->GetScriptId()) ? "NullGameObjectAI" : ai_factory->key();
 
-        sLog.outStaticDebug("GameObject %u used AI is %s.", go->GetGUIDLow(), ainame.c_str());
+        sLog->outStaticDebug("GameObject %u used AI is %s.", go->GetGUIDLow(), ainame.c_str());
 
         return (ai_factory == NULL ? new NullGameObjectAI(go) : ai_factory->Create(go));
     }

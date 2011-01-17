@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -81,18 +81,18 @@ public:
                 IsBossDied[i] = false;
         }
 
-        void OnGameObjectCreate(GameObject* pGo, bool /*add*/)
+        void OnGameObjectCreate(GameObject* go)
         {
-            switch(pGo->GetEntry())
+            switch(go->GetEntry())
             {
-                case GO_GATE_KIRTONOS:  GateKirtonosGUID = pGo->GetGUID(); break;
-                case GO_GATE_GANDLING:  GateGandlingGUID = pGo->GetGUID(); break;
-                case GO_GATE_MALICIA:   GateMiliciaGUID = pGo->GetGUID(); break;
-                case GO_GATE_THEOLEN:   GateTheolenGUID = pGo->GetGUID(); break;
-                case GO_GATE_POLKELT:   GatePolkeltGUID = pGo->GetGUID(); break;
-                case GO_GATE_RAVENIAN:  GateRavenianGUID = pGo->GetGUID(); break;
-                case GO_GATE_BAROV:     GateBarovGUID = pGo->GetGUID(); break;
-                case GO_GATE_ILLUCIA:   GateIlluciaGUID = pGo->GetGUID(); break;
+                case GO_GATE_KIRTONOS:  GateKirtonosGUID = go->GetGUID(); break;
+                case GO_GATE_GANDLING:  GateGandlingGUID = go->GetGUID(); break;
+                case GO_GATE_MALICIA:   GateMiliciaGUID = go->GetGUID(); break;
+                case GO_GATE_THEOLEN:   GateTheolenGUID = go->GetGUID(); break;
+                case GO_GATE_POLKELT:   GatePolkeltGUID = go->GetGUID(); break;
+                case GO_GATE_RAVENIAN:  GateRavenianGUID = go->GetGUID(); break;
+                case GO_GATE_BAROV:     GateBarovGUID = go->GetGUID(); break;
+                case GO_GATE_ILLUCIA:   GateIlluciaGUID = go->GetGUID(); break;
             }
         }
 

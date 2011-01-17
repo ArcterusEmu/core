@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -25,22 +25,21 @@
 #include "revision.h"
 
 #define _PACKAGENAME "ArcterusEmu "
-#define _CODENAME "LONG_COLD_WINTER"
 
 #if TRINITY_ENDIAN == TRINITY_BIGENDIAN
-# define _ENDIAN_STRING "x64 / big-endian"
+# define _ENDIAN_STRING "x64"
 #else
-# define _ENDIAN_STRING "x86 / little-endian"
+# define _ENDIAN_STRING "x86"
 #endif
 
 #if PLATFORM == PLATFORM_WINDOWS
 # ifdef _WIN64
-#  define _FULLVERSION _PACKAGENAME "Rev: " _REVISION " " _BUILD_DIRECTIVE " Hash: " _HASH " (Win64," _ENDIAN_STRING ")"
+#  define _FULLVERSION _PACKAGENAME "Rev: 9 " _BUILD_DIRECTIVE " (Windows, " _ENDIAN_STRING ")"
 # else
-#  define _FULLVERSION _PACKAGENAME "Rev: " _REVISION " " _BUILD_DIRECTIVE " Hash: " _HASH " (Win32," _ENDIAN_STRING ")"
+#  define _FULLVERSION _PACKAGENAME "Rev: 9 " _BUILD_DIRECTIVE " (Windows, " _ENDIAN_STRING ")"
 # endif
 #else
-#  define _FULLVERSION _PACKAGENAME "Rev: " _REVISION " " _BUILD_DIRECTIVE " Hash: " _HASH " (Unix," _ENDIAN_STRING ")"
+#  define _FULLVERSION _PACKAGENAME "Rev: 9 " _BUILD_DIRECTIVE " (Unix, " _ENDIAN_STRING ")"
 #endif
 #endif
 

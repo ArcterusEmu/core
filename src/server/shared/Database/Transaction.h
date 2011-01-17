@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -27,21 +27,22 @@ class PreparedStatement;
 class Transaction
 {
     friend class TransactionTask;
+    friend class MySQLConnection;
+
     public:
+        Transaction() {}
         ~Transaction() { Cleanup(); }
 
         void Append(PreparedStatement* statement);
         void Append(const char* sql);
         void PAppend(const char* sql, ...);
 
-        size_t GetSize() { return m_queries.size(); }
+        size_t GetSize() const { return m_queries.size(); }
 
     protected:
         void Cleanup();
         std::queue<SQLElementData> m_queries;
 
-    private:
-        bool m_actioned;
 };
 typedef ACE_Refcounted_Auto_Ptr<Transaction, ACE_Null_Mutex> SQLTransaction;
 
@@ -50,7 +51,7 @@ class TransactionTask : public SQLOperation
 {
     template <class T> friend class DatabaseWorkerPool;
     friend class DatabaseWorker;
-
+    
     public:
         TransactionTask(SQLTransaction trans) : m_trans(trans) {} ;
         ~TransactionTask(){};

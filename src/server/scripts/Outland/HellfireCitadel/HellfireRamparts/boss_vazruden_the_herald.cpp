@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -337,8 +337,8 @@ class boss_vazruden_the_herald : public CreatureScript
                         VazrudenGUID = 0;
                     }
                     summoned = false;
-                    me->clearUnitState(UNIT_STAT_ROOT);
-                    me->SetVisibility(VISIBILITY_ON);
+                    me->ClearUnitState(UNIT_STAT_ROOT);
+                    me->SetVisible(true);
                 }
             }
 
@@ -351,8 +351,8 @@ class boss_vazruden_the_herald : public CreatureScript
                     if (Creature* Nazan = me->SummonCreature(ENTRY_NAZAN,VazrudenMiddle[0],VazrudenMiddle[1],VazrudenMiddle[2],0,TEMPSUMMON_CORPSE_TIMED_DESPAWN,6000000))
                         NazanGUID = Nazan->GetGUID();
                     summoned = true;
-                    me->SetVisibility(VISIBILITY_OFF);
-                    me->addUnitState(UNIT_STAT_ROOT);
+                    me->SetVisible(false);
+                    me->AddUnitState(UNIT_STAT_ROOT);
                 }
             }
 

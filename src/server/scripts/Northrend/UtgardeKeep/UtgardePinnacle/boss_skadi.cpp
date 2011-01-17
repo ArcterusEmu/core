@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -263,7 +263,7 @@ public:
                     break;
                 case CREATURE_TRIGGER:
                     pSummoned->CastSpell((Unit*)NULL, SPELL_FREEZING_CLOUD, true);
-                    pSummoned->ForcedDespawn(10*IN_MILLISECONDS);
+                    pSummoned->DespawnOrUnsummon(10*IN_MILLISECONDS);
                     break;
             }
             Summons.Summon(pSummoned);
@@ -436,7 +436,7 @@ public:
 
         void SpawnTrigger()
         {
-            uint8 iStart,iEnd;
+            uint8 iStart = 0, iEnd = 0;
             switch (urand(0,1))
             {
                 case 0:
@@ -447,9 +447,11 @@ public:
                     iStart = 38;
                     iEnd = 68;
                     break;
+                default:
+                    break;
             }
-            for(uint32 i = iStart; i < iEnd; ++i)
-                me->SummonCreature(CREATURE_TRIGGER,Location[i]);
+            for (uint32 i = iStart; i < iEnd; ++i)
+                me->SummonCreature(CREATURE_TRIGGER, Location[i]);
         }
     };
 

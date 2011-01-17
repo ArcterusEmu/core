@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -34,7 +34,7 @@ class AuthCrypt
         void DecryptRecv(uint8 *, size_t);
         void EncryptSend(uint8 *, size_t);
 
-        bool IsInitialized() { return _initialized; }
+        bool IsInitialized() const { return _initialized; }
 
     private:
         ARC4 _clientDecrypt;

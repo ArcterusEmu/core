@@ -1,19 +1,18 @@
 /*
- * Copyright (C) 2008-2010 Trinity <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation; either version 2 of the License, or (at your
+ * option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "OutdoorPvPSI.h"
@@ -95,7 +94,7 @@ bool OutdoorPvPSI::HandleAreaTrigger(Player *plr, uint32 trigger)
             if (m_Gathered_A >= SI_MAX_RESOURCES)
             {
                 TeamApplyBuff(TEAM_ALLIANCE, SI_CENARION_FAVOR);
-                sWorld.SendZoneText(OutdoorPvPSIBuffZones[0],sObjectMgr.GetTrinityStringForDBCLocale(LANG_OPVP_SI_CAPTURE_A));
+                sWorld->SendZoneText(OutdoorPvPSIBuffZones[0],sObjectMgr->GetTrinityStringForDBCLocale(LANG_OPVP_SI_CAPTURE_A));
                 m_LastController = ALLIANCE;
                 m_Gathered_A = 0;
                 m_Gathered_H = 0;
@@ -120,7 +119,7 @@ bool OutdoorPvPSI::HandleAreaTrigger(Player *plr, uint32 trigger)
             if (m_Gathered_H >= SI_MAX_RESOURCES)
             {
                 TeamApplyBuff(TEAM_HORDE, SI_CENARION_FAVOR);
-                sWorld.SendZoneText(OutdoorPvPSIBuffZones[0],sObjectMgr.GetTrinityStringForDBCLocale(LANG_OPVP_SI_CAPTURE_H));
+                sWorld->SendZoneText(OutdoorPvPSIBuffZones[0],sObjectMgr->GetTrinityStringForDBCLocale(LANG_OPVP_SI_CAPTURE_H));
                 m_LastController = HORDE;
                 m_Gathered_A = 0;
                 m_Gathered_H = 0;
@@ -164,7 +163,7 @@ bool OutdoorPvPSI::HandleDropFlag(Player *plr, uint32 spellId)
                             return true;
                         }
 
-                        if (!go->Create(sObjectMgr.GenerateLowGuid(HIGHGUID_GAMEOBJECT),SI_SILITHYST_MOUND, map, plr->GetPhaseMask(), plr->GetPositionX(),plr->GetPositionY(),plr->GetPositionZ(),plr->GetOrientation(),0,0,0,0,100,GO_STATE_READY))
+                        if (!go->Create(sObjectMgr->GenerateLowGuid(HIGHGUID_GAMEOBJECT),SI_SILITHYST_MOUND, map, plr->GetPhaseMask(), plr->GetPositionX(),plr->GetPositionY(),plr->GetPositionZ(),plr->GetOrientation(),0,0,0,0,100,GO_STATE_READY))
                         {
                             delete go;
                         }
@@ -193,7 +192,7 @@ bool OutdoorPvPSI::HandleDropFlag(Player *plr, uint32 spellId)
                           delete go;
                           return true;
                           }
-                        if (!go->Create(sObjectMgr.GenerateLowGuid(HIGHGUID_GAMEOBJECT),SI_SILITHYST_MOUND, map, plr->GetPhaseMask() ,plr->GetPositionX(),plr->GetPositionY(),plr->GetPositionZ(),plr->GetOrientation(),0,0,0,0,100,GO_STATE_READY))
+                        if (!go->Create(sObjectMgr->GenerateLowGuid(HIGHGUID_GAMEOBJECT),SI_SILITHYST_MOUND, map, plr->GetPhaseMask() ,plr->GetPositionX(),plr->GetPositionY(),plr->GetPositionZ(),plr->GetOrientation(),0,0,0,0,100,GO_STATE_READY))
                         {
                             delete go;
                         }

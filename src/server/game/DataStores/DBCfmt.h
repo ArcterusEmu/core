@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -45,7 +45,7 @@ const char DurabilityCostsfmt[]="niiiiiiiiiiiiiiiiiiiiiiiiiiiii";
 const char DurabilityQualityfmt[]="nf";
 const char EmotesEntryfmt[]="nxxiiix";
 const char EmotesTextEntryfmt[]="nxixxxxxxxxxxxxxxxx";
-const char FactionEntryfmt[]="niiiiiiiiiiiiiiiiiixxxxssssssssssssssssxxxxxxxxxxxxxxxxxx";
+const char FactionEntryfmt[]="niiiiiiiiiiiiiiiiiiffixssssssssssssssssxxxxxxxxxxxxxxxxxx";
 const char FactionTemplateEntryfmt[]="niiiiiiiiiiiii";
 const char GameObjectDisplayInfofmt[]="nxxxxxxxxxxxffffffx";
 const char GemPropertiesEntryfmt[]="nixxi";
@@ -77,6 +77,7 @@ const char MailTemplateEntryfmt[]="nxxxxxxxxxxxxxxxxxssssssssssssssssx";
 const char MapEntryfmt[]="nxixxssssssssssssssssxixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxixiffxiix";
 const char MapDifficultyEntryfmt[]="diisxxxxxxxxxxxxxxxxiix";
 const char MovieEntryfmt[]="nxx";
+const char OverrideSpellDatafmt[]="niiiiiiiiiix";
 const char QuestSortEntryfmt[]="nxxxxxxxxxxxxxxxxx";
 const char QuestXPfmt[]="niiiiiiiiii";
 const char QuestFactionRewardfmt[]="niiiiiiiiii";
@@ -101,7 +102,7 @@ const char SpellItemEnchantmentConditionfmt[]="nbbbbbxxxxxbbbbbbbbbbiiiiiXXXXX";
 const char SpellRadiusfmt[]="nfxf";
 const char SpellRangefmt[]="nffffixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 const char SpellRuneCostfmt[]="niiii";
-const char SpellShapeshiftfmt[]="nxxxxxxxxxxxxxxxxxxiixixxxxiiiiiiii";
+const char SpellShapeshiftfmt[]="nxxxxxxxxxxxxxxxxxxiixiiixxiiiiiiii";
 const char StableSlotPricesfmt[] = "ni";
 const char SummonPropertiesfmt[] = "niiiii";
 const char TalentEntryfmt[]="niiiiiiiixxxxixxixxxxxx";

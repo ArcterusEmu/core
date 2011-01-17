@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -152,7 +152,7 @@ public:
                             DoScriptText(SAY_TRANSFORM_1, me);
                             uiTransformationTimer = 5*IN_MILLISECONDS;
                             bStartOfTransformation = true;
-                            me->clearUnitState(UNIT_STAT_STUNNED|UNIT_STAT_ROOT);
+                            me->ClearUnitState(UNIT_STAT_STUNNED|UNIT_STAT_ROOT);
                             me->SetReactState(REACT_AGGRESSIVE);
                         }
                         else
@@ -162,7 +162,7 @@ public:
                             if (bStartOfTransformation)
                             {
                                 bStartOfTransformation = false;
-                                me->addUnitState(UNIT_STAT_STUNNED|UNIT_STAT_ROOT);
+                                me->AddUnitState(UNIT_STAT_STUNNED|UNIT_STAT_ROOT);
                                 me->SetReactState(REACT_PASSIVE);
                             }
                         }
@@ -195,7 +195,7 @@ public:
                             DoScriptText(SAY_TRANSFORM_2, me);
                             uiTransformationTimer = 9*IN_MILLISECONDS;
                             bStartOfTransformation = true;
-                            me->clearUnitState(UNIT_STAT_STUNNED|UNIT_STAT_ROOT);
+                            me->ClearUnitState(UNIT_STAT_STUNNED|UNIT_STAT_ROOT);
                             me->SetReactState(REACT_AGGRESSIVE);
                         }
                         else
@@ -205,7 +205,7 @@ public:
                             if (bStartOfTransformation)
                             {
                                 bStartOfTransformation = false;
-                                me->addUnitState(UNIT_STAT_STUNNED|UNIT_STAT_ROOT);
+                                me->AddUnitState(UNIT_STAT_STUNNED|UNIT_STAT_ROOT);
                                 me->SetReactState(REACT_PASSIVE);
                             }
                         }

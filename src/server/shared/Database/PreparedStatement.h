@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -19,6 +19,7 @@
 #define _PREPAREDSTATEMENT_H
 
 #include "SQLOperation.h"
+#include <ace/Future.h>
 
 //- Union for data buffer (upper-level bind -> queue -> lower-level bind)
 union PreparedStatementDataUnion
@@ -138,16 +139,21 @@ class MySQLPreparedStatement
         MYSQL_BIND* m_bind;
 };
 
+typedef ACE_Future<PreparedQueryResult> PreparedQueryResultFuture;
+
 //- Lower-level class, enqueuable operation
 class PreparedStatementTask : public SQLOperation
 {
     public:
         PreparedStatementTask(PreparedStatement* stmt);
+        PreparedStatementTask(PreparedStatement* stmt, PreparedQueryResultFuture result);
         ~PreparedStatementTask();
 
         bool Execute();
 
     protected:
         PreparedStatement* m_stmt;
+        bool m_has_result;
+        PreparedQueryResultFuture m_result;
 };
 #endif

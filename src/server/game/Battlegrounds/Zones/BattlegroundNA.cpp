@@ -1,21 +1,19 @@
 /*
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
- * Copyright (C) 2008-2010 Trinity <http://www.trinitycore.org/>
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation; either version 2 of the License, or (at your
+ * option) any later version.
  *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "Battleground.h"
@@ -50,10 +48,14 @@ void BattlegroundNA::Update(uint32 diff)
 {
     Battleground::Update(diff);
 
-    /*if (GetStatus() == STATUS_IN_PROGRESS)
+    if (GetStatus() == STATUS_IN_PROGRESS)
     {
-        // update something
-    }*/
+        if (GetStartTime() >= 47*MINUTE*IN_MILLISECONDS)    // after 47 minutes without one team losing, the arena closes with no winner and no rating change
+        {
+            UpdateArenaWorldState();
+            CheckArenaAfterTimerConditions();
+        }
+    }
 }
 
 void BattlegroundNA::StartingEventCloseDoors()
@@ -98,7 +100,7 @@ void BattlegroundNA::HandleKillPlayer(Player *player, Player *killer)
 
     if (!killer)
     {
-        sLog.outError("BattlegroundNA: Killer player not found");
+        sLog->outError("BattlegroundNA: Killer player not found");
         return;
     }
 
@@ -127,7 +129,7 @@ void BattlegroundNA::HandleAreaTrigger(Player *Source, uint32 Trigger)
         case 4537:                                          // buff trigger?
             break;
         default:
-            sLog.outError("WARNING: Unhandled AreaTrigger in Battleground: %u", Trigger);
+            sLog->outError("WARNING: Unhandled AreaTrigger in Battleground: %u", Trigger);
             Source->GetSession()->SendAreaTriggerMessage("Warning: Unhandled AreaTrigger in Battleground: %u", Trigger);
             break;
     }
@@ -159,7 +161,7 @@ bool BattlegroundNA::SetupBattleground()
         || !AddObject(BG_NA_OBJECT_BUFF_1, BG_NA_OBJECT_TYPE_BUFF_1, 4009.189941f, 2895.250000f, 13.052700f, -1.448624f, 0, 0, 0.6626201f, -0.7489557f, 120)
         || !AddObject(BG_NA_OBJECT_BUFF_2, BG_NA_OBJECT_TYPE_BUFF_2, 4103.330078f, 2946.350098f, 13.051300f, -0.06981307f, 0, 0, 0.03489945f, -0.9993908f, 120))
     {
-        sLog.outErrorDb("BatteGroundNA: Failed to spawn some object!");
+        sLog->outErrorDb("BatteGroundNA: Failed to spawn some object!");
         return false;
     }
 

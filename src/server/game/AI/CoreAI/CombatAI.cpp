@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -19,6 +19,7 @@
 #include "CombatAI.h"
 #include "SpellMgr.h"
 #include "Vehicle.h"
+#include "ObjectAccessor.h"
 
 int AggressorAI::Permissible(const Creature *creature)
 {
@@ -102,7 +103,7 @@ void CombatAI::UpdateAI(const uint32 diff)
 
     events.Update(diff);
 
-    if (me->hasUnitState(UNIT_STAT_CASTING))
+    if (me->HasUnitState(UNIT_STAT_CASTING))
         return;
 
     if (uint32 spellId = events.ExecuteEvent())
@@ -161,7 +162,7 @@ void CasterAI::UpdateAI(const uint32 diff)
 
     events.Update(diff);
 
-    if (me->hasUnitState(UNIT_STAT_CASTING))
+    if (me->HasUnitState(UNIT_STAT_CASTING))
         return;
 
     if (uint32 spellId = events.ExecuteEvent())
@@ -179,7 +180,7 @@ void CasterAI::UpdateAI(const uint32 diff)
 ArchorAI::ArchorAI(Creature *c) : CreatureAI(c)
 {
     if (!me->m_spells[0])
-        sLog.outError("ArchorAI set for creature (entry = %u) with spell1=0. AI will do nothing", me->GetEntry());
+        sLog->outError("ArchorAI set for creature (entry = %u) with spell1=0. AI will do nothing", me->GetEntry());
 
     m_minRange = GetSpellMinRange(me->m_spells[0], false);
     if (!m_minRange)
@@ -226,7 +227,7 @@ void ArchorAI::UpdateAI(const uint32 /*diff*/)
 TurretAI::TurretAI(Creature *c) : CreatureAI(c)
 {
     if (!me->m_spells[0])
-        sLog.outError("TurretAI set for creature (entry = %u) with spell1=0. AI will do nothing", me->GetEntry());
+        sLog->outError("TurretAI set for creature (entry = %u) with spell1=0. AI will do nothing", me->GetEntry());
 
     m_minRange = GetSpellMinRange(me->m_spells[0], false);
     me->m_CombatDistance = GetSpellMaxRange(me->m_spells[0], false);
@@ -263,9 +264,9 @@ void TurretAI::UpdateAI(const uint32 /*diff*/)
 AOEAI::AOEAI(Creature *c) : CreatureAI(c)
 {
     if (!me->m_spells[0])
-        sLog.outError("AOEAI set for creature (entry = %u) with spell1=0. AI will do nothing", me->GetEntry());
+        sLog->outError("AOEAI set for creature (entry = %u) with spell1=0. AI will do nothing", me->GetEntry());
 
-    me->SetVisibility(VISIBILITY_ON);//visible to see all spell anims
+    me->SetVisible(true);//visible to see all spell anims
     me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);//can't be targeted
     me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_ATTACKABLE_1);//can't be damaged
     me->SetDisplayId(11686);//invisible model,around a size of a player
@@ -308,15 +309,15 @@ void VehicleAI::UpdateAI(const uint32 diff)
         if (m_DismissTimer < diff)
         {
             m_DoDismiss = false;
-            me->SetVisibility(VISIBILITY_OFF);
-            me->ForcedDespawn();
+            me->SetVisible(false);
+            me->DespawnOrUnsummon();
         }else m_DismissTimer -= diff;
     }
 }
 
 void VehicleAI::Reset()
 {
-    me->SetVisibility(VISIBILITY_ON);
+    me->SetVisible(true);
 
     m_vehicle->Reset();
 }
@@ -337,10 +338,10 @@ void VehicleAI::OnCharmed(bool apply)
 
 void VehicleAI::LoadConditions()
 {
-    conditions = sConditionMgr.GetConditionsForNotGroupedEntry(CONDITION_SOURCE_TYPE_CREATURE_TEMPLATE_VEHICLE, me->GetEntry());
+    conditions = sConditionMgr->GetConditionsForNotGroupedEntry(CONDITION_SOURCE_TYPE_CREATURE_TEMPLATE_VEHICLE, me->GetEntry());
     if (!conditions.empty())
     {
-        sLog.outDebug("VehicleAI::LoadConditions: loaded %u conditions", uint32(conditions.size()));
+        sLog->outDebug("VehicleAI::LoadConditions: loaded %u conditions", uint32(conditions.size()));
     }
 }
 
@@ -351,11 +352,11 @@ void VehicleAI::CheckConditions(const uint32 diff)
         if (!conditions.empty())
         {
             for (SeatMap::iterator itr = m_vehicle->m_Seats.begin(); itr != m_vehicle->m_Seats.end(); ++itr)
-                if (Unit *passenger = itr->second.passenger)
+                if (Unit* passenger = ObjectAccessor::GetUnit(*m_vehicle->GetBase(), itr->second.passenger))
                 {
                     if (Player* plr = passenger->ToPlayer())
                     {
-                        if (!sConditionMgr.IsPlayerMeetToConditions(plr, conditions))
+                        if (!sConditionMgr->IsPlayerMeetToConditions(plr, conditions))
                         {
                             plr->ExitVehicle();
                             return;//check other pessanger in next tick

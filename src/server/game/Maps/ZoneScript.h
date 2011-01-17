@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -33,8 +33,10 @@ class ZoneScript
         virtual uint32 GetCreatureEntry(uint32 /*guidlow*/, const CreatureData *data) { return data->id; }
         virtual uint32 GetGameObjectEntry(uint32 /*guidlow*/, uint32 entry) { return entry; }
 
-        virtual void OnCreatureCreate(Creature *, bool /*add*/) {}
-        virtual void OnGameObjectCreate(GameObject * /*go*/, bool /*add*/) {}
+        virtual void OnCreatureCreate(Creature *) {}
+        virtual void OnCreatureRemove(Creature *) {}
+        virtual void OnGameObjectCreate(GameObject *) {}
+        virtual void OnGameObjectRemove(GameObject *) {}
 
         //All-purpose data storage 64 bit
         virtual uint64 GetData64(uint32 /*DataId*/) { return 0; }

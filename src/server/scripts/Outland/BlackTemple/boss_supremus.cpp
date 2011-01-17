@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -72,7 +72,7 @@ public:
             float x, y, z;
             me->GetNearPoint(me, x, y, z, 1, 100, float(M_PI*2*rand_norm()));
             me->GetMotionMaster()->MovePoint(0, x, y, z);
-            me->SetVisibility(VISIBILITY_OFF);
+            me->SetVisible(false);
             me->CastSpell(me,SPELL_MOLTEN_FLAME,true);
         }
     };
@@ -279,7 +279,7 @@ public:
 
         void MoveInLineOfSight(Unit * /*who*/) {}
 
-        void DoAction(const uint32 /*info*/)
+        void DoAction(const int32 /*info*/)
         {
             me->RemoveAura(SPELL_VOLCANIC_ERUPTION);
         }

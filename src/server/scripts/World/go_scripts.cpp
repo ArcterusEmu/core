@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -330,7 +330,7 @@ public:
                     if (Spell)
                         pCreature->CastSpell(pPlayer, Spell, false);
                     else
-                        sLog.outError("TSCR: go_ethereum_prison summoned Creature (entry %u) but faction (%u) are not expected by script.", pCreature->GetEntry(), pCreature->getFaction());
+                        sLog->outError("TSCR: go_ethereum_prison summoned Creature (entry %u) but faction (%u) are not expected by script.", pCreature->GetEntry(), pCreature->getFaction());
                 }
             }
         }
@@ -1005,7 +1005,7 @@ public:
         if (!pPrisoner || !pPrisoner->isAlive())
             return true;
 
-        Quest const* qInfo = sObjectMgr.GetQuestTemplate(QUEST_PRISONERS_OF_WYRMSKULL);
+        Quest const* qInfo = sObjectMgr->GetQuestTemplate(QUEST_PRISONERS_OF_WYRMSKULL);
         if (qInfo)
         {
             //TODO: prisoner should help player for a short period of time
@@ -1112,8 +1112,8 @@ public:
 
     bool OnGossipHello(Player *pPlayer, GameObject *pGO)
     {
-        if (pPlayer->GetQuestStatus(QUEST_DOING_YOUR_DUTY) == QUEST_STATUS_INCOMPLETE ||
-            (pPlayer->GetQuestStatus(QUEST_DOING_YOUR_DUTY) == QUEST_STATUS_COMPLETE))
+        QuestStatus status = pPlayer->GetQuestStatus(QUEST_DOING_YOUR_DUTY);
+        if (status == QUEST_STATUS_INCOMPLETE || status == QUEST_STATUS_COMPLETE || status == QUEST_STATUS_REWARDED)
         {
             pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, GOSSIP_USE_OUTHOUSE, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
             pPlayer->SEND_GOSSIP_MENU(GOSSIP_OUTHOUSE_VACANT, pGO->GetGUID());

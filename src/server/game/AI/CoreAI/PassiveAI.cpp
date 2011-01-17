@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -61,13 +61,13 @@ void PossessedAI::KilledUnit(Unit* victim)
 
 void CritterAI::DamageTaken(Unit * /*done_by*/, uint32 &)
 {
-    if (!me->hasUnitState(UNIT_STAT_FLEEING))
+    if (!me->HasUnitState(UNIT_STAT_FLEEING))
         me->SetControlled(true, UNIT_STAT_FLEEING);
 }
 
 void CritterAI::EnterEvadeMode()
 {
-    if (me->hasUnitState(UNIT_STAT_FLEEING))
+    if (me->HasUnitState(UNIT_STAT_FLEEING))
         me->SetControlled(false, UNIT_STAT_FLEEING);
     CreatureAI::EnterEvadeMode();
 }

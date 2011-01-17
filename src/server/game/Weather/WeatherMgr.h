@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -63,6 +63,6 @@ class WeatherMgr
         WeatherZoneMap mWeatherZoneMap;
 };
 
-#define sWeatherMgr (*ACE_Singleton<WeatherMgr, ACE_Null_Mutex>::instance())
+#define sWeatherMgr ACE_Singleton<WeatherMgr, ACE_Null_Mutex>::instance()
 
 #endif

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -366,7 +366,7 @@ class boss_kaelthas : public CreatureScript
 
                 if (!m_auiAdvisorGuid[0] || !m_auiAdvisorGuid[1] || !m_auiAdvisorGuid[2] || !m_auiAdvisorGuid[3])
                 {
-                    sLog.outError("TSCR: Kael'Thas One or more advisors missing, Skipping Phases 1-3");
+                    sLog->outError("TSCR: Kael'Thas One or more advisors missing, Skipping Phases 1-3");
 
                     DoScriptText(SAY_PHASE4_INTRO2, me);
 
@@ -398,7 +398,7 @@ class boss_kaelthas : public CreatureScript
 
             void MoveInLineOfSight(Unit *who)
             {
-                if (!me->hasUnitState(UNIT_STAT_STUNNED) && who->isTargetableForAttack() &&
+                if (!me->HasUnitState(UNIT_STAT_STUNNED) && who->isTargetableForAttack() &&
                     me->IsHostileTo(who) && who->isInAccessiblePlaceFor(me))
                 {
                     if (!me->canFly() && me->GetDistanceZ(who) > CREATURE_Z_ATTACK_RANGE)
@@ -430,7 +430,7 @@ class boss_kaelthas : public CreatureScript
                     StartEvent();
             }
 
-            void KilledUnit()
+            void KilledUnit(Unit* /*victim*/)
             {
                 DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2,SAY_SLAY3), me);
             }
@@ -692,7 +692,7 @@ class boss_kaelthas : public CreatureScript
                                 Advisor = Unit::GetCreature((*me), m_auiAdvisorGuid[i]);
 
                                 if (!Advisor)
-                                    sLog.outError("SD2: Kael'Thas Advisor %u does not exist. Possibly despawned? Incorrectly Killed?", i);
+                                    sLog->outError("SD2: Kael'Thas Advisor %u does not exist. Possibly despawned? Incorrectly Killed?", i);
                                 else
                                     CAST_AI(advisorbase_ai, Advisor->AI())->Revive(pTarget);
                             }
@@ -785,7 +785,7 @@ class boss_kaelthas : public CreatureScript
                                 if (me->getThreatManager().getThreatList().size() >= 2)
                                     for (uint32 i = 0; i < 3; ++i)
                                 {
-                                    sLog.outDebug("SD2: Kael'Thas mind control not supported.");
+                                    sLog->outDebug("SD2: Kael'Thas mind control not supported.");
                                     //DoCast(pUnit, SPELL_MIND_CONTROL);
                                 }
 

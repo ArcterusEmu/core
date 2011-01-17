@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -158,7 +158,7 @@ class Pet : public Guardian
                 return m_autospells[pos];
         }
 
-        void LooseHappiness();
+        void LoseHappiness();
         HappinessState GetHappinessState();
         void GivePetXP(uint32 xp);
         void GivePetLevel(uint8 level);
@@ -242,11 +242,11 @@ class Pet : public Guardian
         DeclinedName *m_declinedname;
 
     private:
-        void SaveToDB(uint32, uint8)                        // overwrited of Creature::SaveToDB     - don't must be called
+        void SaveToDB(uint32, uint8, uint32)                // override of Creature::SaveToDB     - must not be called
         {
             ASSERT(false);
         }
-        void DeleteFromDB()                                 // overwrited of Creature::DeleteFromDB - don't must be called
+        void DeleteFromDB()                                 // override of Creature::DeleteFromDB - must not be called
         {
             ASSERT(false);
         }

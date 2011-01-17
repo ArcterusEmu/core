@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2011 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2006-2009 ScriptDev2 <https://scriptdev2.svn.sourceforge.net/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -141,7 +141,7 @@ public:
                 pInstance->SetData(DATA_STRANGE_POOL, NOT_STARTED);
             }
             DoCast(me, SPELL_SUBMERGE);//submerge anim
-            me->SetVisibility(VISIBILITY_OFF);//we start invis under water, submerged
+            me->SetVisible(false);//we start invis under water, submerged
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
         }
@@ -149,7 +149,10 @@ public:
         void JustDied(Unit* /*Killer*/)
         {
             if (pInstance)
+            {
                 pInstance->SetData(DATA_THELURKERBELOWEVENT, DONE);
+                pInstance->SetData(DATA_STRANGE_POOL, IN_PROGRESS);
+            }
 
             Summons.DespawnAll();
         }
@@ -189,26 +192,31 @@ public:
                 {
                     if (Submerged)
                     {
-                        me->SetVisibility(VISIBILITY_ON);
+                        me->SetVisible(true);
                         Submerged = false;
                         WaitTimer2 = 500;
                     }
+
                     if (!Submerged && WaitTimer2 <= diff)//wait 500ms before emerge anim
                     {
                         me->RemoveAllAuras();
-                        me->RemoveFlag(UNIT_NPC_EMOTESTATE,EMOTE_STATE_SUBMERGED);
+                        me->SetUInt32Value(UNIT_NPC_EMOTESTATE, 0);
                         DoCast(me, SPELL_EMERGE, false);
                         WaitTimer2 = 60000;//never reached
                         WaitTimer = 3000;
-                    } else WaitTimer2 -= diff;
+                    }
+                    else
+                        WaitTimer2 -= diff;
 
                     if (WaitTimer <= diff)//wait 3secs for emerge anim, then attack
                     {
                         WaitTimer = 3000;
-                        CanStartEvent=true;//fresh fished from pool
+                        CanStartEvent = true;//fresh fished from pool
                         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
                         me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-                    } else WaitTimer -= diff;
+                    }
+                    else
+                        WaitTimer -= diff;
                 }
                 return;
             }
@@ -312,7 +320,7 @@ public:
                     } else WaterboltTimer -= diff;
                 }
 
-                if (!UpdateCombatState())
+                if (!UpdateVictim())
                     return;
 
                 DoMeleeAttackIfReady();
@@ -458,9 +466,33 @@ public:
 
 };
 
+class go_strange_pool : public GameObjectScript
+{
+    public:
+        go_strange_pool() : GameObjectScript("go_strange_pool") {}
+
+        bool OnGossipHello(Player* player, GameObject* go)
+        {
+            // 25%
+            if (InstanceScript* instanceScript = go->GetInstanceScript())
+                if (!urand(0, 3))
+                {
+                    if (instanceScript->GetData(DATA_STRANGE_POOL) == NOT_STARTED)
+                    {
+                        go->CastSpell(player, 54587);
+                        instanceScript->SetData(DATA_STRANGE_POOL, IN_PROGRESS);
+                    }
+                    return true;
+                }
+
+            return false;
+        }
+};
+
 void AddSC_boss_the_lurker_below()
 {
     new boss_the_lurker_below();
     new mob_coilfang_guardian();
     new mob_coilfang_ambusher();
+    new go_strange_pool();
 }
